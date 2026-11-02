@@ -199,6 +199,11 @@ def build_jcde_references_tex() -> str:
             "Amos, B., \\& Kolter, J. Z. (2017). OptNet: Differentiable optimization as a layer in neural networks. In \\emph{Proceedings of the International Conference on Machine Learning (ICML)} (Vol.~70, pp.~136--145). PMLR.",
         ),
         (
+            "anh2026neurotopo",
+            "Nguyen Anh \\& Phan Thi Le(2026)",
+            "Nguyen Anh, T., \\& Phan Thi Le, T. (2026). NeuroTopo: A benchmark for neuro-symbolic topological reasoning on geometric diagrams. In \\emph{2026 IEEE International Conference on Advanced Technologies in Information and Green Business (ATiGB)} (pp.~421--431). IEEE. \\url{https://doi.org/10.1109/ATiGB70203.2026.11628217}",
+        ),
+        (
             "belhumeur1999bas",
             "Belhumeur et~al.(1999)",
             "Belhumeur, P. N., Kriegman, D. J., \\& Yuille, A. L. (1999). The bas-relief ambiguity. \\emph{International Journal of Computer Vision}, 35(1), 33--44. \\url{https://doi.org/10.1023/A:1008154927611}",
@@ -602,7 +607,7 @@ def build_jcde_endmatter_tex() -> str:
     """Build JCDE mandatory unnumbered end-matter sections placed immediately before References."""
     raw = r"""
 \section*{Replication of results}
-To ensure full computational reproducibility in accordance with the \emph{Journal of Computational Design and Engineering} replication standards, the complete Python/PyTorch implementation of NeuroTopo-3D---including the \texttt{PairGT-Asym}, \texttt{EGNN}, \texttt{GATv2-Edge}, and \texttt{GraphGPS} neural lifters, the \texttt{NormalFlowMultiBranchProjector} solver, the classical non-neural \texttt{Marill-MSDA} and \texttt{Lipson--Shpitalni} solvers, the ISO~10303-21 (\texttt{MANIFOLD\_SOLID\_BREP}) \texttt{.STEP} B-Rep exporter and validator (\texttt{step\_exporter\_v9.py}), the automated \texttt{SymPy}/\texttt{float64} theorem verification script (\texttt{verify\_q1\_theorems\_v9.py}), the five-gate claim verification script (\texttt{verify\_q1\_journal\_claims\_v9.py}), all JSON benchmark logs, and all exported \texttt{.STEP} and \texttt{.OBJ} solid models---is provided in the accompanying Supplementary Reproducibility Archive (\texttt{8\_Supplementary\_Reproducibility\_Code\_and\_STEP.zip}) and publicly hosted at \url{https://github.com/GosuEltin/NeuroTopo-3D}. Executing \texttt{pytest} and \texttt{python scripts/verify\_q1\_journal\_claims\_v9.py} reproduces all theorem certificates, statistical tests, and CAD sewing metrics reported in this paper.
+To ensure full computational reproducibility in accordance with the \emph{Journal of Computational Design and Engineering} replication standards, the complete Python/PyTorch implementation of NeuroTopo-3D---including the \texttt{PairGT-Asym}, \texttt{EGNN}, \texttt{GATv2-Edge}, and \texttt{GraphGPS} neural lifters, the \texttt{NormalFlowMultiBranchProjector} solver, the classical non-neural \texttt{Marill-MSDA} and \texttt{Lipson--Shpitalni} solvers, the ISO~10303-21 (\texttt{MANIFOLD\_SOLID\_BREP}) \texttt{.STEP} B-Rep exporter and validator (\texttt{step\_exporter\_v9.py}), the automated \texttt{SymPy}/\texttt{float64} theorem verification script (\texttt{verify\_q1\_theorems\_v9.py}), the five-gate claim verification script (\texttt{verify\_q1\_journal\_claims\_v9.py}), all JSON benchmark logs, and all exported \texttt{.STEP} and \texttt{.OBJ} solid models---is provided in the accompanying Supplementary Reproducibility Archive (\texttt{9\_Supplementary\_Code\_and\_STEP\_Under2MB.zip}) and publicly hosted at \url{https://github.com/GosuEltin/NeuroTopo-3D}. Executing \texttt{pytest} and \texttt{python scripts/verify\_q1\_journal\_claims\_v9.py} reproduces all theorem certificates, statistical tests, and CAD sewing metrics reported in this paper.
 
 \section*{Conflicts of interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. The authors declare no conflict of interest.
@@ -617,7 +622,7 @@ This research received no specific grant from any funding agency in the public, 
 All multi-seed benchmark datasets, anonymous 2D perception graphs, machine-verified symbolic theorem certificates, statistical audit JSON logs, and exported ISO~10303-21 (\texttt{.STEP}) and Wavefront (\texttt{.OBJ}) 3D CAD models generated and analysed during this study are included in the Supplementary Reproducibility Archive and publicly available at \url{https://github.com/GosuEltin/NeuroTopo-3D}.
 
 \section*{Acknowledgments}
-The authors thank the faculty and computing laboratory staff at FPT University, Quy Nhon AI Campus, Vietnam, for providing workstation infrastructure and constructive feedback during the development of the NeuroTopo-3D framework.
+The authors thank the faculty and computing laboratory staff at FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam, for providing workstation infrastructure and constructive feedback during the development of the NeuroTopo-3D framework.
 """
     return re.sub(
         r"\\texttt\{([^}]*)\}",
@@ -626,41 +631,75 @@ The authors thank the faculty and computing laboratory staff at FPT University, 
     )
 
 
-def build_jcde_appendix_after_references(sec7_tex: str) -> str:
-    """Format Appendices A and B placed AFTER References per official JCDE template (Pages 15-17)."""
+def build_jcde_supplementary_tex(sec7_tex: str) -> str:
+    """Format standalone Supplementary Material PDF (Sections S1, S2, S3) for JCDE."""
     sec7_tex = apply_jcde_house_style(sec7_tex)
-    # Replace \appendix + \section + \subsection with JCDE unnumbered Appendix A and Appendix B
-    header_replacement = r"""\clearpage
-\section*{Appendix A. Complete Differentiable Geometric Residual Operator Specification}
-\label{sec:appendix}\label{app:operators}
+    sec7_tex = re.sub(r"Theorem~\\ref\{[^}]+\}", "Theorem in Main Text", sec7_tex)
+    sec7_tex = re.sub(r"Lemma~\\ref\{[^}]+\}", "Lemma~1 in Main Text", sec7_tex)
+    sec7_tex = re.sub(r"Proposition~\\ref\{[^}]+\}", "Proposition~1 in Main Text", sec7_tex)
+    sec7_tex = re.sub(r"Section~\\ref\{[^}]+\}", "Section~3 in Main Text", sec7_tex)
+    sec7_tex = re.sub(r"Equation~\\ref\{[^}]+\}", "Equation~9 in Main Text", sec7_tex)
+
+    header_replacement = r"""\section*{Section S1. Complete Differentiable Geometric Residual Operator Specification}
 \setcounter{table}{0}
-\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thetable}{S\arabic{table}}
 \setcounter{equation}{0}
-\renewcommand{\theequation}{A\arabic{equation}}"""
+\renewcommand{\theequation}{S\arabic{equation}}"""
 
     sec7_tex = re.sub(
         r"\\appendix\s*\\section\{[^}]+\}\s*\\label\{sec:appendix\}\s*\\subsection\{[^}]+\}\s*\\label\{app:operators\}",
         lambda _: header_replacement,
         sec7_tex,
     )
-
     sec7_tex = re.sub(
         r"\\subsection\{Machine-Verified Symbolic and IEEE-754 \\texttt\{float64\} Audit Summary\}\s*\\label\{app:machine_proofs\}",
-        lambda _: (
-            r"\section*{Appendix B. Machine-Verified Symbolic and Spectral Proof Certificates}" "\n"
-            r"\label{app:machine_proofs}" "\n"
-            r"\setcounter{table}{0}" "\n"
-            r"\renewcommand{\thetable}{B\arabic{table}}"
-        ),
+        lambda _: r"\section*{Section S2. Machine-Verified Symbolic and Spectral Proof Certificates}" "\n" r"\label{app:machine_proofs}",
+        sec7_tex,
+    )
+    sec7_tex = re.sub(
+        r"\\subsection\{Dual-Gauge Rigidity Classification Across All 12 Benchmark Families\}\s*\\label\{app:dual_gauge_table\}",
+        lambda _: r"\section*{Section S3. Dual-Gauge Rigidity Classification Across All 12 Benchmark Families}" "\n" r"\label{app:dual_gauge_table}",
         sec7_tex,
     )
 
-    sec7_tex = re.sub(
-        r"\\subsection\{Dual-Gauge Rigidity Classification Across All 12 Benchmark Families\}\s*\\label\{app:dual_gauge_table\}",
-        lambda _: r"\subsection*{B.1 Dual-Gauge Rigidity Classification Across All 12 Benchmark Families}" "\n" r"\label{app:dual_gauge_table}",
-        sec7_tex,
-    )
-    return sec7_tex
+    supp_doc = r"""\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=blue!65!black,urlcolor=blue!70!black]{hyperref}
+
+\captionsetup{font=small,labelfont=bf}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\textit{Journal of Computational Design and Engineering} --- Supplementary Material}
+\fancyhead[R]{\footnotesize\textit{Anh \& Le (2026)}}
+\fancyfoot[C]{S-\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+\begin{center}
+    {\Large\textbf{Supplementary Material:\\NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}\\[0.9em]
+    {\normalsize \textbf{Tin Nguyen Anh}$^{1,*}$ \quad and \quad \textbf{Thuyen Phan Thi Le}$^{1}$}\\[0.4em]
+    {\small $^{1}$FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam}\\[0.2em]
+    {\footnotesize $^{*}$Corresponding author: \texttt{ti93ck2@gmail.com} \quad|\quad Code \& STEP Solids: \url{https://github.com/GosuEltin/NeuroTopo-3D}}
+\end{center}
+\vspace{0.4em}\hrule\vspace{0.8em}
+""" + sec7_tex + "\n\\end{document}\n"
+    return supp_doc
 
 
 def build_jcde_main_tex() -> str:
@@ -723,7 +762,7 @@ def build_jcde_main_tex() -> str:
 \begin{center}
     {\Large\textbf{NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}\\[1.1em]
     {\normalsize \textbf{Tin Nguyen Anh}$^{1,*}$ \quad and \quad \textbf{Thuyen Phan Thi Le}$^{1}$}\\[0.55em]
-    {\small $^{1}$FPT University, Quy Nhon AI Campus, Quy Nhon, Binh Dinh, Vietnam}\\[0.25em]
+    {\small $^{1}$FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam}\\[0.25em]
     {\footnotesize $^{*}$Corresponding author. E-mail: \texttt{ti93ck2@gmail.com} (T.~N.~Anh); ORCID: \url{https://orcid.org/0009-0009-4454-9541}\\
     Co-author E-mail: \texttt{thuyenptl@fe.edu.vn} (T.~P.~T.~Le)}
 \end{center}
@@ -733,7 +772,7 @@ def build_jcde_main_tex() -> str:
 \vspace{0.6em}
 
 \noindent\textbf{Abstract}\\
-Reconstructing exact, watertight three-dimensional polyhedral wireframes and manufacturable Boundary-Representation solids from a single two-dimensional engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric constraints is a foundational inverse problem in computer-aided design and geometric vision. Classical regularity optimisers distort asymmetric or non-convex parts without learned depth priors, pure neural lifters exhibit 7 to 47 millimetres of out-of-plane face warp that breaks solid-kernel sewing, and standard post-hoc solvers either stall off-manifold under soft penalty regularisation or shear proportions along viewing-ray nullspaces. We introduce NeuroTopo-3D, a unified spectral rigidity theory and perception-to-CAD framework resolving this dilemma. First, we prove planar viewing-plane saddle collapse for reflection-symmetric neural lifters and establish a visibility-diameter message-passing depth lower bound. Second, we prove a dual-gauge Schur rank identity partitioning single-view constrained polyhedra into strictly ray-rigid, coupled tilt-shear, and bas-relief families, alongside a local uniqueness radius. Third, we formulate Iterative Normal-Flow Row-Space Levenberg--Marquardt continuation with discrete multi-branch reflection search and target-free solid-over-dashed crossing verification, achieving zero stepwise nullspace velocity and quadratic curvature drift coupled to an ISO~10303-21 STEP solid exporter. Across 6,144 multi-seed mirror-pair views, 792 multi-constraint views, out-of-distribution suites, scanned textbook diagrams, photographed sketches, and 120 mechanical CAD parts, NeuroTopo-3D achieves 96.35\% certified coverage, 0.1107 Procrustes error, 89.17\% CAD sewing validity, and zero invalid updates.
+Reconstructing watertight three-dimensional polyhedral wireframes and manufacturable Boundary-Representation solids from a single two-dimensional engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric constraints is a foundational inverse problem in computer-aided design and geometric vision. Classical regularity optimisers distort asymmetric or non-convex parts without learned depth priors, pure neural lifters exhibit 7 to 47 millimetres of out-of-plane face warp that breaks solid-kernel sewing, and standard post-hoc solvers either stall off-manifold under soft penalty regularisation or shear proportions along viewing-ray nullspaces. We introduce NeuroTopo-3D, a unified spectral rigidity theory and perception-to-CAD framework resolving this dilemma. First, we prove planar viewing-plane saddle collapse for reflection-symmetric neural lifters and establish a visibility-diameter message-passing depth lower bound. Second, we prove a dual-gauge Schur rank identity classifying regular local neighbourhoods of single-view constrained polyhedra into viewing-ray rigid, coupled tilt-shear, and bas-relief regimes, alongside a local uniqueness radius. Third, we formulate Iterative Normal-Flow Row-Space Levenberg--Marquardt continuation with discrete multi-branch reflection search and target-free solid-over-dashed crossing verification, achieving zero stepwise nullspace velocity and quadratic curvature drift coupled to an ISO~10303-21 STEP solid exporter. Across 6,144 multi-seed mirror-pair views, 792 multi-constraint views, out-of-distribution suites, scanned textbook diagrams, photographed sketches, and 120 mechanical CAD parts, NeuroTopo-3D achieves 96.35\% tolerance-certified coverage, 0.1107 Procrustes error, 89.17\% simultaneous metric-feasible and sewable CAD B-Rep validity, and zero unabstained invalid updates.
 
 \vspace{0.55em}
 \noindent\textbf{Keywords:} single-view 3D reconstruction, polyhedral rigidity, bas-relief nullspace, normal-flow manifold optimisation, CAD reverse engineering, STEP B-Rep synthesis.
@@ -750,7 +789,7 @@ $\mathcal{G}_{2\mathrm{D}} = (\hat{U}, A, S_{\mathrm{vis}})$ & Anonymous 2D wire
 $P = [x, y, z] \in \mathbb{R}^{N \times 3}$ & 3D vertex coordinates in the canonical orthographic camera gauge ($+z$ toward viewer) \\
 $\hat{P}_0 = [\hat{x}_0, \hat{y}_0, \hat{z}_0]$ & Continuous 3D coordinate anchor predicted by Module~2 (\texttt{PairGT-Asym}) \\
 $Q_{\mathrm{ray}} \in \mathbb{R}^{N \times (N-1)}$ & Orthonormal basis of the zero-sum viewing-ray subspace $\mathbf{1}_N^\perp$ ($z = \bar{z}_0\mathbf{1}_N + Q_{\mathrm{ray}}\zeta$) \\
-$\mathcal{C}, \; r_{\mathcal{C}}(P), \; \mathcal{M}(\mathcal{C})$ & Symbolic geometric constraint set, dimensionless residual vector in $\mathbb{R}^M$, and exact feasible manifold $\{P : \|r_c(P)\|_{\mathrm{rms}} \le \epsilon_{\mathrm{sem}}\}$ \\
+$\mathcal{C}, \; r_{\mathcal{C}}(P), \; \mathcal{M}(\mathcal{C})$ & Symbolic geometric constraint set, dimensionless residual vector in $\mathbb{R}^M$, and $\varepsilon_{\mathrm{feas}}$-tolerance feasible set $\{P : \|r_c(P)\|_{\mathrm{rms}} \le \varepsilon_{\mathrm{feas}} = 1.1 \times 10^{-3}\}$ \\
 $\tilde{J}_z(P), \; J_{\mathrm{full}}(P)$ & Reduced viewing-ray Jacobian $J_z(P)Q_{\mathrm{ray}} \in \mathbb{R}^{M \times (N-1)}$ and full 3D Jacobian $[J_{xy}, J_z] \in \mathbb{R}^{M \times 3N}$ \\
 $d_{\mathrm{null}}^{\mathrm{ray}}(P), \; d_{\mathrm{null}}^{\mathrm{aff}}(P)$ & Fixed-ray viewing depth nullity $\dim\ker(\tilde{J}_z(P))$ and intrinsic 3D shape nullity $\dim\ker(J_{\mathrm{full}}(P)) - 7$ \\
 $V_{\mathrm{row}}^{(k)}, \; V_{\ker}^{(k)}, \; P_{\ker}^{(k)}$ & Orthonormal row-space basis, Bas-Relief nullspace basis, and orthogonal kernel projector $V_{\ker}^{(k)}V_{\ker}^{(k)\top}$ at step $k$ \\
@@ -771,7 +810,6 @@ $\epsilon_{\mathrm{plan}}(F_f), \; \tau_{\mathrm{sew}}$ & Maximum vertex-to-plan
 \input{sections/sec6_discussion}
 \input{sections/sec_endmatter}
 \input{sections/references}
-\input{sections/sec7_appendix}
 
 \end{document}
 """
@@ -803,12 +841,13 @@ def main() -> None:
         styled_tex = apply_jcde_house_style(raw_tex)
         (JCDE_SEC_DIR / sec_name).write_text(styled_tex, encoding="utf-8")
 
-    # 3. Write JCDE End-Matter, APA 7th References, Appendix A & B (after References), and main.tex
+    # 3. Write JCDE End-Matter, APA 7th References, main.tex, and standalone supplementary.tex
     (JCDE_SEC_DIR / "sec_endmatter.tex").write_text(build_jcde_endmatter_tex(), encoding="utf-8")
     (JCDE_SEC_DIR / "references.tex").write_text(build_jcde_references_tex(), encoding="utf-8")
 
     sec7_raw = (MASTER_DIR / "sections" / "sec7_appendix.tex").read_text(encoding="utf-8")
-    (JCDE_SEC_DIR / "sec7_appendix.tex").write_text(build_jcde_appendix_after_references(sec7_raw), encoding="utf-8")
+    supp_tex_str = build_jcde_supplementary_tex(sec7_raw)
+    (JCDE_TEX_DIR / "supplementary.tex").write_text(supp_tex_str, encoding="utf-8")
 
     (JCDE_TEX_DIR / "main.tex").write_text(build_jcde_main_tex(), encoding="utf-8")
 
@@ -823,13 +862,32 @@ def main() -> None:
             errors="replace",
         )
         if proc.returncode != 0:
-            print(f"pdflatex failed on pass {pass_idx}:")
+            print(f"pdflatex failed on main.tex pass {pass_idx}:")
             print(proc.stdout[-3000:])
             sys.exit(1)
 
     pdf_built = JCDE_TEX_DIR / "main.pdf"
     pdf_target = PKG_DIR / "1_Main_Document_JCDE.pdf"
     shutil.copy2(pdf_built, pdf_target)
+
+    # 4b. Compile manuscript_jcde/supplementary.tex with pdflatex (3 passes)
+    for pass_idx in range(1, 4):
+        proc_supp = subprocess.run(
+            [str(PDFLATEX), "-interaction=nonstopmode", "-halt-on-error", "supplementary.tex"],
+            cwd=str(JCDE_TEX_DIR),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        if proc_supp.returncode != 0:
+            print(f"pdflatex failed on supplementary.tex pass {pass_idx}:")
+            print(proc_supp.stdout[-3000:])
+            sys.exit(1)
+
+    supp_pdf_built = JCDE_TEX_DIR / "supplementary.pdf"
+    supp_pdf_target = PKG_DIR / "8_Supplementary_Material_JCDE.pdf"
+    shutil.copy2(supp_pdf_built, supp_pdf_target)
 
     # Check log for undefined references or citations
     log_text = (JCDE_TEX_DIR / "main.log").read_text(encoding="utf-8", errors="replace")
@@ -839,20 +897,28 @@ def main() -> None:
     pages = int(page_match.group(1)) if page_match else -1
     pdf_bytes = int(page_match.group(2)) if page_match else pdf_target.stat().st_size
 
+    supp_log_text = (JCDE_TEX_DIR / "supplementary.log").read_text(encoding="utf-8", errors="replace")
+    supp_page_match = re.search(r"Output written on supplementary\.pdf \((\d+) pages, (\d+) bytes\)", supp_log_text)
+    supp_pages = int(supp_page_match.group(1)) if supp_page_match else -1
+
     # Verify zero ACIIDS mentions across all JCDE files
     aciids_hits = 0
     for f in JCDE_TEX_DIR.rglob("*.tex"):
         if "aciids" in f.read_text(encoding="utf-8").lower():
             aciids_hits += 1
 
-    # 5. Package 6_Main_Document_Source_JCDE.zip
+    # 5. Package 5_Main_Document_Source_JCDE.zip (and 6_Main_Document_Source_JCDE.zip)
+    zip_src_5 = PKG_DIR / "5_Main_Document_Source_JCDE.zip"
     zip_src = PKG_DIR / "6_Main_Document_Source_JCDE.zip"
-    with zipfile.ZipFile(zip_src, "w", zipfile.ZIP_DEFLATED) as zf:
+    with zipfile.ZipFile(zip_src_5, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.write(JCDE_TEX_DIR / "main.tex", "main.tex")
+        zf.write(JCDE_TEX_DIR / "supplementary.tex", "supplementary.tex")
         for f in sorted(JCDE_SEC_DIR.glob("*.tex")):
-            zf.write(f, f"sections/{f.name}")
+            if f.name != "sec7_appendix.tex":
+                zf.write(f, f"sections/{f.name}")
         for f in sorted(JCDE_FIG_DIR.glob("*.pdf")):
             zf.write(f, f"figures/{f.name}")
+    shutil.copy2(zip_src_5, zip_src)
 
     # 6. Package 7_Figures_JCDE.zip
     zip_figs = PKG_DIR / "7_Figures_JCDE.zip"
@@ -864,7 +930,7 @@ def main() -> None:
             if ga_path.exists():
                 zf.write(ga_path, ga_file)
 
-    # 7. Build github_repo_ready/ and 8_Supplementary_Reproducibility_Code_and_STEP.zip
+    # 7. Build github_repo_ready/ and 9_Supplementary_Reproducibility_Code_and_STEP.zip
     GH_DIR.mkdir(parents=True, exist_ok=True)
     for item in GH_DIR.iterdir():
         if item.name == ".git":
@@ -878,7 +944,7 @@ def main() -> None:
 
 **Paper Title:** *NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction*  
 **Authors:** Tin Nguyen Anh (ORCID: [0009-0009-4454-9541](https://orcid.org/0009-0009-4454-9541)) and Thuyen Phan Thi Le  
-**Affiliation:** FPT University, Quy Nhon AI Campus, Vietnam  
+**Affiliation:** FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam  
 **Repository:** [https://github.com/GosuEltin/NeuroTopo-3D](https://github.com/GosuEltin/NeuroTopo-3D)
 
 ---
@@ -886,6 +952,9 @@ def main() -> None:
 ## Overview
 
 This repository contains the reference implementation, symbolic/spectral theorem verification suite, classical non-neural baselines (`Marill-MSDA 1991` and `Lipson–Shpitalni 1996`), multi-seed experimental logs, and exported **ISO 10303-21 (`.STEP` AP214 `MANIFOLD_SOLID_BREP`)** and **Wavefront (`.OBJ`)** 3D CAD models for **NeuroTopo-3D**.
+
+### Relationship to Prior 2D Conference Work
+Our earlier 2D planar diagram benchmark paper (*"NeuroTopo: A Benchmark for Neuro-Symbolic Topological Reasoning on Geometric Diagrams"*, IEEE ATiGB 2026, pp. 421–431, DOI: [10.1109/ATiGB70203.2026.11628217](https://doi.org/10.1109/ATiGB70203.2026.11628217)) addressed 2D image-plane keypoint refinement without 3D depth recovery. **NeuroTopo-3D** extends that line into full 2D-to-3D polyhedral lifting, Dual-Gauge Spectral Rigidity Theory, Iterative Normal-Flow Row-Space Levenberg–Marquardt (`NF-RSLM`), and watertight ISO 10303-21 `.STEP` CAD B-Rep reverse engineering.
 
 ### Key Modules Included
 - `src/reasoning/normal_flow_projector_v9.py`: Iterative Normal-Flow Row-Space Levenberg–Marquardt (`NF-RSLM`) with multi-branch Necker reflection continuation and target-free solid-over-dashed ray-crossing disambiguation.
@@ -937,7 +1006,7 @@ MIT License.
         if cf.suffix.lower() in {".step", ".obj"}:
             shutil.copy2(cf, gh_cad / cf.name)
 
-    zip_repro = PKG_DIR / "8_Supplementary_Reproducibility_Code_and_STEP.zip"
+    zip_repro = PKG_DIR / "9_Supplementary_Reproducibility_Code_and_STEP.zip"
     with zipfile.ZipFile(zip_repro, "w", zipfile.ZIP_DEFLATED) as zf:
         for f in sorted(GH_DIR.rglob("*")):
             if f.is_file() and ".git" not in f.parts:
@@ -947,10 +1016,12 @@ MIT License.
         "jcde_pdf": str(pdf_target),
         "pages": pages,
         "pdf_bytes": pdf_bytes,
+        "supplementary_pdf": str(supp_pdf_target),
+        "supplementary_pages": supp_pages,
         "undef_refs": len(undef_refs),
         "undef_cites": len(undef_cites),
         "aciids_mentions": aciids_hits,
-        "zip_source_bytes": zip_src.stat().st_size,
+        "zip_source_bytes": zip_src_5.stat().st_size,
         "zip_figures_bytes": zip_figs.stat().st_size,
         "zip_repro_bytes": zip_repro.stat().st_size,
     }

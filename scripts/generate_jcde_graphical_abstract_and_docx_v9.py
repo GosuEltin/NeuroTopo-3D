@@ -1,20 +1,14 @@
-"""Generate Official JCDE Submission Companion Files (Graphical Abstract, Highlights.docx, Cover_Letter.docx, Figure_Alt_Text.docx).
-
-Strictly adheres to Oxford University Press / Journal of Computational Design and Engineering (JCDE) author guidelines:
-  1. Graphical Abstract:
-     - A4 portrait format (`8.27 x 11.69 in`) exported as PDF (for peer review) and 300-DPI JPG + TIFF (for production).
-     - Strictly pictorial & visual (NO algorithm flowcharts permitted by JCDE!).
-  2. Highlights (`3_Highlights_JCDE.docx`):
-     - A4 portrait MS Word (.docx) with heading "Highlights" on the first line.
-     - 3 to 5 bullet points, each strictly <= 15 words AND <= 100 characters (including spaces).
-  3. Cover Letter (`4_Cover_Letter_JCDE.docx`):
-     - Addressed to the Editor-in-Chief of JCDE, stating novelty, originality, and explicit Conflicts of Interest declaration.
-  4. Figure Alt Text (`5_Figure_Alt_Text_JCDE.docx`):
-     - 1-2 descriptive accessibility sentences per figure (`Figure 1` to `Figure 10` + `Graphical Abstract`).
+"""Generate Official JCDE Submission Companion Files:
+  - 2_Graphical_Abstract_A4_Portrait.pdf & 2_Graphical_Abstract_HighRes_300dpi.jpg
+  - 3_Highlights_JCDE.docx
+  - 4_Submission_Checklist_JCDE.docx
+  - 4_Cover_Letter_JCDE.docx (and 6_Cover_Letter_JCDE.docx)
+  - 5_Figure_Alt_Text_JCDE.docx (and 7_Figure_Alt_Text_JCDE.docx)
 """
 from __future__ import annotations
 
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -29,8 +23,7 @@ from matplotlib.patches import FancyBboxPatch
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import numpy as np
 import docx
-from docx.shared import Inches, Pt, Mm, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Inches, Pt, Mm
 
 from src.cad.step_exporter_v9 import fit_face_plane, orient_faces_outward
 
@@ -131,7 +124,6 @@ def generate_graphical_abstract() -> dict:
     fig = plt.figure(figsize=(8.27, 11.69), dpi=300)
     fig.patch.set_facecolor("white")
 
-    # Outer layout: 4 pictorial visual zones on A4 portrait
     gs = fig.add_gridspec(
         4, 1,
         height_ratios=[0.46, 1.38, 1.58, 1.58],
@@ -196,13 +188,13 @@ def generate_graphical_abstract() -> dict:
         title="(D) Non-Convex V-Groove\nPA = 0.087 (Newell Valid)",
     )
 
-    # Zone 3: Spectral Manifold Geometry (Left) & Parametric Nullspace .STEP Family Explorer (Right)
+    # Zone 3: Spectral Manifold Geometry (Left) & 3-Class Dual-Gauge Rigidity Performance (Right)
     gs_z3 = gs[2, 0].subgridspec(1, 2, width_ratios=[1.08, 1.22], wspace=0.24)
     ax_geo = fig.add_subplot(gs_z3[0, 0])
     t = np.linspace(-1.2, 1.25, 200)
     mx = t
     my = 0.22 * (t**2) - 0.18
-    ax_geo.plot(mx, my, color=C_EMERALD, lw=2.5, label="Exact Constraint Manifold $\\mathcal{M}(\\mathcal{C})$")
+    ax_geo.plot(mx, my, color=C_EMERALD, lw=2.5, label="Tolerance-Feasible Manifold $\\mathcal{M}(\\mathcal{C})$")
     ax_geo.fill_between(mx, my - 0.045, my + 0.045, color=C_EMERALD, alpha=0.15)
     p0 = np.array([-0.24, 0.86])
     p_star = np.array([-0.18, 0.22 * (-0.18) ** 2 - 0.18])
@@ -231,7 +223,6 @@ def generate_graphical_abstract() -> dict:
     ax_geo.set_title("(E) Spectral Manifold Geometry (Theorems 2 & 3)", fontsize=8.6, fontweight="bold", color=C_NAVY)
     ax_geo.legend(loc="lower left", fontsize=6.5, frameon=True)
 
-    # Right subpanel of Zone 3: 3-Class Dual-Gauge Rigidity Performance (792 Multi-Constraint Views)
     ax_rig = fig.add_subplot(gs_z3[0, 1])
     s_a2 = json.loads((RUN_DIR / "suite_a_12family_792views_v9.json").read_text(encoding="utf-8"))["pooled_792_views"]["by_rigidity_class"]
     cls_a2 = json.loads((RUN_DIR / "classical_msda_lipson_benchmarks_v9.json").read_text(encoding="utf-8"))["part2_12family_792views"]["by_rigidity_class"]
@@ -259,7 +250,7 @@ def generate_graphical_abstract() -> dict:
     ax_rig.legend(loc="upper left", fontsize=6.9, frameon=True)
     ax_rig.grid(True, axis="y", alpha=0.35)
 
-    # Zone 4: Quantitative Breakthrough Summary Across All Benchmarks (Left: CAD & Real-World, Right: Key Metrics)
+    # Zone 4: Quantitative Breakthrough Summary Across All Benchmarks
     gs_z4 = gs[3, 0].subgridspec(1, 2, width_ratios=[1.12, 1.18], wspace=0.24)
     ax_cad = fig.add_subplot(gs_z4[0, 0])
     methods_c = [
@@ -289,20 +280,20 @@ def generate_graphical_abstract() -> dict:
         "Tetrahedra Rescue\n(3 Seeds)",
         "Unseen OOD Tier-1\nComplex-8",
         "External GDP-29K\nTextbook (9 Seeds)",
-        "120 CAD Parts\nSewable (<=0.10mm)",
+        "120 CAD Parts\nMetric+Sewable",
     ]
     v843_cov = [92.97, 82.29, 56.25, 69.75, 20.00]
     v90_cov = [96.35, 95.31, 95.83, 93.83, 89.17]
     sx = np.arange(len(suites_lbl))
     sw = 0.34
     ax_cov.bar(sx - sw / 2, v843_cov, sw, color=C_BLUE, label="Post-Hoc Two-Stage SLSQP")
-    b_cv = ax_cov.bar(sx + sw / 2, v90_cov, sw, color=C_TEAL, label="NeuroTopo-3D (0 Invalid Views)")
+    b_cv = ax_cov.bar(sx + sw / 2, v90_cov, sw, color=C_TEAL, label="NeuroTopo-3D (0 Unabstained Invalid)")
     for b, val in zip(b_cv, v90_cov):
         ax_cov.text(b.get_x() + b.get_width() / 2, val + 1.8, f"{val:.1f}%", ha="center", fontsize=7.0, fontweight="bold", color=C_TEAL)
     ax_cov.set_xticks(sx)
     ax_cov.set_xticklabels(suites_lbl, rotation=18, ha="right", fontsize=7.1)
     ax_cov.set_ylim(0, 118)
-    ax_cov.set_ylabel("Certified Valid / Sewable Rate (%) $\\uparrow$", fontsize=8.1, fontweight="bold")
+    ax_cov.set_ylabel("Tolerance-Certified / Sewable (%) $\\uparrow$", fontsize=8.1, fontweight="bold")
     ax_cov.set_title("(H) Certified Coverage & CAD B-Rep Sewing Gains", fontsize=8.8, fontweight="bold", color=C_NAVY)
     ax_cov.legend(loc="upper right", fontsize=6.9, frameon=True)
     ax_cov.grid(True, axis="y", alpha=0.35)
@@ -325,9 +316,9 @@ def generate_graphical_abstract() -> dict:
 def generate_highlights_docx() -> dict:
     """Create A4 portrait MS Word Highlights file strictly obeying <=15 words and <=100 chars per bullet."""
     highlights = [
-        "Spectral theory classifies single-view polyhedral rigidity into three exact regimes.",
+        "Spectral theory classifies single-view polyhedral rigidity into three local regimes.",
         "Normal-flow row-space continuation eliminates first-order Bas-Relief nullspace shear.",
-        "Multi-branch continuation reaches 96.35% certified coverage with zero invalid views.",
+        "Multi-branch continuation reaches 96.35% certified coverage with zero invalid updates.",
         "Outperforms equivariant GNNs, Lipson-Shpitalni solvers, and frontier multimodal VLMs.",
         "Converts 89.17% of 120 CAD blueprints into sewable ISO 10303-21 STEP B-Rep solids.",
     ]
@@ -371,97 +362,187 @@ def generate_highlights_docx() -> dict:
     return {"path": str(out_path), "bullets": audit}
 
 
-def generate_cover_letter_docx() -> str:
-    """Create official JCDE Cover Letter (.docx) with mandatory Conflicts of Interest disclosure."""
+def generate_submission_checklist_docx() -> str:
+    """Create official JCDE Submission Checklist (.docx) required for initial ScholarOne submission."""
     doc = docx.Document()
     sec = doc.sections[0]
     sec.page_width = Mm(210)
     sec.page_height = Mm(297)
-    sec.top_margin = Inches(1.0)
-    sec.bottom_margin = Inches(1.0)
+    sec.top_margin = Inches(0.85)
+    sec.bottom_margin = Inches(0.85)
+    sec.left_margin = Inches(0.9)
+    sec.right_margin = Inches(0.9)
+
+    style = doc.styles["Normal"]
+    style.font.name = "Times New Roman"
+    style.font.size = Pt(11.5)
+
+    p_title = doc.add_paragraph()
+    r_title = p_title.add_run("Journal of Computational Design and Engineering (JCDE)\nAuthor Submission Checklist")
+    r_title.bold = True
+    r_title.font.name = "Times New Roman"
+    r_title.font.size = Pt(14)
+
+    p_meta = doc.add_paragraph()
+    r_meta = p_meta.add_run(
+        "Manuscript Title: NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction\n"
+        "Article Type: Original Research Article\n"
+        "Authors: Tin Nguyen Anh (Corresponding Author, ORCID: 0009-0009-4454-9541) and Thuyen Phan Thi Le\n"
+        "Affiliation: FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam\n"
+        "Corresponding Email: ti93ck2@gmail.com"
+    )
+    r_meta.font.name = "Times New Roman"
+    r_meta.font.size = Pt(11)
+
+    checklist_items = [
+        ("1. Single-Column Format, Font & Spacing", "Checked [X]", "A4 single-column layout, 12-point Times/Latin Modern font, 1.5-line spacing, line numbers enabled, and centered bottom page numbers (`1_Main_Document_JCDE.pdf`)."),
+        ("2. Title, Authors, Affiliations & ORCID", "Checked [X]", "Concise 12-word title free of internal version tags; full author names, institutional affiliation (FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam), emails, and ORCID included on title page."),
+        ("3. Abstract & Keywords", "Checked [X]", "Single-paragraph standalone Abstract (~235 words, no citations or abbreviations) followed by 6 specific keywords."),
+        ("4. Nomenclature & Numbered Sections", "Checked [X]", "Alphabetical/symbol Nomenclature table included after Keywords; all main sections and subsections numbered sequentially (Sections 1 to 7)."),
+        ("5. Equations, Figures, Tables & Algorithms", "Checked [X]", "All equations numbered sequentially; 'Equation X' and 'Figure X' written in full per JCDE style; all tables and figures cited in text with self-contained captions and large legible typography."),
+        ("6. Figure Accessibility (Alt Text)", "Checked [X]", "1-2 sentence descriptive Alternative Text (Alt Text) provided for the Graphical Abstract and Figures 1-10 in `5_Figure_Alt_Text_JCDE.docx`."),
+        ("7. Mandatory End-Matter Declarations", "Checked [X]", "Unnumbered sections ('Replication of results', 'Conflicts of interest', 'Author contributions' with CRediT roles, 'Funding', 'Data availability', and 'Acknowledgments') placed immediately before References."),
+        ("8. APA 7th Author-Date References & DOIs", "Checked [X]", "All citations formatted in APA 7th Author-Year style (`\\citet` / `\\citep`), sorted alphabetically in References with full DOIs."),
+        ("9. Disclosure of Related Prior Conference Work", "Checked [X]", "Prior 2D conference paper at IEEE ATiGB 2026 (`Nguyen Anh & Phan Thi Le, 2026`, DOI: 10.1109/ATiGB70203.2026.11628217) is explicitly cited and contrasted in Section 1.1, Section 2.4, and Cover Letter."),
+        ("10. Graphical Abstract (Separate File)", "Checked [X]", "A4 Portrait pictorial Graphical Abstract (`2_Graphical_Abstract_A4_Portrait.pdf` and 300-DPI `.jpg`, >1250x500 px) without any algorithm flowchart."),
+        ("11. Highlights (Separate .docx File)", "Checked [X]", "MS Word file `3_Highlights_JCDE.docx` starting with 'Highlights' and containing 5 bullet points, each strictly <= 15 words and <= 100 characters with spaces."),
+        ("12. Main Document Source Archive (.zip)", "Checked [X]", "Complete compilable LaTeX source archive provided in `6_LaTeX_Source_Archive_JCDE.zip` (and `5_Main_Document_Source_JCDE.zip`)."),
+        ("13. Replication of Results & Open Repository", "Checked [X]", "Public GitHub repository live at https://github.com/GosuEltin/NeuroTopo-3D and <2 MB Supplementary Archive (`9_Supplementary_Code_and_STEP_Under2MB.zip` + `8_Supplementary_Material_JCDE.pdf`)."),
+    ]
+
+    table = doc.add_table(rows=1, cols=3)
+    table.style = "Table Grid"
+    hdr_cells = table.rows[0].cells
+    hdr_cells[0].text = "JCDE Submission Requirement"
+    hdr_cells[1].text = "Status"
+    hdr_cells[2].text = "Compliance Verification Details"
+    for c in hdr_cells:
+        for p in c.paragraphs:
+            for r in p.runs:
+                r.bold = True
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(10.5)
+
+    for item, status, detail in checklist_items:
+        row_cells = table.add_row().cells
+        row_cells[0].text = item
+        row_cells[1].text = status
+        row_cells[2].text = detail
+        for c in row_cells:
+            for p in c.paragraphs:
+                p.paragraph_format.space_after = Pt(2)
+                for r in p.runs:
+                    r.font.name = "Times New Roman"
+                    r.font.size = Pt(10)
+
+    p_sign = doc.add_paragraph()
+    p_sign.paragraph_format.space_before = Pt(12)
+    r_sign = p_sign.add_run(
+        "Declaration: As the Corresponding Author, I confirm on behalf of all co-authors that all items in the JCDE Author Submission Checklist have been verified and satisfied, and that the authors declare no conflict of interest.\n\n"
+        "Signed: Tin Nguyen Anh (Corresponding Author) — November 2, 2026"
+    )
+    r_sign.bold = True
+    r_sign.font.name = "Times New Roman"
+    r_sign.font.size = Pt(11)
+
+    out_path = PKG_DIR / "4_Submission_Checklist_JCDE.docx"
+    doc.save(out_path)
+    return str(out_path)
+
+
+def generate_cover_letter_docx() -> str:
+    """Create official JCDE Cover Letter (.docx) with mandatory Conflicts of Interest and ATiGB 2026 prior-work disclosure."""
+    doc = docx.Document()
+    sec = doc.sections[0]
+    sec.page_width = Mm(210)
+    sec.page_height = Mm(297)
+    sec.top_margin = Inches(0.95)
+    sec.bottom_margin = Inches(0.95)
     sec.left_margin = Inches(1.0)
     sec.right_margin = Inches(1.0)
 
     style = doc.styles["Normal"]
     style.font.name = "Times New Roman"
-    style.font.size = Pt(12)
+    style.font.size = Pt(11.5)
 
-    def add_p(text: str, bold: bool = False, space_after: float = 8.0) -> None:
+    def add_p(text: str, bold: bool = False, space_after: float = 7.0) -> None:
         p = doc.add_paragraph()
-        p.paragraph_format.line_spacing = 1.35
+        p.paragraph_format.line_spacing = 1.30
         p.paragraph_format.space_after = Pt(space_after)
         r = p.add_run(text)
         r.bold = bold
         r.font.name = "Times New Roman"
-        r.font.size = Pt(12)
+        r.font.size = Pt(11.5)
 
-    add_p("November 2, 2026", space_after=12)
-    add_p("To the Editor-in-Chief\nJournal of Computational Design and Engineering (JCDE)\nOxford University Press", bold=True, space_after=12)
+    add_p("November 2, 2026", space_after=10)
+    add_p("To the Editor-in-Chief\nJournal of Computational Design and Engineering (JCDE)\nOxford University Press", bold=True, space_after=10)
     add_p(
         "Subject: Submission of Original Research Article — \"NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction\"",
         bold=True,
-        space_after=12,
+        space_after=10,
     )
     add_p("Dear Editor-in-Chief,")
     add_p(
-        "We are pleased to submit our original research article entitled \"NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction\" by Tin Nguyen Anh and Thuyen Phan Thi Le (FPT University, Quy Nhon AI Campus, Vietnam) for consideration for publication as a Research Article in the Journal of Computational Design and Engineering (JCDE)."
+        "We are pleased to submit our original research article entitled \"NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction\" by Tin Nguyen Anh and Thuyen Phan Thi Le (FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam) for consideration for publication as a Research Article in the Journal of Computational Design and Engineering (JCDE)."
     )
     add_p(
-        "Reconstructing exact, watertight 3D boundary-representation (B-Rep) solids from a single 2D engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric dimensioning and tolerancing (GD&T) predicates is a foundational problem in computational design and reverse engineering. Existing paradigms face a sharp divide: classical non-neural regularity optimizers (such as Marill MSDA and Lipson-Shpitalni) distort asymmetric or non-convex parts along unobservable Generalized Bas-Relief (GBR) viewing-ray nullspaces, whereas modern 2D-to-3D neural lifters exhibit 7 to 47 mm of out-of-plane face warp on a 100 mm part, causing immediate B-Rep sewing failure in industrial CAD kernels."
+        "Reconstructing watertight 3D boundary-representation (B-Rep) solids from a single 2D engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric dimensioning and tolerancing (GD&T) predicates is a foundational problem in computational design and reverse engineering. Existing paradigms face a sharp divide: classical non-neural regularity optimizers (Marill MSDA and Lipson-Shpitalni) distort asymmetric or non-convex parts along unobservable Generalized Bas-Relief (GBR) viewing-ray nullspaces, whereas pure 2D-to-3D neural lifters exhibit 7 to 47 mm of out-of-plane face warp on a 100 mm part, causing immediate B-Rep sewing failure in CAD kernels."
     )
     add_p(
-        "In this work, we resolve this tension both theoretically and algorithmically through five core contributions directly aligned with the scope of JCDE:"
+        "In this work, we resolve this dilemma through five core contributions directly aligned with the scope of JCDE:"
     )
     bullets = [
-        "1. Spectral Theory of Single-View Lifting & Dual-Gauge Rigidity: We prove planar z = 0 saddle collapse for reflection-symmetric lifters (Theorem 1), a visibility-diameter message-passing depth lower bound (Lemma 1), and an exact Schur-complement rank identity (Theorem 2) classifying single-view constrained polyhedra into strictly ray-rigid (Class I), coupled tilt-shear (Class II), and bas-relief families (Class III). All symbolic and spectral identities are machine-verified in SymPy and IEEE-754 float64.",
-        "2. Iterative Normal-Flow Row-Space Levenberg-Marquardt (NF-RSLM) & Crossing Disambiguation: We prove that whereas soft Tikhonov penalties suffer an O(lambda) infeasibility floor, restricting every step to the coupled viewing-ray row space enforces exact zero stepwise nullspace velocity and pure O(epsilon^2) curvature drift (Theorem 3), paired with multi-branch Necker continuation and a target-free solid-over-dashed 2D ray-crossing verifier (Proposition 1).",
-        "3. Comprehensive Multi-Seed & Classical CAD Benchmarks: Across 6,144 three-seed mirror-pair evaluations and 792 twelve-family multi-constraint views, we benchmark seven equivariant/Transformer lifters (EGNN, GATv2-Edge, GraphGPS, PairGT), four frontier multimodal VLMs, two classical non-neural CAD solvers (Marill-MSDA 1991 and Lipson-Shpitalni 1996), and eight manifold optimization baselines, achieving 96.35% +/- 1.13% certified mirror-pair coverage, 0.1107 +/- 0.0014 Shape PA (p = 2.22 x 10^-5), and zero invalid updates.",
-        "4. Mechanical CAD Blueprint Reverse Engineering & ISO 10303-21 (.STEP) Synthesis: Across 120 convex and non-convex machined components (chamfered blocks, slanted wedges, L-brackets, V-groove guideways, stepped fixtures, and hopper dies), NeuroTopo-3D achieves 89.17% (107/120) direct CAD sewing validity (<= 0.10 mm planarity tolerance) and 2.2x lower Shape PA than Lipson-Shpitalni (1996), while supporting an interactive Parametric Nullspace CAD Family Explorer at 0.000 px 2D reprojection drift.",
-        "5. Zero-Shot Real-World Generalization: Without domain fine-tuning, our framework transfers zero-shot to external scanned GDP-29K solid-geometry textbook diagrams (93.83% +/- 1.75% certified coverage across 9 seed pairs; 100/100 valid on disjoint test scans) and smartphone-photographed hand-drawn sketches (20/20 valid, 100% crossing occlusion consistency)."
+        "1. Spectral Theory of Single-View Lifting & Dual-Gauge Rigidity: We prove planar z = 0 saddle collapse for reflection-symmetric lifters (Theorem 1), a visibility-diameter message-passing depth lower bound (Lemma 1), and an exact Schur-complement rank identity (Theorem 2) classifying regular local neighborhoods of constrained polyhedra into viewing-ray rigid (Class I), coupled tilt-shear (Class II), and bas-relief submanifolds (Class III). All symbolic and spectral identities are verified in SymPy and IEEE-754 float64.",
+        "2. Iterative Normal-Flow Row-Space Levenberg-Marquardt (NF-RSLM) & Crossing Disambiguation: We prove that whereas soft Tikhonov penalties suffer an O(lambda) infeasibility floor, restricting every step to the coupled viewing-ray row space enforces zero stepwise nullspace velocity and O(epsilon^2) curvature drift (Theorem 3), paired with multi-branch Necker continuation and a target-free solid-over-dashed 2D ray-crossing verifier (Proposition 1).",
+        "3. Multi-Seed Equivariant Lifting & Classical CAD Solver Benchmarks: Across 6,144 three-seed mirror-pair evaluations and 792 twelve-family multi-constraint views, we benchmark seven equivariant/Transformer lifters (EGNN, GATv2-Edge, GraphGPS, PairGT), four multimodal VLMs, two classical non-neural CAD solvers (Marill-MSDA 1991 and Lipson-Shpitalni 1996), and eight manifold optimization baselines, achieving 96.35% +/- 1.13% tolerance-certified mirror-pair coverage, 0.1107 +/- 0.0014 Shape PA (p = 2.22 x 10^-5), and zero unabstained tolerance-violating updates.",
+        "4. Mechanical CAD Blueprint Reverse Engineering & ISO 10303-21 (.STEP) Synthesis: Across 120 convex and non-convex machined components, NeuroTopo-3D jointly achieves 89.17% (107/120) nonlinear GD&T semantic feasibility and ISO 10303-21 (.STEP) B-Rep sewing validity (<0.01 mm face planarity on all certified solids) with 2.2x lower 3D Shape PA (0.0696 vs. 0.1534) and 2.1x lower dihedral error (3.03 deg vs. 6.35 deg) than Lipson-Shpitalni (1996), plus a Parametric Nullspace CAD Family Explorer at 0.000 px 2D reprojection drift.",
+        "5. Zero-Shot Real-World Generalization: Without domain fine-tuning, our framework transfers zero-shot to external scanned GDP-29K solid-geometry textbook diagrams (93.83% +/- 1.75% tolerance-certified coverage across 9 seed pairs; 100/100 non-degenerate on disjoint test scans) and smartphone-photographed hand-drawn sketches (20/20 valid, 100% crossing occlusion consistency)."
     ]
     for b in bullets:
         p = doc.add_paragraph()
-        p.paragraph_format.left_indent = Inches(0.25)
-        p.paragraph_format.line_spacing = 1.28
-        p.paragraph_format.space_after = Pt(5)
+        p.paragraph_format.left_indent = Inches(0.22)
+        p.paragraph_format.line_spacing = 1.24
+        p.paragraph_format.space_after = Pt(4)
         r = p.add_run(b)
         r.font.name = "Times New Roman"
-        r.font.size = Pt(11.5)
+        r.font.size = Pt(11)
 
     add_p(
-        "Reproducibility and Open Source Availability: In full compliance with JCDE's Replication of Results standards, all source code, automated SymPy/float64 theorem proof verifiers, benchmark evaluation logs, and exported ISO 10303-21 (.STEP) and Wavefront (.OBJ) CAD solid models are provided in the Supplementary Reproducibility Archive and publicly hosted at https://github.com/GosuEltin/NeuroTopo-3D."
+        "Disclosure of Related Prior Conference Work: A preliminary 2D synthetic benchmark study by the authors appeared in the 2026 IEEE International Conference on Advanced Technologies in Information and Green Business (ATiGB 2026, pp. 421-431, DOI: 10.1109/ATiGB70203.2026.11628217; cited in the manuscript as Nguyen Anh & Phan Thi Le, 2026). That conference paper was restricted strictly to 2D image-plane keypoint localization and 2D projected planar graph refinement on four basic synthetic templates without recovering 3D vertex depths. The present JCDE submission is a substantially new theoretical, algorithmic, and CAD engineering investigation introducing 2D-to-3D Equivariant Graph Transformer lifting, Dual-Gauge Spectral Rigidity Theory (Theorems 1-3), Normal-Flow Row-Space Levenberg-Marquardt 3D manifold projection, 12-family and real-world GDP-29K/sketch evaluations, classical MSDA/Lipson-Shpitalni comparisons, and ISO 10303-21 (.STEP) B-Rep solid synthesis.",
+        bold=False,
     )
     add_p(
-        "Originality and Submission Declarations: We confirm that this manuscript is original, has not been published previously, and is not currently under consideration for publication elsewhere. All authors have approved the manuscript and agree with its submission to the Journal of Computational Design and Engineering."
+        "Reproducibility and Open Source Availability: All source code, automated SymPy/float64 theorem verifiers, benchmark evaluation logs, and exported ISO 10303-21 (.STEP) and Wavefront (.OBJ) CAD solid models are publicly hosted at https://github.com/GosuEltin/NeuroTopo-3D and included in the accompanying Supplementary Reproducibility Archive."
     )
     add_p(
-        "Conflicts of Interest Disclosure: In accordance with JCDE policy, the authors declare no conflict of interest. Neither author has any financial or personal relationships with other people or organizations that could inappropriately influence or bias this work.",
+        "Originality and Conflicts of Interest Disclosure: We confirm that this manuscript is original, has not been published previously, and is not under consideration elsewhere. In accordance with JCDE policy, the authors declare no conflict of interest.",
         bold=True,
     )
-    add_p("Thank you very much for your time and consideration. We look forward to hearing from you.")
     add_p(
-        "Sincerely,\n\nTin Nguyen Anh (Corresponding Author)\nORCID: https://orcid.org/0009-0009-4454-9541\nEmail: ti93ck2@gmail.com\n\nThuyen Phan Thi Le\nEmail: thuyenptl@fe.edu.vn\n\nFPT University, Quy Nhon AI Campus, Vietnam",
+        "Sincerely,\n\nTin Nguyen Anh (Corresponding Author, ORCID: https://orcid.org/0009-0009-4454-9541, Email: ti93ck2@gmail.com)\nThuyen Phan Thi Le (Co-Author, Email: thuyenptl@fe.edu.vn)\nFPT University, Quy Nhon AI Campus, Gia Lai, Vietnam",
         space_after=4,
     )
 
-    out_path = PKG_DIR / "4_Cover_Letter_JCDE.docx"
-    doc.save(out_path)
-    return str(out_path)
+    out_path_4 = PKG_DIR / "4_Cover_Letter_JCDE.docx"
+    out_path_6 = PKG_DIR / "6_Cover_Letter_JCDE.docx"
+    doc.save(out_path_4)
+    shutil.copy2(out_path_4, out_path_6)
+    return str(out_path_6)
 
 
 def generate_alt_text_docx() -> str:
-    """Create official JCDE Figure Alt Text MS Word file (`5_Figure_Alt_Text_JCDE.docx`)."""
+    """Create official JCDE Figure Alt Text MS Word file (`5_Figure_Alt_Text_JCDE.docx` & `7_Figure_Alt_Text_JCDE.docx`)."""
     alt_items = [
         ("Graphical Abstract", "Visual summary contrasting single-view 2D engineering blueprints and warped raw neural meshes against watertight ISO 10303-21 STEP B-Rep solids reconstructed via spectral normal-flow manifold projection across three rigidity classes."),
-        ("Figure 1", "Four-panel schematic showing the five-stage NeuroTopo-3D perception-to-STEP pipeline, normal-flow row-space trajectory versus Tikhonov and Gauss-Newton trajectories on the constraint manifold, multi-branch Necker reflection continuation, and target-free 2D solid-over-dashed crossing verification."),
-        ("Figure 2", "Three quantitative verification plots demonstrating zero visibility-cue propagation below the four-hop visibility diameter (Theorem 1 and Lemma 1), exact Schur-complement dual-gauge nullspace decomposition across 12 polyhedral families (Theorem 2), and log-log slope-2 quadratic nullspace curvature drift scaling (Theorem 3)."),
-        ("Figure 3", "Three-panel benchmark chart comparing three-seed held-out 3D Shape Procrustes Alignment across seven Module 2 neural lifters, end-to-end graph recovery and 3D error against four frontier multimodal vision-language models, and the Module 3 Pareto frontier of Shape PA versus certified mirror-pair coverage."),
-        ("Figure 4", "Qualitative 3D wireframe gallery across four polyhedral families comparing perceived 2D graphs, raw neural anchors, post-hoc two-stage SLSQP, and certified NeuroTopo-3D reconstructions, paired with bar charts showing tetrahedral mirror-pair coverage rising from 15.6% to 95.3%."),
-        ("Figure 5", "Two-panel bar chart of the 792-view 12-family multi-constraint benchmark stratified by Dual-Gauge Rigidity Classes I, II, and III, comparing non-neural Lipson-Shpitalni optimization, raw neural anchors, two-stage SLSQP, and NeuroTopo-3D in 3D Shape PA and certified valid coverage."),
+        ("Figure 1", "Four-panel schematic showing the five-stage NeuroTopo-3D perception-to-STEP pipeline, normal-flow row-space trajectory versus Tikhonov and Gauss-Newton trajectories on the tolerance-feasible constraint manifold, multi-branch Necker reflection continuation, and target-free 2D solid-over-dashed crossing verification."),
+        ("Figure 2", "Three quantitative verification plots demonstrating zero visibility-cue propagation below the four-hop visibility diameter (Theorem 1 and Lemma 1), Schur-complement dual-gauge nullspace decomposition across 12 polyhedral families (Theorem 2), and log-log slope-2 quadratic nullspace curvature drift scaling (Theorem 3)."),
+        ("Figure 3", "Three-panel benchmark chart comparing three-seed held-out 3D Shape Procrustes Alignment across seven Module 2 neural lifters, end-to-end graph recovery and 3D error against four frontier multimodal vision-language models, and the Module 3 Pareto frontier of Shape PA versus tolerance-certified mirror-pair coverage."),
+        ("Figure 4", "Qualitative 3D wireframe gallery across four polyhedral families comparing perceived 2D graphs, raw neural anchors, post-hoc two-stage SLSQP, and tolerance-certified NeuroTopo-3D reconstructions, paired with bar charts showing tetrahedral mirror-pair coverage rising from 15.6% to 95.3%."),
+        ("Figure 5", "Two-panel bar chart of the 792-view 12-family multi-constraint benchmark stratified by Dual-Gauge Rigidity Classes I, II, and III, comparing non-neural Lipson-Shpitalni optimization, raw neural anchors, two-stage SLSQP, and NeuroTopo-3D in 3D Shape PA and tolerance-certified valid coverage."),
         ("Figure 6", "Three-panel bar chart of three-tier out-of-distribution generalization across unseen composite scenes, three-seed leave-one-scene-out cross-validation, and 100 procedural random 3D convex hulls, showing up to 96 percentage-point coverage rescue with bounded nullspace drift."),
         ("Figure 7", "Six-column reverse-engineering gallery of convex and non-convex mechanical CAD blueprints showing 2D drawings, warped zero-shot neural meshes, and watertight NeuroTopo-3D STEP B-Rep solids, alongside log-scale face non-planarity against the 0.10 mm sewing tolerance and 3D dihedral angle error."),
         ("Figure 8", "Visual and quantitative demonstration of the Parametric Nullspace CAD Family Explorer on an affine-constrained frustum hopper die, showing five watertight STEP solid variants generated along the primary Bas-Relief kernel mode at 0.000 px 2D reprojection drift."),
-        ("Figure 9", "Real-world transfer gallery on external scanned GDP-29K solid-geometry textbook diagrams and smartphone-photographed hand-drawn paper sketches, accompanied by a bar chart showing certified valid coverage increasing from 69.8% to 93.8% across nine seed pairs."),
+        ("Figure 9", "Real-world transfer gallery on external scanned GDP-29K solid-geometry textbook diagrams and smartphone-photographed hand-drawn paper sketches, accompanied by a bar chart showing tolerance-certified valid coverage increasing from 69.8% to 93.8% across nine seed pairs."),
         ("Figure 10", "Six-panel stress-test and sensitivity plot showing graceful degradation under 2D pixel jitter, topological edge/vertex drops, solid-dashed visibility flips, and 15% spurious false constraints, alongside four-order-of-magnitude stability plateaus across spectral SVD thresholds."),
     ]
     doc = docx.Document()
@@ -495,14 +576,23 @@ def generate_alt_text_docx() -> str:
         r2.font.name = "Times New Roman"
         r2.font.size = Pt(12)
 
-    out_path = PKG_DIR / "5_Figure_Alt_Text_JCDE.docx"
-    doc.save(out_path)
-    return str(out_path)
+    out_path_5 = PKG_DIR / "5_Figure_Alt_Text_JCDE.docx"
+    out_path_7 = PKG_DIR / "7_Figure_Alt_Text_JCDE.docx"
+    doc.save(out_path_5)
+    shutil.copy2(out_path_5, out_path_7)
+    return str(out_path_5)
 
 
 if __name__ == "__main__":
     ga_info = generate_graphical_abstract()
     hl_info = generate_highlights_docx()
+    chk_path = generate_submission_checklist_docx()
     cl_path = generate_cover_letter_docx()
     at_path = generate_alt_text_docx()
-    print(json.dumps({"graphical_abstract": ga_info, "highlights": hl_info, "cover_letter": cl_path, "alt_text": at_path}, indent=2))
+    print(json.dumps({
+        "graphical_abstract": ga_info,
+        "highlights": hl_info,
+        "submission_checklist": chk_path,
+        "cover_letter": cl_path,
+        "alt_text": at_path,
+    }, indent=2))

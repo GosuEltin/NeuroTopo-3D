@@ -1,6 +1,6 @@
 {
-  "overall_status": "ALL_5_Q1_AUDIT_GATES_PASSED",
-  "all_passed": true,
+  "overall_status": "FAILED",
+  "all_passed": false,
   "gate1_frozen_aciids2027_sha256": {
     "passed": true,
     "files_checked": 7,
@@ -9,8 +9,8 @@
   "gate2_pytest_unit_tests": {
     "passed": true,
     "returncode": 0,
-    "stdout": "........                                                                 [100%]\n8 passed in 7.62s",
-    "stderr": "C:\\Users\\GosuEltin Lap\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.2) or chardet (7.4.3)/charset_normalizer (3.4.4) doesn't match a supported version!\n  warnings.warn("
+    "stdout": "........                                                                 [100%]\n8 passed in 16.34s",
+    "stderr": ""
   },
   "gate3_json_reports": {
     "passed": true,
@@ -26,9 +26,30 @@
     "errors": []
   },
   "gate5_claim_to_json_audit": {
-    "passed": true,
+    "passed": false,
     "claims_checked": 43,
-    "missing_claims": [],
+    "missing_claims": [
+      {
+        "metric": "cls_a2_overall_ls_pa",
+        "expected_token": "0.1718"
+      },
+      {
+        "metric": "a2_overall_v9_pa",
+        "expected_token": "0.1056"
+      },
+      {
+        "metric": "a2_overall_v9_cov",
+        "expected_token": "88.89"
+      },
+      {
+        "metric": "b_tier1_v9_pa",
+        "expected_token": "0.1724"
+      },
+      {
+        "metric": "b_loso_s03_v9_pa",
+        "expected_token": "0.2980"
+      }
+    ],
     "zero_aciids_mentions_in_manuscript": true,
     "no_stale_parameter_strings": true
   }
