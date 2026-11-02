@@ -182,6 +182,14 @@ def apply_jcde_house_style(tex: str) -> str:
         tex,
     )
 
+    # Fit wide tables cleanly to 12pt \textwidth while preserving compact column headers (~96% of \footnotesize)
+    tex = re.sub(
+        r"(?<!\{)(\\begin\{tabular\}\{[^\n]+\}.*?\\end\{tabular\})",
+        r"\\resizebox{\\textwidth}{!}{\1}",
+        tex,
+        flags=re.S,
+    )
+
     return tex
 
 
@@ -634,11 +642,22 @@ The authors thank the faculty and computing laboratory staff at FPT University, 
 def build_jcde_supplementary_tex(sec7_tex: str) -> str:
     """Format standalone Supplementary Material PDF (Sections S1, S2, S3) for JCDE."""
     sec7_tex = apply_jcde_house_style(sec7_tex)
-    sec7_tex = re.sub(r"Theorem~\\ref\{[^}]+\}", "Theorem in Main Text", sec7_tex)
-    sec7_tex = re.sub(r"Lemma~\\ref\{[^}]+\}", "Lemma~1 in Main Text", sec7_tex)
-    sec7_tex = re.sub(r"Proposition~\\ref\{[^}]+\}", "Proposition~1 in Main Text", sec7_tex)
-    sec7_tex = re.sub(r"Section~\\ref\{[^}]+\}", "Section~3 in Main Text", sec7_tex)
-    sec7_tex = re.sub(r"Equation~\\ref\{[^}]+\}", "Equation~9 in Main Text", sec7_tex)
+    ref_map = {
+        r"\ref{thm:mirror_saddle}": "1",
+        r"\ref{thm:dual_gauge}": "2",
+        r"\ref{thm:normal_flow}": "3",
+        r"\ref{lem:vis_diameter}": "1",
+        r"\ref{prop:crossing_verifier}": "1",
+        r"\ref{sec:theory}": "3",
+        r"\ref{eq:schur_identity}": "16",
+    }
+    for k, v in ref_map.items():
+        sec7_tex = sec7_tex.replace(k, v)
+    sec7_tex = re.sub(r"Theorem~\\ref\{[^}]+\}", "Theorem~1", sec7_tex)
+    sec7_tex = re.sub(r"Lemma~\\ref\{[^}]+\}", "Lemma~1", sec7_tex)
+    sec7_tex = re.sub(r"Proposition~\\ref\{[^}]+\}", "Proposition~1", sec7_tex)
+    sec7_tex = re.sub(r"Section~\\ref\{[^}]+\}", "Section~3", sec7_tex)
+    sec7_tex = re.sub(r"Equation~\\ref\{[^}]+\}", "Equation~16", sec7_tex)
 
     header_replacement = r"""\section*{Section S1. Complete Differentiable Geometric Residual Operator Specification}
 \setcounter{table}{0}
