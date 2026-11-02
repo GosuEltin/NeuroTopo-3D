@@ -1,0 +1,321 @@
+{
+  "frozen_aciids2027_hashes": {
+    "main.tex": {
+      "sha256": "c46501c47babff813e8c659b22a8c31c4041402ba288801767de4d9258c3507e",
+      "bytes": 63822,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\main.tex"
+    },
+    "main.pdf": {
+      "sha256": "07bcad3dc32f14933f4fdb1dc4e9638f4c14e60028cc2029c670246584ab18ef",
+      "bytes": 1753741,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\main.pdf"
+    },
+    "main_lncs.tex": {
+      "sha256": "c46501c47babff813e8c659b22a8c31c4041402ba288801767de4d9258c3507e",
+      "bytes": 63822,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\main_lncs.tex"
+    },
+    "main_lncs.pdf": {
+      "sha256": "07bcad3dc32f14933f4fdb1dc4e9638f4c14e60028cc2029c670246584ab18ef",
+      "bytes": 1753741,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\main_lncs.pdf"
+    },
+    "llncs.cls": {
+      "sha256": "04ec99046ad9867f6cd54ffd1ef8c47c767b327d1baec77536db0528cd492fa2",
+      "bytes": 43700,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\llncs.cls"
+    },
+    "splncs04.bst": {
+      "sha256": "f36c3a17e5304a692706359aafa9de709395a085e579eb47c027095aeaa35174",
+      "bytes": 32146,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\splncs04.bst"
+    },
+    "DescriptionTexts.txt": {
+      "sha256": "3785d50b52997f801ed56a6834e5b27f9879764c275d6b1fe6011cb14a14d89a",
+      "bytes": 1270,
+      "original_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\overleaf_neurotopo_v845\\DescriptionTexts.txt"
+    }
+  },
+  "summary_12fam_gt_spectra": {
+    "cube_v2": {
+      "count": 12,
+      "n_range": [
+        8,
+        10
+      ],
+      "d_null_n1_dist": {
+        "1": 12
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "equal_length": 36,
+        "parallel": 24,
+        "orthogonal": 24,
+        "coplanar": 24,
+        "angle_line_plane": 12,
+        "midpoint": 7
+      }
+    },
+    "polyhedra_v2": {
+      "count": 12,
+      "n_range": [
+        5,
+        11
+      ],
+      "d_null_n1_dist": {
+        "5": 4,
+        "7": 5,
+        "8": 1,
+        "6": 1,
+        "4": 1
+      },
+      "d_null_n3_dist": {
+        "3": 4,
+        "5": 5,
+        "6": 1,
+        "4": 1,
+        "2": 1
+      },
+      "operators": {
+        "coplanar": 125,
+        "betweenness": 9,
+        "midpoint": 8,
+        "centroid": 3,
+        "distance_ratio": 1
+      }
+    },
+    "prism_v2": {
+      "count": 12,
+      "n_range": [
+        6,
+        8
+      ],
+      "d_null_n1_dist": {
+        "3": 12
+      },
+      "d_null_n3_dist": {
+        "1": 12
+      },
+      "operators": {
+        "parallel": 24,
+        "equal_length": 24,
+        "coplanar": 24,
+        "angle_line_plane": 12,
+        "centroid": 6
+      }
+    },
+    "scene_01_inscribed_prism": {
+      "count": 12,
+      "n_range": [
+        10,
+        10
+      ],
+      "d_null_n1_dist": {
+        "1": 12
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "betweenness": 36,
+        "parallel": 36,
+        "orthogonal_projection": 36,
+        "distance_ratio": 36,
+        "collinear": 36
+      }
+    },
+    "scene_02_symmetric_octahedron": {
+      "count": 12,
+      "n_range": [
+        7,
+        7
+      ],
+      "d_null_n1_dist": {
+        "3": 12
+      },
+      "d_null_n3_dist": {
+        "1": 12
+      },
+      "operators": {
+        "midpoint": 36,
+        "betweenness": 36,
+        "equal_length": 36,
+        "collinear": 36
+      }
+    },
+    "scene_03_cutting_plane": {
+      "count": 12,
+      "n_range": [
+        10,
+        10
+      ],
+      "d_null_n1_dist": {
+        "6": 11,
+        "7": 1
+      },
+      "d_null_n3_dist": {
+        "4": 11,
+        "5": 1
+      },
+      "operators": {
+        "betweenness": 24,
+        "distance_ratio": 24,
+        "collinear": 24,
+        "coplanar": 12
+      }
+    },
+    "scene_04_orthogonal_projection": {
+      "count": 12,
+      "n_range": [
+        7,
+        7
+      ],
+      "d_null_n1_dist": {
+        "0": 12
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "orthogonal": 48,
+        "betweenness": 24,
+        "distance_ratio": 24,
+        "collinear": 24,
+        "angle_line_plane": 12,
+        "coplanar": 12
+      }
+    },
+    "scene_05_centroid_polyhedron": {
+      "count": 12,
+      "n_range": [
+        9,
+        9
+      ],
+      "d_null_n1_dist": {
+        "3": 12
+      },
+      "d_null_n3_dist": {
+        "1": 12
+      },
+      "operators": {
+        "centroid": 48,
+        "coplanar": 24
+      }
+    },
+    "scene_06_vertical_side": {
+      "count": 12,
+      "n_range": [
+        7,
+        7
+      ],
+      "d_null_n1_dist": {
+        "0": 11,
+        "1": 1
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "orthogonal": 60,
+        "midpoint": 12,
+        "angle_line_plane": 12,
+        "coplanar": 12,
+        "collinear": 12
+      }
+    },
+    "scene_07_right_prism": {
+      "count": 12,
+      "n_range": [
+        11,
+        11
+      ],
+      "d_null_n1_dist": {
+        "1": 12
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "midpoint": 96,
+        "betweenness": 60,
+        "collinear": 36,
+        "orthogonal": 24,
+        "equal_length": 24,
+        "angle_line_plane": 12
+      }
+    },
+    "scene_08_centroid_altitude": {
+      "count": 12,
+      "n_range": [
+        9,
+        9
+      ],
+      "d_null_n1_dist": {
+        "0": 12
+      },
+      "d_null_n3_dist": {
+        "0": 12
+      },
+      "operators": {
+        "orthogonal": 60,
+        "midpoint": 24,
+        "betweenness": 24,
+        "equal_length": 24,
+        "collinear": 24,
+        "centroid": 12
+      }
+    },
+    "tetra_v2": {
+      "count": 12,
+      "n_range": [
+        4,
+        6
+      ],
+      "d_null_n1_dist": {
+        "3": 11,
+        "2": 1
+      },
+      "d_null_n3_dist": {
+        "1": 12
+      },
+      "operators": {
+        "coplanar": 12,
+        "midpoint": 6,
+        "betweenness": 6,
+        "centroid": 3,
+        "orthogonal": 2
+      }
+    }
+  },
+  "v843_tetra_summary": {
+    "heldout_branch0_tetra": {
+      "groups": 64,
+      "raw_shape_pa": 0.22776805311541126,
+      "post_shape_pa": 0.11081303143163296,
+      "shape_pa_delta": -0.1169550216837783,
+      "raw_proper_pa": 0.22776805311541126,
+      "post_proper_pa": 0.11081303143163296,
+      "proper_pa_delta": -0.1169550216837783,
+      "accepted_valid_pairs": 51,
+      "accepted_valid_pair_rate": 0.796875,
+      "any_accepted_groups": 58,
+      "shape_harmed_groups": 0,
+      "marginal_shape_harm_rate": 0.0
+    },
+    "runs_module3_v843_files": [
+      "analysis.json",
+      "completion_lock.json",
+      "descriptive_report.json",
+      "development",
+      "heldout",
+      "nullspace_projector_summary.png",
+      "prediction_lock.json",
+      "protocol_lock.json",
+      "train",
+      "unit_tests.xml",
+      "verification.json"
+    ]
+  }
+}

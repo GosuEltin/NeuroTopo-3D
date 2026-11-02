@@ -1,0 +1,507 @@
+{
+  "status": "all_q1_theorems_machine_verified",
+  "theorem_1_equivariance_and_mirror_saddle": {
+    "passed": true,
+    "max_Sn_permutation_equivariance_error_fp64": 4.440892098500626e-16,
+    "max_horizontal_reflection_equivariance_error_fp64": 0.0,
+    "sympy_pythagoras_mirror_risk_residual": "0",
+    "theta_sym_mirror_branch_discrepancy": 0.0,
+    "saddle_gradient_max_abs_at_z0": 0.0,
+    "saddle_hessian_eigenvalues_at_z0": [
+      -1.5607105792128417e-06,
+      0.001875653114112489
+    ],
+    "lemma1_node4_dist3_hop_differences": {
+      "layer_1": 0.0,
+      "layer_2": 0.0,
+      "layer_3": 0.0,
+      "layer_4": 0.030581490811242507
+    }
+  },
+  "theorem_2_gbr_dual_gauge_and_kantorovich": {
+    "passed": true,
+    "sympy_coplanarity_det_gbr_diff": "0",
+    "sympy_parallelism_cross_gbr": [
+      "0",
+      "0",
+      "0"
+    ],
+    "sympy_collinear_ratio_gbr": [
+      "0",
+      "0",
+      "0"
+    ],
+    "sympy_orthogonality_breaks_gbr": true,
+    "schur_coupled_tilt_rank_identity_views_tested": 144,
+    "schur_coupled_tilt_rank_identity_mismatches": 0,
+    "three_class_distribution_144views": {
+      "Class_II_Intrinsic_Rigid_Coupled_Tilt_Shear": 37,
+      "Class_III_Under_Constrained_Bas_Relief_Nullspace": 71,
+      "Class_I_Strictly_Ray_Rigid": 36
+    },
+    "per_family_dual_gauge_classification": {
+      "cube_v2": {
+        "d_null_ray_values": [
+          1
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          1
+        ],
+        "dominant_rigidity_class": "Class_II_Intrinsic_Rigid_Coupled_Tilt_Shear"
+      },
+      "polyhedra_v2": {
+        "d_null_ray_values": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "d_null_aff_values": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      },
+      "prism_v2": {
+        "d_null_ray_values": [
+          3
+        ],
+        "d_null_aff_values": [
+          1
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      },
+      "scene_01_inscribed_prism": {
+        "d_null_ray_values": [
+          1
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          1
+        ],
+        "dominant_rigidity_class": "Class_II_Intrinsic_Rigid_Coupled_Tilt_Shear"
+      },
+      "scene_02_symmetric_octahedron": {
+        "d_null_ray_values": [
+          3
+        ],
+        "d_null_aff_values": [
+          1
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      },
+      "scene_03_cutting_plane": {
+        "d_null_ray_values": [
+          6
+        ],
+        "d_null_aff_values": [
+          4
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      },
+      "scene_04_orthogonal_projection": {
+        "d_null_ray_values": [
+          0
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          0
+        ],
+        "dominant_rigidity_class": "Class_I_Strictly_Ray_Rigid"
+      },
+      "scene_05_centroid_polyhedron": {
+        "d_null_ray_values": [
+          3
+        ],
+        "d_null_aff_values": [
+          1
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      },
+      "scene_06_vertical_side": {
+        "d_null_ray_values": [
+          0
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          0
+        ],
+        "dominant_rigidity_class": "Class_I_Strictly_Ray_Rigid"
+      },
+      "scene_07_right_prism": {
+        "d_null_ray_values": [
+          1
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          1
+        ],
+        "dominant_rigidity_class": "Class_II_Intrinsic_Rigid_Coupled_Tilt_Shear"
+      },
+      "scene_08_centroid_altitude": {
+        "d_null_ray_values": [
+          0
+        ],
+        "d_null_aff_values": [
+          0
+        ],
+        "coupled_tilt_dim_values": [
+          0
+        ],
+        "dominant_rigidity_class": "Class_I_Strictly_Ray_Rigid"
+      },
+      "tetra_v2": {
+        "d_null_ray_values": [
+          2,
+          3
+        ],
+        "d_null_aff_values": [
+          0,
+          1
+        ],
+        "coupled_tilt_dim_values": [
+          2
+        ],
+        "dominant_rigidity_class": "Class_III_Under_Constrained_Bas_Relief_Nullspace"
+      }
+    },
+    "kantorovich_rigid_stats": {
+      "count": 36,
+      "median_sigma_min": 0.05126972081134086,
+      "median_L_J": 0.24209743647729698,
+      "median_kantorovich_safe_residual": 0.003381542439844132
+    }
+  },
+  "theorem_3_normal_flow_quadratic_and_zero_shear": {
+    "passed": true,
+    "max_stepwise_nullspace_velocity_fp64": 5.866459255114957e-17,
+    "families_tested": {
+      "cube_v2": {
+        "d_null_ray": 1,
+        "nf_rslm_scaling": [
+          {
+            "eps": 0.16,
+            "tangential_drift": 0.005779978878213672,
+            "dist_to_exact_nearest": 0.005760300676264171,
+            "iters": 25,
+            "final_res": 1.063018533951718e-06
+          },
+          {
+            "eps": 0.08,
+            "tangential_drift": 0.0011046863726079095,
+            "dist_to_exact_nearest": 0.0011024913810740633,
+            "iters": 25,
+            "final_res": 3.8969617641745855e-08
+          },
+          {
+            "eps": 0.04,
+            "tangential_drift": 0.00023749801657987316,
+            "dist_to_exact_nearest": 0.00023725410864411698,
+            "iters": 25,
+            "final_res": 1.8059245700329729e-09
+          },
+          {
+            "eps": 0.02,
+            "tangential_drift": 5.4800299931292866e-05,
+            "dist_to_exact_nearest": 5.477127537497127e-05,
+            "iters": 25,
+            "final_res": 9.648007672196863e-11
+          },
+          {
+            "eps": 0.01,
+            "tangential_drift": 1.314486036076897e-05,
+            "dist_to_exact_nearest": 1.3141257367156012e-05,
+            "iters": 25,
+            "final_res": 5.609335239472329e-12
+          }
+        ],
+        "tikhonov_stationary_bias_audit": [
+          {
+            "eps": 0.16,
+            "tikhonov_residual": 0.009078397801217023,
+            "theoretical_lower_bound": 0.002753589693438733
+          },
+          {
+            "eps": 0.08,
+            "tikhonov_residual": 0.004538513431177537,
+            "theoretical_lower_bound": 0.0013724068605215538
+          },
+          {
+            "eps": 0.04,
+            "tikhonov_residual": 0.002269079274144846,
+            "theoretical_lower_bound": 0.0006852412510118182
+          },
+          {
+            "eps": 0.02,
+            "tikhonov_residual": 0.0011344962528316337,
+            "theoretical_lower_bound": 0.00034239425927729927
+          },
+          {
+            "eps": 0.01,
+            "tikhonov_residual": 0.0005672376411055528,
+            "theoretical_lower_bound": 0.0001711423948708074
+          }
+        ],
+        "residual_quadratic_trace_eps016": [
+          0.014396254568479601,
+          0.00021147281851700478,
+          1.0641667254443097e-06,
+          1.0630185339756282e-06,
+          1.0630185339969205e-06,
+          1.0630185339972606e-06,
+          1.0630185340424202e-06,
+          1.0630185339518702e-06,
+          1.0630185340422847e-06,
+          1.063018533997296e-06,
+          1.0630185340423323e-06,
+          1.0630185339519708e-06,
+          1.0630185340422182e-06,
+          1.0630185339520022e-06,
+          1.0630185339970635e-06,
+          1.0630185339971522e-06,
+          1.0630185339519293e-06,
+          1.0630185340422753e-06,
+          1.0630185339519723e-06,
+          1.063018534042291e-06,
+          1.0630185339971084e-06,
+          1.0630185339971994e-06,
+          1.063018534042412e-06,
+          1.0630185340876246e-06,
+          1.0630185339519679e-06,
+          1.063018533951718e-06
+        ],
+        "empirical_nullspace_drift_loglog_slope": 2.189415242669019
+      },
+      "prism_v2": {
+        "d_null_ray": 3,
+        "nf_rslm_scaling": [
+          {
+            "eps": 0.16,
+            "tangential_drift": 0.027177839932257877,
+            "dist_to_exact_nearest": 0.026492065089184454,
+            "iters": 25,
+            "final_res": 8.875732963190823e-05
+          },
+          {
+            "eps": 0.08,
+            "tangential_drift": 0.0017278978429224488,
+            "dist_to_exact_nearest": 0.0017285240353054811,
+            "iters": 25,
+            "final_res": 2.560890016754661e-07
+          },
+          {
+            "eps": 0.04,
+            "tangential_drift": 0.0009258353871490283,
+            "dist_to_exact_nearest": 0.0009256920664321113,
+            "iters": 25,
+            "final_res": 9.714892049459853e-08
+          },
+          {
+            "eps": 0.02,
+            "tangential_drift": 0.00035883777600654015,
+            "dist_to_exact_nearest": 0.00035882375945896325,
+            "iters": 25,
+            "final_res": 1.8124051466730123e-08
+          },
+          {
+            "eps": 0.01,
+            "tangential_drift": 0.00010337648694173226,
+            "dist_to_exact_nearest": 0.00010337484921664972,
+            "iters": 25,
+            "final_res": 9.103510410254655e-09
+          }
+        ],
+        "tikhonov_stationary_bias_audit": [
+          {
+            "eps": 0.16,
+            "tikhonov_residual": 0.012322408227383334,
+            "theoretical_lower_bound": 0.011763852868135256
+          },
+          {
+            "eps": 0.08,
+            "tikhonov_residual": 0.006148792206329575,
+            "theoretical_lower_bound": 0.0058823402201930025
+          },
+          {
+            "eps": 0.04,
+            "tikhonov_residual": 0.0030710406240180986,
+            "theoretical_lower_bound": 0.0029413249847029237
+          },
+          {
+            "eps": 0.02,
+            "tikhonov_residual": 0.0015346319947724947,
+            "theoretical_lower_bound": 0.0014707119979887053
+          },
+          {
+            "eps": 0.01,
+            "tikhonov_residual": 0.0007670926198660372,
+            "theoretical_lower_bound": 0.0007353696718128515
+          }
+        ],
+        "residual_quadratic_trace_eps016": [
+          0.08040034864924814,
+          0.005566319385203645,
+          0.0005883740136416441,
+          8.899297497328009e-05,
+          8.875733330976503e-05,
+          8.875732963205816e-05,
+          8.875732963186731e-05,
+          8.875732963198988e-05,
+          8.875732963197645e-05,
+          8.875732963197671e-05,
+          8.875732963191737e-05,
+          8.875732963190779e-05,
+          8.87573296319174e-05,
+          8.875732963197645e-05,
+          8.875732963191292e-05,
+          8.875732963191729e-05,
+          8.875732963190779e-05,
+          8.875732963191783e-05,
+          8.875732963210391e-05,
+          8.875732963191697e-05,
+          8.875732963190774e-05,
+          8.875732963198133e-05,
+          8.875732963198079e-05,
+          8.875732963190839e-05,
+          8.875732963198118e-05,
+          8.875732963190823e-05
+        ],
+        "empirical_nullspace_drift_loglog_slope": 1.8344372055351017
+      },
+      "scene_03_cutting_plane": {
+        "d_null_ray": 6,
+        "nf_rslm_scaling": [
+          {
+            "eps": 0.16,
+            "tangential_drift": 0.003861831012836409,
+            "dist_to_exact_nearest": 0.0038614785583898827,
+            "iters": 25,
+            "final_res": 5.200669580777469e-06
+          },
+          {
+            "eps": 0.08,
+            "tangential_drift": 0.000981649519841274,
+            "dist_to_exact_nearest": 0.0009815605548175843,
+            "iters": 25,
+            "final_res": 5.203512464713382e-06
+          },
+          {
+            "eps": 0.04,
+            "tangential_drift": 0.0002465889646193489,
+            "dist_to_exact_nearest": 0.0002468941744168355,
+            "iters": 25,
+            "final_res": 5.204212798645168e-06
+          },
+          {
+            "eps": 0.02,
+            "tangential_drift": 6.182109893972705e-05,
+            "dist_to_exact_nearest": 6.335134627867698e-05,
+            "iters": 25,
+            "final_res": 5.204385614213655e-06
+          },
+          {
+            "eps": 0.01,
+            "tangential_drift": 1.5514956331118067e-05,
+            "dist_to_exact_nearest": 2.0913954032882996e-05,
+            "iters": 25,
+            "final_res": 5.2044285070148416e-06
+          }
+        ],
+        "tikhonov_stationary_bias_audit": [
+          {
+            "eps": 0.16,
+            "tikhonov_residual": 0.015459519785969388,
+            "theoretical_lower_bound": 0.013246230515733145
+          },
+          {
+            "eps": 0.08,
+            "tikhonov_residual": 0.007726880186746978,
+            "theoretical_lower_bound": 0.006626977688439888
+          },
+          {
+            "eps": 0.04,
+            "tikhonov_residual": 0.003863260908152584,
+            "theoretical_lower_bound": 0.003315422663169284
+          },
+          {
+            "eps": 0.02,
+            "tikhonov_residual": 0.0019318014783906519,
+            "theoretical_lower_bound": 0.0016586146095119764
+          },
+          {
+            "eps": 0.01,
+            "tikhonov_residual": 0.0009661215688370301,
+            "theoretical_lower_bound": 0.000829882525218588
+          }
+        ],
+        "residual_quadratic_trace_eps016": [
+          0.05284341631390806,
+          0.0007586948913719725,
+          5.240217093792775e-06,
+          5.200669580764359e-06,
+          5.20066958077492e-06,
+          5.20066958077664e-06,
+          5.20066958077664e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06,
+          5.200669580777193e-06,
+          5.200669580777469e-06
+        ],
+        "empirical_nullspace_drift_loglog_slope": 1.9908000001987176
+      }
+    }
+  },
+  "proposition_2_crossing_occlusion_disambiguation": {
+    "passed": true,
+    "views_tested": 144,
+    "views_with_transverse_solid_dashed_crossings": 75,
+    "total_transverse_crossings": 211,
+    "sign_consistent_views": 75,
+    "physical_occlusion_sign_consistency_pct": 100.0
+  }
+}

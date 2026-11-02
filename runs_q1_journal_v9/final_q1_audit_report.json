@@ -1,0 +1,35 @@
+{
+  "overall_status": "ALL_5_Q1_AUDIT_GATES_PASSED",
+  "all_passed": true,
+  "gate1_frozen_aciids2027_sha256": {
+    "passed": true,
+    "files_checked": 7,
+    "mismatches": []
+  },
+  "gate2_pytest_unit_tests": {
+    "passed": true,
+    "returncode": 0,
+    "stdout": "........                                                                 [100%]\n8 passed in 7.62s",
+    "stderr": "C:\\Users\\GosuEltin Lap\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.2) or chardet (7.4.3)/charset_normalizer (3.4.4) doesn't match a supported version!\n  warnings.warn("
+  },
+  "gate3_json_reports": {
+    "passed": true,
+    "reports_verified": 10,
+    "errors": []
+  },
+  "gate4_figures_step_and_pdf": {
+    "passed": true,
+    "pdf_figures_count": 10,
+    "step_files_count": 11,
+    "obj_files_count": 6,
+    "compiled_pdf_pages": 41,
+    "errors": []
+  },
+  "gate5_claim_to_json_audit": {
+    "passed": true,
+    "claims_checked": 43,
+    "missing_claims": [],
+    "zero_aciids_mentions_in_manuscript": true,
+    "no_stale_parameter_strings": true
+  }
+}

@@ -1,0 +1,764 @@
+{
+  "status": "PASS",
+  "experiment": "Classical_NonNeural_Marill_MSDA_and_Lipson_Shpitalni_Benchmarks_V9",
+  "part1_heldout_3seeds_1536views": {
+    "aggregate_3seed_heldout": {
+      "marill_msda_1991": {
+        "macro_shape_pa_mean": 0.3236,
+        "macro_shape_pa_std": 0.0134,
+        "macro_proper_pa_mean": 0.499,
+        "macro_proper_pa_std": 0.0081,
+        "pair_cov_pct_mean": 0.0,
+        "pair_cov_pct_std": 0.0,
+        "view_cov_pct_mean": 0.0,
+        "total_invalid_views_3seeds": 1536,
+        "latency_median_ms": 111.13,
+        "family": {
+          "tetra_v2": {
+            "shape_pa_mean": 0.3041,
+            "shape_pa_std": 0.0039,
+            "pair_cov_pct_mean": 0.0,
+            "view_cov_pct_mean": 0.0
+          },
+          "cube_v2": {
+            "shape_pa_mean": 0.3177,
+            "shape_pa_std": 0.0183,
+            "pair_cov_pct_mean": 0.0,
+            "view_cov_pct_mean": 0.0
+          },
+          "prism_v2": {
+            "shape_pa_mean": 0.2016,
+            "shape_pa_std": 0.0103,
+            "pair_cov_pct_mean": 0.0,
+            "view_cov_pct_mean": 0.0
+          },
+          "polyhedra_v2": {
+            "shape_pa_mean": 0.4711,
+            "shape_pa_std": 0.0402,
+            "pair_cov_pct_mean": 0.0,
+            "view_cov_pct_mean": 0.0
+          }
+        }
+      },
+      "lipson_shpitalni_1996": {
+        "macro_shape_pa_mean": 0.1038,
+        "macro_shape_pa_std": 0.0005,
+        "macro_proper_pa_mean": 0.3665,
+        "macro_proper_pa_std": 0.011,
+        "pair_cov_pct_mean": 33.33,
+        "pair_cov_pct_std": 0.81,
+        "view_cov_pct_mean": 47.66,
+        "total_invalid_views_3seeds": 804,
+        "latency_median_ms": 429.08,
+        "family": {
+          "tetra_v2": {
+            "shape_pa_mean": 0.0439,
+            "shape_pa_std": 0.0005,
+            "pair_cov_pct_mean": 82.81,
+            "view_cov_pct_mean": 88.28
+          },
+          "cube_v2": {
+            "shape_pa_mean": 0.0589,
+            "shape_pa_std": 0.0004,
+            "pair_cov_pct_mean": 9.38,
+            "view_cov_pct_mean": 25.78
+          },
+          "prism_v2": {
+            "shape_pa_mean": 0.1424,
+            "shape_pa_std": 0.0018,
+            "pair_cov_pct_mean": 19.79,
+            "view_cov_pct_mean": 37.5
+          },
+          "polyhedra_v2": {
+            "shape_pa_mean": 0.1701,
+            "shape_pa_std": 0.0017,
+            "pair_cov_pct_mean": 21.35,
+            "view_cov_pct_mean": 39.06
+          }
+        }
+      }
+    },
+    "per_seed": [
+      {
+        "branch": 0,
+        "msda": {
+          "macro_shape_pa": 0.335224783526061,
+          "macro_proper_pa": 0.5030247276934933,
+          "view_cov": 0.0,
+          "pair_cov": 0.0,
+          "invalid_views": 512,
+          "latency_median_ms": 112.51070001162589,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.30779458600858156,
+              "proper_pa": 0.45198565483845715,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "cube_v2": {
+              "shape_pa": 0.33405901133652605,
+              "proper_pa": 0.5136040206849684,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "prism_v2": {
+              "shape_pa": 0.199197881943318,
+              "proper_pa": 0.42859506617604265,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.49984765481581844,
+              "proper_pa": 0.6179141690745049,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            }
+          }
+        },
+        "ls": {
+          "macro_shape_pa": 0.1042829914610471,
+          "macro_proper_pa": 0.37793190969080315,
+          "view_cov": 0.478515625,
+          "pair_cov": 0.33984375,
+          "invalid_views": 267,
+          "latency_median_ms": 434.56214999605436,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.04422712357048305,
+              "proper_pa": 0.2856334144593049,
+              "view_cov": 0.8828125,
+              "pair_cov": 0.828125
+            },
+            "cube_v2": {
+              "shape_pa": 0.05856491013637484,
+              "proper_pa": 0.43748191400218256,
+              "view_cov": 0.265625,
+              "pair_cov": 0.109375
+            },
+            "prism_v2": {
+              "shape_pa": 0.14237760077294004,
+              "proper_pa": 0.4333235830073651,
+              "view_cov": 0.3828125,
+              "pair_cov": 0.203125
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.17196233136439046,
+              "proper_pa": 0.35528872729436006,
+              "view_cov": 0.3828125,
+              "pair_cov": 0.21875
+            }
+          }
+        }
+      },
+      {
+        "branch": 1,
+        "msda": {
+          "macro_shape_pa": 0.32665179960810076,
+          "macro_proper_pa": 0.5044179138409011,
+          "view_cov": 0.0,
+          "pair_cov": 0.0,
+          "invalid_views": 512,
+          "latency_median_ms": 110.7981499953894,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.3045339910931167,
+              "proper_pa": 0.46597402315496683,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "cube_v2": {
+              "shape_pa": 0.3211107850980723,
+              "proper_pa": 0.518735697105495,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "prism_v2": {
+              "shape_pa": 0.19273585257033476,
+              "proper_pa": 0.44226848532203383,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.48822656967087924,
+              "proper_pa": 0.5906934497811085,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            }
+          }
+        },
+        "ls": {
+          "macro_shape_pa": 0.10334824661813792,
+          "macro_proper_pa": 0.36535348815273566,
+          "view_cov": 0.48046875,
+          "pair_cov": 0.3359375,
+          "invalid_views": 266,
+          "latency_median_ms": 429.72159999771975,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.044218209684068456,
+              "proper_pa": 0.2666734354634962,
+              "view_cov": 0.8828125,
+              "pair_cov": 0.828125
+            },
+            "cube_v2": {
+              "shape_pa": 0.058940564026687514,
+              "proper_pa": 0.395470847507406,
+              "view_cov": 0.2578125,
+              "pair_cov": 0.09375
+            },
+            "prism_v2": {
+              "shape_pa": 0.1406342060242148,
+              "proper_pa": 0.42436394218939016,
+              "view_cov": 0.375,
+              "pair_cov": 0.203125
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.1696000067375809,
+              "proper_pa": 0.3749057274506502,
+              "view_cov": 0.40625,
+              "pair_cov": 0.21875
+            }
+          }
+        }
+      },
+      {
+        "branch": 2,
+        "msda": {
+          "macro_shape_pa": 0.3090164675426874,
+          "macro_proper_pa": 0.48969552965534574,
+          "view_cov": 0.0,
+          "pair_cov": 0.0,
+          "invalid_views": 512,
+          "latency_median_ms": 110.07000000972766,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.30008371628431874,
+              "proper_pa": 0.46863491176649547,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "cube_v2": {
+              "shape_pa": 0.29796633796904093,
+              "proper_pa": 0.49524107941412465,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "prism_v2": {
+              "shape_pa": 0.2128408896268653,
+              "proper_pa": 0.43959902109780713,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.4251749262905247,
+              "proper_pa": 0.5553071063429558,
+              "view_cov": 0.0,
+              "pair_cov": 0.0
+            }
+          }
+        },
+        "ls": {
+          "macro_shape_pa": 0.10390702800322998,
+          "macro_proper_pa": 0.3560883542575834,
+          "view_cov": 0.470703125,
+          "pair_cov": 0.32421875,
+          "invalid_views": 271,
+          "latency_median_ms": 422.9699499846902,
+          "family": {
+            "tetra_v2": {
+              "shape_pa": 0.043311091422360976,
+              "proper_pa": 0.2703273535395298,
+              "view_cov": 0.8828125,
+              "pair_cov": 0.828125
+            },
+            "cube_v2": {
+              "shape_pa": 0.05929035343238705,
+              "proper_pa": 0.33156968600250397,
+              "view_cov": 0.25,
+              "pair_cov": 0.078125
+            },
+            "prism_v2": {
+              "shape_pa": 0.14431680721723977,
+              "proper_pa": 0.4181248295631916,
+              "view_cov": 0.3671875,
+              "pair_cov": 0.1875
+            },
+            "polyhedra_v2": {
+              "shape_pa": 0.16870985994093216,
+              "proper_pa": 0.4043315479251083,
+              "view_cov": 0.3828125,
+              "pair_cov": 0.203125
+            }
+          }
+        }
+      }
+    ]
+  },
+  "part2_12family_792views": {
+    "overall_792_views": {
+      "views": 792,
+      "marill_msda_pa": 0.4759,
+      "marill_msda_valid_pct": 0.0,
+      "marill_msda_lat_median_ms": 132.25,
+      "lipson_shpitalni_pa": 0.1718,
+      "lipson_shpitalni_proper_pa": 0.6464,
+      "lipson_shpitalni_valid_pct": 89.39,
+      "lipson_shpitalni_lat_median_ms": 437.68
+    },
+    "by_rigidity_class": {
+      "Class_I_RayRigid": {
+        "views": 193,
+        "marill_msda_pa": 0.5021,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 126.27,
+        "lipson_shpitalni_pa": 0.0158,
+        "lipson_shpitalni_proper_pa": 0.6194,
+        "lipson_shpitalni_valid_pct": 93.26,
+        "lipson_shpitalni_lat_median_ms": 431.6
+      },
+      "Class_II_CoupledTilt": {
+        "views": 178,
+        "marill_msda_pa": 0.4554,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 153.86,
+        "lipson_shpitalni_pa": 0.1169,
+        "lipson_shpitalni_proper_pa": 0.6087,
+        "lipson_shpitalni_valid_pct": 92.7,
+        "lipson_shpitalni_lat_median_ms": 704.97
+      },
+      "Class_III_BasRelief": {
+        "views": 421,
+        "marill_msda_pa": 0.4726,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 126.48,
+        "lipson_shpitalni_pa": 0.2666,
+        "lipson_shpitalni_proper_pa": 0.6748,
+        "lipson_shpitalni_valid_pct": 86.22,
+        "lipson_shpitalni_lat_median_ms": 371.82
+      }
+    },
+    "by_family": {
+      "cube_v2": {
+        "views": 58,
+        "marill_msda_pa": 0.2887,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 133.09,
+        "lipson_shpitalni_pa": 0.0438,
+        "lipson_shpitalni_proper_pa": 0.5405,
+        "lipson_shpitalni_valid_pct": 93.1,
+        "lipson_shpitalni_lat_median_ms": 590.13
+      },
+      "polyhedra_v2": {
+        "views": 58,
+        "marill_msda_pa": 0.4919,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 120.34,
+        "lipson_shpitalni_pa": 0.4293,
+        "lipson_shpitalni_proper_pa": 0.6296,
+        "lipson_shpitalni_valid_pct": 56.9,
+        "lipson_shpitalni_lat_median_ms": 246.87
+      },
+      "prism_v2": {
+        "views": 58,
+        "marill_msda_pa": 0.4315,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 104.88,
+        "lipson_shpitalni_pa": 0.0898,
+        "lipson_shpitalni_proper_pa": 0.6214,
+        "lipson_shpitalni_valid_pct": 100.0,
+        "lipson_shpitalni_lat_median_ms": 340.38
+      },
+      "scene_01_inscribed_prism": {
+        "views": 70,
+        "marill_msda_pa": 0.4986,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 179.65,
+        "lipson_shpitalni_pa": 0.2087,
+        "lipson_shpitalni_proper_pa": 0.6892,
+        "lipson_shpitalni_valid_pct": 80.0,
+        "lipson_shpitalni_lat_median_ms": 708.59
+      },
+      "scene_02_symmetric_octahedron": {
+        "views": 70,
+        "marill_msda_pa": 0.5335,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 83.7,
+        "lipson_shpitalni_pa": 0.2427,
+        "lipson_shpitalni_proper_pa": 0.7075,
+        "lipson_shpitalni_valid_pct": 100.0,
+        "lipson_shpitalni_lat_median_ms": 405.84
+      },
+      "scene_03_cutting_plane": {
+        "views": 70,
+        "marill_msda_pa": 0.4411,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 153.53,
+        "lipson_shpitalni_pa": 0.3722,
+        "lipson_shpitalni_proper_pa": 0.7232,
+        "lipson_shpitalni_valid_pct": 100.0,
+        "lipson_shpitalni_lat_median_ms": 474.55
+      },
+      "scene_04_orthogonal_projection": {
+        "views": 70,
+        "marill_msda_pa": 0.4585,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 107.6,
+        "lipson_shpitalni_pa": 0.0048,
+        "lipson_shpitalni_proper_pa": 0.4788,
+        "lipson_shpitalni_valid_pct": 100.0,
+        "lipson_shpitalni_lat_median_ms": 408.37
+      },
+      "scene_05_centroid_polyhedron": {
+        "views": 70,
+        "marill_msda_pa": 0.5529,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 162.43,
+        "lipson_shpitalni_pa": 0.2726,
+        "lipson_shpitalni_proper_pa": 0.6741,
+        "lipson_shpitalni_valid_pct": 98.57,
+        "lipson_shpitalni_lat_median_ms": 268.69
+      },
+      "scene_06_vertical_side": {
+        "views": 70,
+        "marill_msda_pa": 0.4989,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 125.99,
+        "lipson_shpitalni_pa": 0.0229,
+        "lipson_shpitalni_proper_pa": 0.7268,
+        "lipson_shpitalni_valid_pct": 97.14,
+        "lipson_shpitalni_lat_median_ms": 375.4
+      },
+      "scene_07_right_prism": {
+        "views": 70,
+        "marill_msda_pa": 0.555,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 163.62,
+        "lipson_shpitalni_pa": 0.1797,
+        "lipson_shpitalni_proper_pa": 0.5998,
+        "lipson_shpitalni_valid_pct": 92.86,
+        "lipson_shpitalni_lat_median_ms": 819.11
+      },
+      "scene_08_centroid_altitude": {
+        "views": 70,
+        "marill_msda_pa": 0.5512,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 142.39,
+        "lipson_shpitalni_pa": 0.0241,
+        "lipson_shpitalni_proper_pa": 0.6828,
+        "lipson_shpitalni_valid_pct": 81.43,
+        "lipson_shpitalni_lat_median_ms": 710.61
+      },
+      "tetra_v2": {
+        "views": 58,
+        "marill_msda_pa": 0.351,
+        "marill_msda_valid_pct": 0.0,
+        "marill_msda_lat_median_ms": 85.69,
+        "lipson_shpitalni_pa": 0.1815,
+        "lipson_shpitalni_proper_pa": 0.6607,
+        "lipson_shpitalni_valid_pct": 65.52,
+        "lipson_shpitalni_lat_median_ms": 112.74
+      }
+    },
+    "pilot144_subset": {
+      "views": 288,
+      "marill_msda_pa": 0.4717,
+      "marill_msda_valid_pct": 0.0,
+      "marill_msda_lat_median_ms": 127.64,
+      "lipson_shpitalni_pa": 0.1662,
+      "lipson_shpitalni_proper_pa": 0.6259,
+      "lipson_shpitalni_valid_pct": 92.01,
+      "lipson_shpitalni_lat_median_ms": 415.09
+    }
+  },
+  "part3_cad_reverse_engineering_120parts": {
+    "overall_120_parts": {
+      "marill_msda": {
+        "shape_pa_mean": 0.3553,
+        "proper_pa_mean": 0.3554,
+        "max_face_planarity_mm_mean": 5.3764,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "affine_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 10.75,
+        "relative_edge_length_error_pct": 26.551,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0,
+        "latency_median_ms": 225.28
+      },
+      "lipson_shpitalni": {
+        "shape_pa_mean": 0.1534,
+        "proper_pa_mean": 0.1534,
+        "max_face_planarity_mm_mean": 0.0142,
+        "cad_sewing_valid_pct": 100.0,
+        "semantically_feasible_pct": 0.0,
+        "affine_feasible_pct": 100.0,
+        "dihedral_angle_error_deg_mean": 6.346,
+        "relative_edge_length_error_pct": 12.94,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0,
+        "latency_median_ms": 2106.3
+      },
+      "lipson_shpitalni_full_gdt": {
+        "shape_pa_mean": 0.0087,
+        "proper_pa_mean": 0.0087,
+        "max_face_planarity_mm_mean": 0.0344,
+        "cad_sewing_valid_pct": 97.5,
+        "semantically_feasible_pct": 99.17,
+        "affine_feasible_pct": 99.17,
+        "dihedral_angle_error_deg_mean": 0.19,
+        "relative_edge_length_error_pct": 0.852,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0,
+        "latency_median_ms": 2298.89
+      }
+    },
+    "per_archetype": {
+      "chamfered_block": {
+        "marill_msda": {
+          "shape_pa_mean": 0.2123,
+          "proper_pa_mean": 0.2123,
+          "max_face_planarity_mm_mean": 11.1319,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 8.105,
+          "relative_edge_length_error_pct": 18.942,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 233.78
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.1293,
+          "proper_pa_mean": 0.1293,
+          "max_face_planarity_mm_mean": 0.0082,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 6.637,
+          "relative_edge_length_error_pct": 10.0,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 1504.29
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.0101,
+          "proper_pa_mean": 0.0101,
+          "max_face_planarity_mm_mean": 0.0188,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 100.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 0.172,
+          "relative_edge_length_error_pct": 0.961,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 1777.46
+        }
+      },
+      "slanted_wedge_housing": {
+        "marill_msda": {
+          "shape_pa_mean": 0.2887,
+          "proper_pa_mean": 0.2887,
+          "max_face_planarity_mm_mean": 2.8688,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 9.683,
+          "relative_edge_length_error_pct": 24.597,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 114.46
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.2465,
+          "proper_pa_mean": 0.2465,
+          "max_face_planarity_mm_mean": 0.0002,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 9.097,
+          "relative_edge_length_error_pct": 20.223,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 519.7
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.0083,
+          "proper_pa_mean": 0.0083,
+          "max_face_planarity_mm_mean": 0.0044,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 100.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 0.058,
+          "relative_edge_length_error_pct": 0.775,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 662.04
+        }
+      },
+      "l_bracket_extrusion": {
+        "marill_msda": {
+          "shape_pa_mean": 0.0494,
+          "proper_pa_mean": 0.0494,
+          "max_face_planarity_mm_mean": 1.5748,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 2.135,
+          "relative_edge_length_error_pct": 4.212,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 222.96
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.0997,
+          "proper_pa_mean": 0.0997,
+          "max_face_planarity_mm_mean": 0.0085,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 4.369,
+          "relative_edge_length_error_pct": 9.08,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 2652.97
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.005,
+          "proper_pa_mean": 0.005,
+          "max_face_planarity_mm_mean": 0.0078,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 100.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 0.073,
+          "relative_edge_length_error_pct": 0.494,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 3011.26
+        }
+      },
+      "v_groove_guide": {
+        "marill_msda": {
+          "shape_pa_mean": 0.1742,
+          "proper_pa_mean": 0.1742,
+          "max_face_planarity_mm_mean": 12.4446,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 5.355,
+          "relative_edge_length_error_pct": 13.177,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 270.84
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.0916,
+          "proper_pa_mean": 0.0916,
+          "max_face_planarity_mm_mean": 0.0455,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 3.81,
+          "relative_edge_length_error_pct": 6.942,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 5208.09
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.0045,
+          "proper_pa_mean": 0.0045,
+          "max_face_planarity_mm_mean": 0.0044,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 100.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 0.123,
+          "relative_edge_length_error_pct": 0.378,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 5654.68
+        }
+      },
+      "stepped_slotted_block": {
+        "marill_msda": {
+          "shape_pa_mean": 0.0755,
+          "proper_pa_mean": 0.0755,
+          "max_face_planarity_mm_mean": 2.1532,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 3.566,
+          "relative_edge_length_error_pct": 5.731,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 300.37
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.2181,
+          "proper_pa_mean": 0.2181,
+          "max_face_planarity_mm_mean": 0.0194,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 8.322,
+          "relative_edge_length_error_pct": 20.72,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 10465.82
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.0097,
+          "proper_pa_mean": 0.0097,
+          "max_face_planarity_mm_mean": 0.0543,
+          "cad_sewing_valid_pct": 90.0,
+          "semantically_feasible_pct": 100.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 0.254,
+          "relative_edge_length_error_pct": 0.891,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 12045.62
+        }
+      },
+      "frustum_hopper_die": {
+        "marill_msda": {
+          "shape_pa_mean": 1.3319,
+          "proper_pa_mean": 1.3322,
+          "max_face_planarity_mm_mean": 2.0849,
+          "cad_sewing_valid_pct": 0.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 0.0,
+          "dihedral_angle_error_deg_mean": 35.657,
+          "relative_edge_length_error_pct": 92.649,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 157.92
+        },
+        "lipson_shpitalni": {
+          "shape_pa_mean": 0.1354,
+          "proper_pa_mean": 0.1354,
+          "max_face_planarity_mm_mean": 0.0032,
+          "cad_sewing_valid_pct": 100.0,
+          "semantically_feasible_pct": 0.0,
+          "affine_feasible_pct": 100.0,
+          "dihedral_angle_error_deg_mean": 5.838,
+          "relative_edge_length_error_pct": 10.673,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 974.33
+        },
+        "lipson_shpitalni_full_gdt": {
+          "shape_pa_mean": 0.0148,
+          "proper_pa_mean": 0.0148,
+          "max_face_planarity_mm_mean": 0.1167,
+          "cad_sewing_valid_pct": 95.0,
+          "semantically_feasible_pct": 95.0,
+          "affine_feasible_pct": 95.0,
+          "dihedral_angle_error_deg_mean": 0.462,
+          "relative_edge_length_error_pct": 1.613,
+          "step_valid_pct": 100.0,
+          "watertight_brep_pct": 100.0,
+          "latency_median_ms": 1143.47
+        }
+      }
+    }
+  }
+}

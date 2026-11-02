@@ -1,0 +1,491 @@
+{
+  "status": "PASS",
+  "experiment": "Suite_C2_Mechanical_CAD_Blueprint_Reverse_Engineering_120Parts_STEP_V9",
+  "total_parts": 120,
+  "overall_120_parts": {
+    "raw_neural": {
+      "shape_pa_mean": 0.3868,
+      "proper_pa_mean": 0.8253,
+      "max_face_planarity_mm_mean": 23.7914,
+      "cad_sewing_valid_pct": 0.0,
+      "semantically_feasible_pct": 0.0,
+      "dihedral_angle_error_deg_mean": 22.672,
+      "relative_edge_length_error_pct": 19.78,
+      "step_valid_pct": 100.0,
+      "watertight_brep_pct": 100.0
+    },
+    "soft_tikhonov": {
+      "shape_pa_mean": 0.3384,
+      "proper_pa_mean": 0.8395,
+      "max_face_planarity_mm_mean": 20.2962,
+      "cad_sewing_valid_pct": 0.0,
+      "semantically_feasible_pct": 0.0,
+      "dihedral_angle_error_deg_mean": 17.7,
+      "relative_edge_length_error_pct": 19.891,
+      "step_valid_pct": 100.0,
+      "watertight_brep_pct": 100.0
+    },
+    "v827_r015": {
+      "shape_pa_mean": 0.3868,
+      "proper_pa_mean": 0.8253,
+      "max_face_planarity_mm_mean": 23.7914,
+      "cad_sewing_valid_pct": 0.0,
+      "semantically_feasible_pct": 0.0,
+      "dihedral_angle_error_deg_mean": 22.672,
+      "relative_edge_length_error_pct": 19.78,
+      "step_valid_pct": 100.0,
+      "watertight_brep_pct": 100.0
+    },
+    "v843_aciids": {
+      "shape_pa_mean": 0.2863,
+      "proper_pa_mean": 0.8014,
+      "max_face_planarity_mm_mean": 19.4711,
+      "cad_sewing_valid_pct": 20.0,
+      "semantically_feasible_pct": 40.83,
+      "dihedral_angle_error_deg_mean": 16.676,
+      "relative_edge_length_error_pct": 14.12,
+      "step_valid_pct": 100.0,
+      "watertight_brep_pct": 100.0
+    },
+    "v9_ours": {
+      "shape_pa_mean": 0.0696,
+      "proper_pa_mean": 0.7796,
+      "max_face_planarity_mm_mean": 3.6231,
+      "cad_sewing_valid_pct": 89.17,
+      "semantically_feasible_pct": 89.17,
+      "dihedral_angle_error_deg_mean": 3.026,
+      "relative_edge_length_error_pct": 4.515,
+      "step_valid_pct": 100.0,
+      "watertight_brep_pct": 100.0
+    },
+    "v9_latency_median_ms": 6236.74
+  },
+  "per_archetype": {
+    "chamfered_block": {
+      "raw_neural": {
+        "shape_pa_mean": 0.3265,
+        "proper_pa_mean": 0.9119,
+        "max_face_planarity_mm_mean": 10.4838,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 18.1,
+        "relative_edge_length_error_pct": 23.659,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.278,
+        "proper_pa_mean": 0.9317,
+        "max_face_planarity_mm_mean": 9.5473,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 13.04,
+        "relative_edge_length_error_pct": 23.365,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.3265,
+        "proper_pa_mean": 0.9119,
+        "max_face_planarity_mm_mean": 10.4838,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 18.1,
+        "relative_edge_length_error_pct": 23.659,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.1877,
+        "proper_pa_mean": 0.8623,
+        "max_face_planarity_mm_mean": 5.3831,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 50.0,
+        "dihedral_angle_error_deg_mean": 10.243,
+        "relative_edge_length_error_pct": 14.045,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.0224,
+        "proper_pa_mean": 0.8139,
+        "max_face_planarity_mm_mean": 0.0024,
+        "cad_sewing_valid_pct": 100.0,
+        "semantically_feasible_pct": 100.0,
+        "dihedral_angle_error_deg_mean": 0.279,
+        "relative_edge_length_error_pct": 2.187,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 661.18
+    },
+    "slanted_wedge_housing": {
+      "raw_neural": {
+        "shape_pa_mean": 0.2695,
+        "proper_pa_mean": 0.8109,
+        "max_face_planarity_mm_mean": 7.1924,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 14.472,
+        "relative_edge_length_error_pct": 16.1,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.1815,
+        "proper_pa_mean": 0.7794,
+        "max_face_planarity_mm_mean": 1.4942,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 7.467,
+        "relative_edge_length_error_pct": 15.051,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.2695,
+        "proper_pa_mean": 0.8109,
+        "max_face_planarity_mm_mean": 7.1924,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 14.472,
+        "relative_edge_length_error_pct": 16.1,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.1149,
+        "proper_pa_mean": 0.7531,
+        "max_face_planarity_mm_mean": 1.3466,
+        "cad_sewing_valid_pct": 70.0,
+        "semantically_feasible_pct": 70.0,
+        "dihedral_angle_error_deg_mean": 5.404,
+        "relative_edge_length_error_pct": 7.612,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.0171,
+        "proper_pa_mean": 0.7043,
+        "max_face_planarity_mm_mean": 0.0005,
+        "cad_sewing_valid_pct": 100.0,
+        "semantically_feasible_pct": 100.0,
+        "dihedral_angle_error_deg_mean": 0.136,
+        "relative_edge_length_error_pct": 1.574,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 3984.93
+    },
+    "l_bracket_extrusion": {
+      "raw_neural": {
+        "shape_pa_mean": 0.4506,
+        "proper_pa_mean": 0.8126,
+        "max_face_planarity_mm_mean": 28.7114,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 26.448,
+        "relative_edge_length_error_pct": 23.61,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.4034,
+        "proper_pa_mean": 0.8352,
+        "max_face_planarity_mm_mean": 28.6928,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 20.874,
+        "relative_edge_length_error_pct": 23.725,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.4506,
+        "proper_pa_mean": 0.8126,
+        "max_face_planarity_mm_mean": 28.7114,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 26.448,
+        "relative_edge_length_error_pct": 23.61,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.4123,
+        "proper_pa_mean": 0.7938,
+        "max_face_planarity_mm_mean": 26.5338,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 15.0,
+        "dihedral_angle_error_deg_mean": 24.014,
+        "relative_edge_length_error_pct": 21.621,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.0714,
+        "proper_pa_mean": 0.7643,
+        "max_face_planarity_mm_mean": 3.5722,
+        "cad_sewing_valid_pct": 90.0,
+        "semantically_feasible_pct": 90.0,
+        "dihedral_angle_error_deg_mean": 2.937,
+        "relative_edge_length_error_pct": 4.985,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 15175.4
+    },
+    "v_groove_guide": {
+      "raw_neural": {
+        "shape_pa_mean": 0.4665,
+        "proper_pa_mean": 0.8546,
+        "max_face_planarity_mm_mean": 41.628,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 26.727,
+        "relative_edge_length_error_pct": 14.831,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.4176,
+        "proper_pa_mean": 0.8918,
+        "max_face_planarity_mm_mean": 36.926,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 22.602,
+        "relative_edge_length_error_pct": 16.505,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.4665,
+        "proper_pa_mean": 0.8546,
+        "max_face_planarity_mm_mean": 41.628,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 26.727,
+        "relative_edge_length_error_pct": 14.831,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.4169,
+        "proper_pa_mean": 0.8582,
+        "max_face_planarity_mm_mean": 36.4052,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 15.0,
+        "dihedral_angle_error_deg_mean": 23.336,
+        "relative_edge_length_error_pct": 13.329,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.0874,
+        "proper_pa_mean": 0.9098,
+        "max_face_planarity_mm_mean": 4.2322,
+        "cad_sewing_valid_pct": 85.0,
+        "semantically_feasible_pct": 85.0,
+        "dihedral_angle_error_deg_mean": 4.725,
+        "relative_edge_length_error_pct": 4.127,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 26367.83
+    },
+    "stepped_slotted_block": {
+      "raw_neural": {
+        "shape_pa_mean": 0.5489,
+        "proper_pa_mean": 0.662,
+        "max_face_planarity_mm_mean": 46.6524,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 35.75,
+        "relative_edge_length_error_pct": 25.133,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.5355,
+        "proper_pa_mean": 0.6819,
+        "max_face_planarity_mm_mean": 42.0579,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 30.652,
+        "relative_edge_length_error_pct": 26.968,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.5489,
+        "proper_pa_mean": 0.662,
+        "max_face_planarity_mm_mean": 46.6524,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 35.75,
+        "relative_edge_length_error_pct": 25.133,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.5489,
+        "proper_pa_mean": 0.662,
+        "max_face_planarity_mm_mean": 46.6524,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 35.75,
+        "relative_edge_length_error_pct": 25.133,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.1643,
+        "proper_pa_mean": 0.606,
+        "max_face_planarity_mm_mean": 12.7529,
+        "cad_sewing_valid_pct": 75.0,
+        "semantically_feasible_pct": 75.0,
+        "dihedral_angle_error_deg_mean": 7.758,
+        "relative_edge_length_error_pct": 9.944,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 61509.11
+    },
+    "frustum_hopper_die": {
+      "raw_neural": {
+        "shape_pa_mean": 0.259,
+        "proper_pa_mean": 0.8999,
+        "max_face_planarity_mm_mean": 8.0801,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 14.533,
+        "relative_edge_length_error_pct": 15.345,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "soft_tikhonov": {
+        "shape_pa_mean": 0.2142,
+        "proper_pa_mean": 0.9171,
+        "max_face_planarity_mm_mean": 3.0592,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 11.567,
+        "relative_edge_length_error_pct": 13.732,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v827_r015": {
+        "shape_pa_mean": 0.259,
+        "proper_pa_mean": 0.8999,
+        "max_face_planarity_mm_mean": 8.0801,
+        "cad_sewing_valid_pct": 0.0,
+        "semantically_feasible_pct": 0.0,
+        "dihedral_angle_error_deg_mean": 14.533,
+        "relative_edge_length_error_pct": 15.345,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v843_aciids": {
+        "shape_pa_mean": 0.0373,
+        "proper_pa_mean": 0.879,
+        "max_face_planarity_mm_mean": 0.5055,
+        "cad_sewing_valid_pct": 50.0,
+        "semantically_feasible_pct": 95.0,
+        "dihedral_angle_error_deg_mean": 1.311,
+        "relative_edge_length_error_pct": 2.982,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_ours": {
+        "shape_pa_mean": 0.0549,
+        "proper_pa_mean": 0.8792,
+        "max_face_planarity_mm_mean": 1.1781,
+        "cad_sewing_valid_pct": 85.0,
+        "semantically_feasible_pct": 85.0,
+        "dihedral_angle_error_deg_mean": 2.324,
+        "relative_edge_length_error_pct": 4.274,
+        "step_valid_pct": 100.0,
+        "watertight_brep_pct": 100.0
+      },
+      "v9_latency_median_ms": 5382.59
+    }
+  },
+  "parametric_nullspace_cad_explorer": {
+    "archetype": "frustum_hopper_die",
+    "d_null_ray": 3,
+    "members": [
+      {
+        "amplitude": -0.5,
+        "max_constraint_rms": 8.896473814403206e-08,
+        "xy_reprojection_drift": 0.0,
+        "max_face_planarity_mm": 4.698484637799538e-06,
+        "step_valid": true,
+        "step_path": "d:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\nullspace_family_frustum_amp_0.step"
+      },
+      {
+        "amplitude": -0.25,
+        "max_constraint_rms": 1.074425302014129e-07,
+        "xy_reprojection_drift": 0.0,
+        "max_face_planarity_mm": 5.300770180127756e-06,
+        "step_valid": true,
+        "step_path": "d:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\nullspace_family_frustum_amp_1.step"
+      },
+      {
+        "amplitude": 0.0,
+        "max_constraint_rms": 9.096633373995202e-08,
+        "xy_reprojection_drift": 0.0,
+        "max_face_planarity_mm": 5.475567961710226e-06,
+        "step_valid": true,
+        "step_path": "d:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\nullspace_family_frustum_amp_2.step"
+      },
+      {
+        "amplitude": 0.25,
+        "max_constraint_rms": 8.712550583557255e-08,
+        "xy_reprojection_drift": 0.0,
+        "max_face_planarity_mm": 5.164187250272789e-06,
+        "step_valid": true,
+        "step_path": "d:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\nullspace_family_frustum_amp_3.step"
+      },
+      {
+        "amplitude": 0.5,
+        "max_constraint_rms": 8.698536867578419e-08,
+        "xy_reprojection_drift": 0.0,
+        "max_face_planarity_mm": 4.645181587825675e-06,
+        "step_valid": true,
+        "step_path": "d:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\nullspace_family_frustum_amp_4.step"
+      }
+    ]
+  },
+  "exported_step_and_obj_files": [
+    {
+      "archetype": "chamfered_block",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\chamfered_block_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\chamfered_block_sample00_v9.obj"
+    },
+    {
+      "archetype": "slanted_wedge_housing",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\slanted_wedge_housing_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\slanted_wedge_housing_sample00_v9.obj"
+    },
+    {
+      "archetype": "l_bracket_extrusion",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\l_bracket_extrusion_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\l_bracket_extrusion_sample00_v9.obj"
+    },
+    {
+      "archetype": "v_groove_guide",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\v_groove_guide_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\v_groove_guide_sample00_v9.obj"
+    },
+    {
+      "archetype": "stepped_slotted_block",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\stepped_slotted_block_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\stepped_slotted_block_sample00_v9.obj"
+    },
+    {
+      "archetype": "frustum_hopper_die",
+      "step_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\frustum_hopper_die_sample00_v9.step",
+      "obj_path": "D:\\GEOMETRY_SOLVER_3D\\topobench_v2\\runs_q1_journal_v9\\cad_exports\\frustum_hopper_die_sample00_v9.obj"
+    }
+  ]
+}
