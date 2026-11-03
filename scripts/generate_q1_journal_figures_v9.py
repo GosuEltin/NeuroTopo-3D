@@ -91,7 +91,7 @@ def _save_fig(fig: plt.Figure, stem: str) -> None:
     pdf_p = FIG_DIR / f"{stem}.pdf"
     png_p = FIG_DIR / f"{stem}.png"
     fig.savefig(pdf_p, bbox_inches="tight", pad_inches=0.06)
-    fig.savefig(png_p, dpi=260, bbox_inches="tight", pad_inches=0.06)
+    fig.savefig(png_p, dpi=300, bbox_inches="tight", pad_inches=0.06)
     plt.close(fig)
     print(f"[Saved Figure] {pdf_p.name} + {png_p.name}", flush=True)
 
@@ -261,7 +261,7 @@ def generate_fig1() -> None:
     ax_top.set_ylim(0, 26)
     ax_top.axis("off")
     ax_top.set_title(
-        "(a) NeuroTopo-3D: End-to-End Single-View Polyhedral Wireframe & Certified ISO 10303-21 CAD B-Rep Pipeline",
+        "(A) NeuroTopo-3D: End-to-End Single-View Polyhedral Wireframe & Certified ISO 10303-21 CAD B-Rep Pipeline",
         loc="left",
         fontsize=10.2,
         pad=6,
@@ -326,7 +326,7 @@ def generate_fig1() -> None:
     ax_b.set_yticks([])
     ax_b.set_xlabel("Viewing-Ray Bas-Relief Mode $\\ker(\\tilde{J}_z)$", fontsize=8.2)
     ax_b.set_ylabel("Constraint Row-Space $\\operatorname{row}(\\tilde{J}_z)$", fontsize=8.2)
-    ax_b.set_title("(b) Theorem 3: Normal-Flow vs. Tikhonov / GN", fontsize=9.2)
+    ax_b.set_title("(B) Theorem 3: Normal-Flow vs. Tikhonov / GN", fontsize=9.2)
     ax_b.legend(loc="upper right", frameon=True, fontsize=6.9)
 
     # Bottom Panel (c): Multi-Branch Necker & Apex Reflection Continuation
@@ -349,11 +349,11 @@ def generate_fig1() -> None:
     ax_c.set_ylim(-0.02, 0.78)
     ax_c.set_xlabel("Viewing-Ray Depth Coordinate $z$ (Necker Involution)", fontsize=8.2)
     ax_c.set_ylabel("Constraint Energy $\\|r(\\hat{x},\\hat{y},z)\\|_2^2$", fontsize=8.2)
-    ax_c.set_title("(c) Multi-Branch Necker Continuation", fontsize=9.2)
+    ax_c.set_title("(C) Multi-Branch Necker Continuation", fontsize=9.2)
     ax_c.legend(loc="upper right", frameon=True, fontsize=6.9)
     ax_c.grid(True, alpha=0.4)
 
-    # Bottom Panel (d): Proposition 2 Physical Solid-Over-Dashed Crossing Verifier
+    # Bottom Panel (d): Proposition 1 Physical Solid-Over-Dashed Crossing Verifier
     ax_d = fig.add_subplot(gs[1, 2])
     ax_d.set_xlim(0, 10)
     ax_d.set_ylim(-0.6, 10.8)
@@ -370,7 +370,7 @@ def generate_fig1() -> None:
               bbox=dict(boxstyle="round,pad=0.28", fc="#ecfdf5", ec=C_EMERALD, lw=0.9))
     ax_d.set_xticks([])
     ax_d.set_yticks([])
-    ax_d.set_title("(d) Proposition 2: Target-Free Crossing Verifier", fontsize=9.2)
+    ax_d.set_title("(D) Proposition 1: Target-Free Crossing Verifier", fontsize=9.2)
     ax_d.legend(loc="lower right", frameon=True, fontsize=6.8)
 
     _save_fig(fig, "fig1_q1_architecture_and_v9_solver")
@@ -405,7 +405,7 @@ def generate_fig2() -> None:
     ax0.set_ylim(0, 0.036)
     ax0.set_xlabel("Message-Passing Depth $L$ (Lemma 1, $\\mathrm{diam}_{\\mathrm{vis}}=4$)")
     ax0.set_ylabel("Remote Node State Discrepancy $\\|h_u^{(L)}-h_u'^{(L)}\\|_2$")
-    ax0.set_title("(a) Thm 1 & Lemma 1: Visibility Depth Bound")
+    ax0.set_title("(A) Thm 1 & Lemma 1: Visibility Depth Bound")
     ax0.grid(True, axis="y", alpha=0.45)
 
     # Panel (b): Theorem 2 Dual-Gauge Classification across all 12 Families (144 views, 0 mismatches)
@@ -432,7 +432,7 @@ def generate_fig2() -> None:
     ax1.set_xticklabels(short_lbls, rotation=38, ha="right", fontsize=7.3)
     ax1.set_ylim(0, 8.2)
     ax1.set_ylabel("Viewing-Ray Nullspace Dimension $d_{\\mathrm{null}}^{\\mathrm{ray}}$")
-    ax1.set_title("(b) Thm 2: Dual-Gauge Schur Decomposition")
+    ax1.set_title("(B) Thm 2: Dual-Gauge Schur Decomposition")
     ax1.legend(loc="upper left", frameon=True, fontsize=6.9)
     ax1.grid(True, axis="y", alpha=0.45)
 
@@ -455,7 +455,7 @@ def generate_fig2() -> None:
     ax2.loglog(eps_ref, 0.15 * (eps_ref**2), ls=":", lw=1.3, color=C_GRAY, label="Reference $\\mathcal{O}(\\epsilon^2)$ Curvature")
     ax2.set_xlabel("Initial Perturbation Norm $\\epsilon = \\|\\hat{z}_0 - z^\\star\\|_2$")
     ax2.set_ylabel("Total Nullspace Drift $\\|P_{\\ker(\\tilde{J}_z(z^\\star))}(\\hat{z} - \\hat{z}_0)\\|_2$")
-    ax2.set_title("(c) Thm 3: $\\mathcal{O}(\\epsilon^2)$ Nullspace Drift Scaling")
+    ax2.set_title("(C) Thm 3: $\\mathcal{O}(\\epsilon^2)$ Nullspace Drift Scaling")
     ax2.legend(loc="lower right", frameon=True, fontsize=6.8)
     ax2.grid(True, which="both", alpha=0.4)
 
@@ -498,7 +498,7 @@ def generate_fig3() -> None:
     ax0.invert_yaxis()
     ax0.set_xlim(0, 0.56)
     ax0.set_xlabel("Heldout Macro Shape PA $\\downarrow$ (3-Seed Mean $\\pm$ SD)")
-    ax0.set_title("(a) Module 2: Modern 3D Lifter Baselines")
+    ax0.set_title("(A) Module 2: Modern 3D Lifter Baselines")
     ax0.grid(True, axis="x", alpha=0.45)
 
     # Panel (b): End-to-End Frontier Multimodal VLMs vs NeuroTopo-3D V9.0
@@ -520,7 +520,7 @@ def generate_fig3() -> None:
     ax1.set_xticklabels([e[0] for e in vlm_entries], rotation=22, ha="right", fontsize=7.6)
     ax1.set_ylim(0, 1.05)
     ax1.set_ylabel("End-to-End 3D Shape PA $\\downarrow$ (% Complete G)")
-    ax1.set_title("(b) End-to-End vs. Frontier Multimodal VLMs")
+    ax1.set_title("(B) End-to-End vs. Frontier Multimodal VLMs")
     ax1.grid(True, axis="y", alpha=0.45)
 
     # Panel (c): Module 3 Solver Coverage-Accuracy Pareto Frontier (Heldout 3-seed)
@@ -549,7 +549,7 @@ def generate_fig3() -> None:
     ax2.invert_yaxis()  # Lower PA is better -> top-right is ideal Pareto corner!
     ax2.set_xlabel("Certified Valid Mirror-Pair Coverage (%) $\\uparrow$")
     ax2.set_ylabel("Post-Projection Macro Shape PA $\\downarrow$ (Inverted)")
-    ax2.set_title("(c) Module 3 Pareto Frontier (0% Invalid)")
+    ax2.set_title("(C) Module 3 Pareto Frontier (0% Invalid)")
     ax2.grid(True, alpha=0.45)
 
     _save_fig(fig, "fig3_module2_equivariant_baselines_and_solvers")
@@ -655,7 +655,7 @@ def generate_fig4() -> None:
     ax_cov.set_xticklabels(flbls)
     ax_cov.set_ylim(0, 114)
     ax_cov.set_ylabel("Valid Pair Coverage (%) $\\uparrow$", fontsize=8.2)
-    ax_cov.set_title("(e) 3-Seed Heldout Valid Pair Coverage by Family")
+    ax_cov.set_title("(E) 3-Seed Heldout Valid Pair Coverage by Family")
     ax_cov.legend(loc="lower right", frameon=True, fontsize=7.2)
     ax_cov.grid(True, axis="y", alpha=0.45)
 
@@ -671,7 +671,7 @@ def generate_fig4() -> None:
     ax_pa.set_xticklabels(flbls)
     ax_pa.set_ylim(0, 0.345)
     ax_pa.set_ylabel("Post-Projection Shape PA $\\downarrow$")
-    ax_pa.set_title("(f) 3-Seed Heldout Shape PA by Family")
+    ax_pa.set_title("(F) 3-Seed Heldout Shape PA by Family")
     ax_pa.legend(loc="upper right", frameon=True, fontsize=7.2)
     ax_pa.grid(True, axis="y", alpha=0.45)
 
@@ -723,7 +723,7 @@ def generate_fig5() -> None:
     ax0.set_xticklabels([lbl for _, lbl in fam_order], rotation=35, ha="right", fontsize=7.4)
     ax0.set_ylim(0, max(max(ls_v), max(raw_v)) * 1.24)
     ax0.set_ylabel("3D Procrustes Shape PA $\\downarrow$ (792 Pooled Views)")
-    ax0.set_title("(a) 12-Family Multi-Constraint Benchmark Stratified by Rigidity Class")
+    ax0.set_title("(A) 12-Family Multi-Constraint Benchmark Stratified by Rigidity Class")
     ax0.legend(loc="upper left", frameon=True, fontsize=7.0, ncol=2)
     ax0.grid(True, axis="y", alpha=0.45)
 
@@ -752,7 +752,7 @@ def generate_fig5() -> None:
     ax1.set_xticklabels([lbl for _, lbl in cls_keys], fontsize=7.6)
     ax1.set_ylim(0, 134)
     ax1.set_ylabel("Certified Valid View Coverage (%) $\\uparrow$")
-    ax1.set_title("(b) Certified Coverage Across Theorem 2 Classes")
+    ax1.set_title("(B) Certified Coverage Across Theorem 2 Classes")
     ax1.legend(loc="upper right", ncol=2, frameon=True, fontsize=6.9)
     ax1.grid(True, axis="y", alpha=0.45)
 
@@ -787,7 +787,7 @@ def generate_fig6() -> None:
     ax0.set_xticklabels(cats, fontsize=7.6)
     ax0.set_ylim(0, max(max(s["raw_pa"], s["legacy_lbfgs_pa"]) for s in subsets) * 1.44)
     ax0.set_ylabel("3D Procrustes Shape PA $\\downarrow$")
-    ax0.set_title("(a) Tier 1: Zero-Shot Basic-4 $\\to$ Complex-8")
+    ax0.set_title("(A) Tier 1: Zero-Shot Basic-4 $\\to$ Complex-8")
     ax0.legend(loc="upper right", frameon=True, fontsize=6.8)
     ax0.grid(True, axis="y", alpha=0.45)
 
@@ -809,7 +809,7 @@ def generate_fig6() -> None:
     ax1.set_xticklabels([r[0] for r in regimes], fontsize=7.5)
     ax1.set_ylim(0, max(r[1]["raw_pa"] for r in regimes) * 1.26)
     ax1.set_ylabel("3D Procrustes Shape PA $\\downarrow$")
-    ax1.set_title("(b) Tiers 2 & 3: Unseen Topologies & Hulls")
+    ax1.set_title("(B) Tiers 2 & 3: Unseen Topologies & Hulls")
     ax1.legend(loc="upper right", frameon=True, fontsize=6.8)
     ax1.grid(True, axis="y", alpha=0.45)
 
@@ -833,7 +833,7 @@ def generate_fig6() -> None:
     ax2.set_xticks(xd)
     ax2.set_xticklabels([r[0] for r in cov_regimes], fontsize=7.4)
     ax2.set_ylabel("Certified Valid OOD Coverage (%) $\\uparrow$")
-    ax2.set_title("(c) OOD Coverage Rescue & Nullspace Drift")
+    ax2.set_title("(C) OOD Coverage Rescue & Nullspace Drift")
     ax2.legend(loc="upper left", frameon=True, fontsize=6.8)
     ax2.grid(True, axis="y", alpha=0.45)
 
@@ -927,7 +927,7 @@ def generate_fig7() -> None:
     ax_plan.set_xticks(x)
     ax_plan.set_xticklabels(lbls, rotation=18, ha="right", fontsize=7.6)
     ax_plan.set_ylabel("Face Non-Planarity (mm, Log) $\\downarrow$")
-    ax_plan.set_title("(d) Certified .STEP Planarity vs. 0.10 mm Tolerance")
+    ax_plan.set_title("(D) Certified .STEP Planarity vs. 0.10 mm Tolerance")
     ax_plan.legend(loc="upper right", frameon=True, fontsize=6.4, ncol=2)
     ax_plan.grid(True, which="both", axis="y", alpha=0.4)
 
@@ -945,7 +945,7 @@ def generate_fig7() -> None:
     ax_dih.set_xticklabels(lbls, rotation=18, ha="right", fontsize=7.6)
     ax_dih.set_ylim(0, max(max(d_raw), max(d_ls)) * 1.52)
     ax_dih.set_ylabel("Dihedral Angle Error (deg) $\\downarrow$")
-    ax_dih.set_title("(e) 3D Dihedral Angle Fidelity Across 120 Mechanical Parts")
+    ax_dih.set_title("(E) 3D Dihedral Angle Fidelity Across 120 Mechanical Parts")
     ax_dih.legend(loc="upper right", frameon=True, fontsize=6.7, ncol=2)
     ax_dih.grid(True, axis="y", alpha=0.45)
 
@@ -1039,17 +1039,17 @@ def generate_fig9() -> None:
         ax_g0_img.scatter(pts0[:, 0], pts0[:, 1], s=22, color=C_RED, edgecolors="white", linewidths=0.5, zorder=5)
         ax_g0_img.set_xticks([])
         ax_g0_img.set_yticks([])
-        ax_g0_img.set_title("(a) GDP-29K Textbook Scan\n+ Perceived Solid/Dashed Graph", fontsize=8.4)
+        ax_g0_img.set_title("(A) GDP-29K Textbook Scan\n+ Perceived Solid/Dashed Graph", fontsize=8.4)
 
         ax_g0_3d = fig.add_subplot(gs[0, 1], projection="3d")
         _plot_3d_wireframe(ax_g0_3d, g0["coords_3d"], adj0, sty0, color=C_TEAL,
-                           title="(b) Reconstructed 3D Polyhedron\n(Occlusion Verified: 34/34 = 100%)")
+                           title="(B) Reconstructed 3D Polyhedron\n(Occlusion Verified: 34/34 = 100%)")
 
     if len(gdp_files) >= 2:
         g1 = np.load(gdp_files[1], allow_pickle=True)
         ax_g1_3d = fig.add_subplot(gs[0, 2], projection="3d")
         _plot_3d_wireframe(ax_g1_3d, g1["coords_3d"], g1["adjacency"], g1["edge_style"], color=C_INDIGO,
-                           title=f"(c) GDP-29K Test ({g1['sample_id']})\n100/100 Non-Degenerate (0.96 px)")
+                           title=f"(C) GDP-29K Test ({g1['sample_id']})\n100/100 Non-Degenerate (0.96 px)")
 
     # Top-right: 9-Cell (3x3 Seeds) Human-Reviewed GDP-29K Valid Coverage Jump
     ax_bar = fig.add_subplot(gs[0, 3])
@@ -1075,7 +1075,7 @@ def generate_fig9() -> None:
     ax_bar.set_xticklabels(m_names, fontsize=7.5)
     ax_bar.set_ylim(0, 115)
     ax_bar.set_ylabel("Certified Valid Coverage (%) $\\uparrow$")
-    ax_bar.set_title("(d) GDP-29K 9-Cell ($3\\times 3$ Seeds)\n0 Invalid Updates", fontsize=8.4)
+    ax_bar.set_title("(D) GDP-29K 9-Cell ($3\\times 3$ Seeds)\n0 Invalid Updates", fontsize=8.4)
     ax_bar.grid(True, axis="y", alpha=0.45)
 
     # Bottom row: Real Smartphone-Photographed Hand-Drawn Sketches (`Đề bài viết tay`)
@@ -1107,11 +1107,13 @@ def generate_fig9() -> None:
         ax_hi.scatter(pts_h[:, 0], pts_h[:, 1], s=20, color=C_RED, edgecolors="white", linewidths=0.5, zorder=5)
         ax_hi.set_xticks([])
         ax_hi.set_yticks([])
-        ax_hi.set_title(f"(e.{k+1}) Photographed Hand-Drawn Sketch #{k+1}\n+ Zero-Shot Graph Extraction", fontsize=8.3)
+        lbl_hi = "E" if k == 0 else "G"
+        lbl_h3 = "F" if k == 0 else "H"
+        ax_hi.set_title(f"({lbl_hi}) Photographed Hand-Drawn Sketch #{k+1}\n+ Zero-Shot Graph Extraction", fontsize=8.3)
 
         ax_h3 = fig.add_subplot(gs[1, 2 * k + 1], projection="3d")
         _plot_3d_wireframe(ax_h3, coords_h3, adj_h, sty_h, color=C_TEAL,
-                           title=f"(f.{k+1}) Reconstructed 3D Wireframe #{k+1}\n(20/20 Valid · 100% Crossing Consistent)")
+                           title=f"({lbl_h3}) Reconstructed 3D Wireframe #{k+1}\n(20/20 Valid · 100% Crossing Consistent)")
 
     _save_fig(fig, "fig9_realworld_gdp29k_and_handdrawn_sketches")
 
@@ -1137,7 +1139,7 @@ def generate_fig10() -> None:
     ax.plot(jx, [rob[k]["v9_macro_pa"] for k in jit_keys], "s-", color=C_TEAL, lw=2.1, label="NeuroTopo-3D (Ours)")
     ax.set_xlabel("2D Vertex Coordinate Jitter $\\sigma_{\\mathrm{px}}$ (pixels)")
     ax.set_ylabel("Macro 3D Shape PA $\\downarrow$")
-    ax.set_title("(a) Robustness to 2D Keypoint Pixel Jitter")
+    ax.set_title("(A) Robustness to 2D Keypoint Pixel Jitter")
     ax.legend(loc="upper left", frameon=True, fontsize=7.0)
     ax.grid(True, alpha=0.45)
 
@@ -1153,7 +1155,7 @@ def generate_fig10() -> None:
     ax.plot(nx, [rob[k]["v9_macro_pa"] for k in nd_keys], "D-", color=C_INDIGO, lw=1.7, label="NeuroTopo-3D (Node Drop)")
     ax.set_xlabel("Topological Graph Drop Rate (%)")
     ax.set_ylabel("Macro 3D Shape PA $\\downarrow$")
-    ax.set_title("(b) Robustness to Missing Edges & Vertices")
+    ax.set_title("(B) Robustness to Missing Edges & Vertices")
     ax.legend(loc="upper left", frameon=True, fontsize=7.0)
     ax.grid(True, alpha=0.45)
 
@@ -1169,7 +1171,7 @@ def generate_fig10() -> None:
     ax.set_xticks(fx)
     ax.set_xticklabels(fl_lbls, fontsize=7.4)
     ax.set_ylabel("Macro 3D Shape PA $\\downarrow$")
-    ax.set_title("(c) Visibility Flips & Spurious Constraints")
+    ax.set_title("(C) Visibility Flips & Spurious Constraints")
     ax.legend(loc="upper left", frameon=True, fontsize=7.0)
     ax.grid(True, axis="y", alpha=0.45)
 
@@ -1195,11 +1197,11 @@ def generate_fig10() -> None:
         ax_l.legend(handles, [h.get_label() for h in handles], loc=leg_loc, frameon=True, fontsize=6.7)
 
     plot_sweep(axes[1, 0], sw["tau_svd_sweep"], [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 5e-2, 1e-1],
-               "Viewing-Ray SVD Threshold $\\tau_{\\mathrm{svd}}$", "(d) Spectral Nullspace Threshold $\\tau_{\\mathrm{svd}}$", 1e-3, log_x=True, leg_loc="center left")
+               "Viewing-Ray SVD Threshold $\\tau_{\\mathrm{svd}}$", "(D) Spectral Nullspace Threshold $\\tau_{\\mathrm{svd}}$", 1e-3, log_x=True, leg_loc="center left")
     plot_sweep(axes[1, 1], sw["sigma_gate_sweep"], [1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2, 0.15],
-               "Rigid Conditioning Gate $\\sigma_{\\mathrm{gate}}$", "(e) Rigid Conditioning Gate $\\sigma_{\\mathrm{gate}}$", 5e-3, log_x=True, leg_loc="center left")
+               "Rigid Conditioning Gate $\\sigma_{\\mathrm{gate}}$", "(E) Rigid Conditioning Gate $\\sigma_{\\mathrm{gate}}$", 5e-3, log_x=True, leg_loc="center left")
     plot_sweep(axes[1, 2], sw["row_radius_sweep"], [0.15, 0.22, 0.28, 0.35, 0.45, 0.65],
-               "Row-Space Continuation Radius $r_{\\max}^{\\mathrm{row}}$", "(f) Row-Space Radius $r_{\\max}^{\\mathrm{row}}$", 0.35, log_x=False, leg_loc="lower left")
+               "Row-Space Continuation Radius $r_{\\max}^{\\mathrm{row}}$", "(F) Row-Space Radius $r_{\\max}^{\\mathrm{row}}$", 0.35, log_x=False, leg_loc="lower left")
 
     _save_fig(fig, "fig10_corruption_robustness_and_spectral_sensitivity")
 

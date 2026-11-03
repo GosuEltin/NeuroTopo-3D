@@ -9,7 +9,7 @@
   "gate2_pytest_unit_tests": {
     "passed": true,
     "returncode": 0,
-    "stdout": "........                                                                 [100%]\n8 passed in 9.36s",
+    "stdout": "........                                                                 [100%]\n8 passed in 10.50s",
     "stderr": ""
   },
   "gate3_json_reports": {

@@ -1,11 +1,12 @@
-"""Build Official JCDE Manuscript Edition, Compile PDF, and Package All 8 Submission Deliverables.
+"""Build Official JCDE Manuscript Edition (V3.1 / V2.22 Compliant), Compile PDF, and Package Submission Deliverables.
 
 Creates:
-  1. `jcde_submission_package/manuscript_jcde/` (complete JCDE-formatted LaTeX project)
+  1. `jcde_submission_package/manuscript_jcde/` (complete JCDE V3.1 LaTeX project with fig_1..fig_10 & references.bib)
   2. `jcde_submission_package/1_Main_Document_JCDE.pdf` (compiled single-blind JCDE review PDF)
-  3. `jcde_submission_package/6_Main_Document_Source_JCDE.zip` (LaTeX source archive for ScholarOne/Overleaf)
-  4. `jcde_submission_package/7_Figures_JCDE.zip` (all 10 vector PDF + high-res PNG figures + Graphical Abstract)
-  5. `jcde_submission_package/8_Supplementary_Reproducibility_Code_and_STEP.zip` + `github_repo_ready/`
+  3. `jcde_submission_package/5_Main_Document_Source_JCDE.zip` & `6_Main_Document_Source_JCDE.zip`
+  4. `jcde_submission_package/7_Figures_JCDE.zip` (fig_1..fig_10 PDF/PNG + Graphical_abstract)
+  5. `jcde_submission_package/8_Supplementary_Material_JCDE.pdf`
+  6. `jcde_submission_package/9_Supplementary_Reproducibility_Code_and_STEP.zip` + `github_repo_ready/`
 """
 from __future__ import annotations
 
@@ -27,72 +28,148 @@ GH_DIR = PKG_DIR / "github_repo_ready"
 
 PDFLATEX = Path(r"C:\Users\GosuEltin Lap\AppData\Local\Programs\MiKTeX\miktex\bin\x64\pdflatex.exe")
 
-# UK English dictionary replacements (preserving LaTeX commands and code identifiers)
-UK_SPELLING_MAP = [
-    (r"\boptimization\b", "optimisation"),
-    (r"\bOptimization\b", "Optimisation"),
-    (r"\boptimizations\b", "optimisations"),
-    (r"\boptimizer\b", "optimiser"),
-    (r"\boptimizers\b", "optimisers"),
-    (r"\boptimize\b", "optimise"),
-    (r"\boptimizes\b", "optimises"),
-    (r"\boptimized\b", "optimised"),
-    (r"\boptimizing\b", "optimising"),
-    (r"\bmodeling\b", "modelling"),
-    (r"\bModeling\b", "Modelling"),
-    (r"\bparameterization\b", "parameterisation"),
-    (r"\bParameterization\b", "Parameterisation"),
-    (r"\bparameterizes\b", "parameterises"),
-    (r"\bparameterized\b", "parameterised"),
-    (r"\bnormalization\b", "normalisation"),
-    (r"\bNormalization\b", "Normalisation"),
-    (r"\bnormalized\b", "normalised"),
-    (r"\bNormalized\b", "Normalised"),
-    (r"\bnormalizing\b", "normalising"),
-    (r"\bregularization\b", "regularisation"),
-    (r"\bRegularization\b", "Regularisation"),
-    (r"\bregularized\b", "regularised"),
-    (r"\bsymmetrization\b", "symmetrisation"),
-    (r"\bSymmetrization\b", "Symmetrisation"),
-    (r"\bsymmetrized\b", "symmetrised"),
-    (r"\bSymmetrized\b", "Symmetrised"),
-    (r"\bcanonicalized\b", "canonicalised"),
-    (r"\binitialized\b", "initialised"),
-    (r"\binitialization\b", "initialisation"),
-    (r"\binitializations\b", "initialisations"),
-    (r"\bpenalized\b", "penalised"),
-    (r"\bpenalizes\b", "penalises"),
-    (r"\bpenalizing\b", "penalising"),
-    (r"\bminimizes\b", "minimises"),
-    (r"\bminimizing\b", "minimising"),
-    (r"\bminimizer\b", "minimiser"),
-    (r"\bmaximizes\b", "maximises"),
-    (r"\bmaximizing\b", "maximising"),
-    (r"\bsummarized\b", "summarised"),
-    (r"\bsummarizes\b", "summarises"),
-    (r"\bcharacterized\b", "characterised"),
-    (r"\bcharacterizes\b", "characterises"),
-    (r"\blocalized\b", "localised"),
-    (r"\blocalization\b", "localisation"),
-    (r"\bdiscretized\b", "discretised"),
-    (r"\brealization\b", "realisation"),
-    (r"\bgeneralization\b", "generalisation"),
-    (r"\bGeneralization\b", "Generalisation"),
-    (r"\bbehavior\b", "behaviour"),
-    (r"\bbehaviors\b", "behaviours"),
-    (r"\bBehavior\b", "Behaviour"),
-    (r"\bneighbors\b", "neighbours"),
-    (r"\bneighbor\b", "neighbour"),
-    (r"(?<!\\)\bartifacts\b", "artefacts"),
-    (r"(?<!\\)\bcentered\b", "centred"),
-    (r"(?<!\\)\bcatalogs\b", "catalogues"),
-    (r"(?<!\\)\bcatalog\b", "catalogue"),
+# Sentence-case section and subsection headings per Official JCDE Checklist V2.22 Table 3 R14
+SENTENCE_CASE_HEADINGS = [
+    (
+        r"\subsection{Contributions and Relationship to Prior Work}",
+        r"\subsection{Contributions and relationship to prior work}",
+    ),
+    (
+        r"\section{Related Work}",
+        r"\section{Related work}",
+    ),
+    (
+        r"\subsection{Line-Drawing Interpretation, Polyhedral Rigidity, and Bas-Relief Ambiguity}",
+        r"\subsection{Line-drawing interpretation, polyhedral rigidity, and Bas-Relief ambiguity}",
+    ),
+    (
+        r"\subsection{Equivariant Graph Neural Networks and 2D-to-3D Wireframe Lifting}",
+        r"\subsection{Equivariant graph neural networks and 2D-to-3D wireframe lifting}",
+    ),
+    (
+        r"\subsection{Constrained Manifold Optimization and Differentiable Solvers}",
+        r"\subsection{Constrained manifold optimization and differentiable solvers}",
+    ),
+    (
+        r"\subsection{CAD Sketch-to-B-Rep Reverse Engineering and Diagram Benchmarks}",
+        r"\subsection{CAD sketch-to-B-Rep reverse engineering and diagram benchmarks}",
+    ),
+    (
+        r"\section{Mathematical Formulation and Spectral Rigidity Theory}",
+        r"\section{Mathematical formulation and spectral rigidity theory}",
+    ),
+    (
+        r"\subsection{Anonymous Graph Contract, Camera Gauge, and Constraint Operators}",
+        r"\subsection{Anonymous graph contract, camera gauge, and constraint operators}",
+    ),
+    (
+        r"\subsection{Permutation Equivariance, Mirror Saddle Collapse, and Visibility Depth}",
+        r"\subsection{Permutation equivariance, mirror saddle collapse, and visibility depth}",
+    ),
+    (
+        r"\subsection{Dual-Gauge Viewing-Ray vs.\ Affine Rigidity and Local Uniqueness Radius}",
+        r"\subsection{Dual-gauge viewing-ray vs.\ affine rigidity and local uniqueness radius}",
+    ),
+    (
+        r"\subsection{Normal-Flow Row-Space Continuation and Crossing Disambiguation}",
+        r"\subsection{Normal-flow row-space continuation and crossing disambiguation}",
+    ),
+    (
+        r"\section{Methodology: NeuroTopo-3D Architecture and CAD Kernel Synthesis}",
+        r"\section{Methodology: NeuroTopo-3D architecture and CAD kernel synthesis}",
+    ),
+    (
+        r"\subsection{Module 1: Anonymous Perception Contract and Canonical Orthographic Gauge}",
+        r"\subsection{Module 1: Anonymous perception contract and canonical orthographic gauge}",
+    ),
+    (
+        r"\subsection{Module 2: Occlusion-Asymmetric Pairwise Graph Transformer (\texttt{PairGT-Asym})}",
+        r"\subsection{Module 2: Occlusion-asymmetric pairwise Graph Transformer (\texttt{PairGT-Asym})}",
+    ),
+    (
+        r"\subsection{Module 3: Spectral Normal-Flow Row-Space \& Multi-Branch Continuation (\texttt{V9.0})}",
+        r"\subsection{Module 3: Spectral normal-flow row-space and multi-branch continuation}",
+    ),
+    (
+        r"\subsection{Module 3: Spectral Normal-Flow Row-Space \& Multi-Branch Continuation}",
+        r"\subsection{Module 3: Spectral normal-flow row-space and multi-branch continuation}",
+    ),
+    (
+        r"\subsection{Module 3: Spectral Normal-Flow Row-Space \& Multi-Branch Continuation (\texttt{NeuroTopo-3D})}",
+        r"\subsection{Module 3: Spectral normal-flow row-space and multi-branch continuation}",
+    ),
+    (
+        r"\subsection{Module 4: B-Rep Solid Orientation, ISO~10303-21 \texttt{.STEP} Synthesis, and Nullspace CAD Explorer}",
+        r"\subsection{Module 4: B-Rep solid orientation, ISO~10303-21 \texttt{.STEP} synthesis, and nullspace CAD explorer}",
+    ),
+    (
+        r"\section{Experimental Evaluation}",
+        r"\section{Experimental evaluation}",
+    ),
+    (
+        r"\subsection{Experimental Protocol, Evaluation Metrics, and Hardware}",
+        r"\subsection{Experimental protocol, evaluation metrics, and hardware}",
+    ),
+    (
+        r"\subsection{Module 1 Anonymous Perception vs.\ Frontier Multimodal VLMs}",
+        r"\subsection{Module 1 anonymous perception vs.\ frontier multimodal VLMs}",
+    ),
+    (
+        r"\subsection{Module 2 Lifting: 3-Seed Equivariant and Graph Transformer Baselines}",
+        r"\subsection{Module 2 lifting: 3-seed equivariant and Graph Transformer baselines}",
+    ),
+    (
+        r"\subsection{Module 3 Solvers, Component Ablations, Wilcoxon Tests, and Latency}",
+        r"\subsection{Module 3 solvers, component ablations, Wilcoxon tests, and latency}",
+    ),
+    (
+        r"\subsection{792-View 12-Family Benchmark Stratified by Dual-Gauge Rigidity Classes}",
+        r"\subsection{792-view 12-family benchmark stratified by dual-gauge rigidity classes}",
+    ),
+    (
+        r"\subsection{Three-Tier Out-of-Distribution Generalization and Nullspace Shear Audit}",
+        r"\subsection{Three-tier out-of-distribution generalization and nullspace shear audit}",
+    ),
+    (
+        r"\subsection{Mechanical CAD Blueprint Reverse Engineering and ISO~10303-21 \texttt{.STEP} Synthesis}",
+        r"\subsection{Mechanical CAD blueprint reverse engineering and ISO~10303-21 \texttt{.STEP} synthesis}",
+    ),
+    (
+        r"\subsection{External Real-World \texttt{GDP-29K} Textbook Diagrams and Hand-Drawn Sketches}",
+        r"\subsection{External real-world \texttt{GDP-29K} textbook diagrams and hand-drawn sketches}",
+    ),
+    (
+        r"\subsection{Upstream Corruption Stress Testing and Spectral Hyperparameter Sensitivity}",
+        r"\subsection{Upstream corruption stress testing and spectral hyperparameter sensitivity}",
+    ),
+    (
+        r"\section{Discussion, Computational Scaling, and Failure Taxonomy}",
+        r"\section{Discussion, computational scaling, and failure taxonomy}",
+    ),
+    (
+        r"\subsection{Why Spectral Manifold Geometry Decides Neuro-Symbolic Reconstruction}",
+        r"\subsection{Why spectral manifold geometry decides neuro-symbolic reconstruction}",
+    ),
+    (
+        r"\subsection{Wall-Clock Computational Complexity and Interactive CAD Deployment}",
+        r"\subsection{Wall-clock computational complexity and interactive CAD deployment}",
+    ),
+    (
+        r"\subsection{Failure Mode Taxonomy and Current Limitations}",
+        r"\subsection{Failure mode taxonomy and current limitations}",
+    ),
 ]
 
 
 def apply_jcde_house_style(tex: str) -> str:
-    """Apply JCDE house rules: APA Equations/Figures, UTF-8 punctuation cleanup, and UK English."""
-    # Replace UTF-8 em-dash with LaTeX ---
+    """Apply Official JCDE V3.1 / V2.22 rules:
+    - Oxford spelling (-ize) consistently throughout (Table 2 R17)
+    - Sentence-case section/subsection headings (Table 3 R14)
+    - 'Equation X' and 'Figure X' written in full (Table 4 R2, R8)
+    - Subfigure references 'Figure 1A' and caption labels '(A)', '(B)' (Table 4 R10-R11)
+    - Figure filenames 'figures/fig_1.pdf' .. 'figures/fig_10.pdf' (Table 5 R27)
+    """
+    # Replace UTF-8 em-dash / en-dash with LaTeX --- / --
     tex = tex.replace("—", "---").replace("–", "--")
 
     # Convert narrative citations to \citet{...}
@@ -111,15 +188,49 @@ def apply_jcde_house_style(tex: str) -> str:
     tex = re.sub(r"~\\cite\{", r"~\\citep{", tex)
     tex = re.sub(r"\\cite\{", r"\\citep{", tex)
 
-    # JCDE rule: Write "Equation X" instead of "Eq. (X)" or "Equation (X)"
+    # JCDE rule (Table 4 R2): Write "Equation X" instead of "Eq. (X)" or "Equation (X)"
     tex = re.sub(r"Eqs\.~\\eqref\{([^}]+)\}--\\eqref\{([^}]+)\}", r"Equations~\\ref{\1}--\\ref{\2}", tex)
     tex = re.sub(r"Equations~\\eqref\{([^}]+)\}--\\eqref\{([^}]+)\}", r"Equations~\\ref{\1}--\\ref{\2}", tex)
     tex = re.sub(r"Eq\.~\\eqref\{([^}]+)\}", r"Equation~\\ref{\1}", tex)
     tex = re.sub(r"Equation~\\eqref\{([^}]+)\}", r"Equation~\\ref{\1}", tex)
 
-    # JCDE rule: Never abbreviate "Figure" as "Fig."
+    # JCDE rule (Table 4 R8): Never abbreviate "Figure" as "Fig."
     tex = re.sub(r"\bFigs\.~", "Figures~", tex)
     tex = re.sub(r"\bFig\.~", "Figure~", tex)
+
+    # JCDE rule (Table 4 R10): Subfigures cited using uppercase letters e.g. Figure 3A
+    tex = re.sub(
+        r"(Figure~\\ref\{[^}]+\})\(([a-h])\)",
+        lambda m: f"{m.group(1)}{m.group(2).upper()}",
+        tex,
+    )
+    tex = re.sub(
+        r"\b([Pp]anel(?:s)?\s*~?\()([a-h])(\))",
+        lambda m: f"{m.group(1)}{m.group(2).upper()}{m.group(3)}",
+        tex,
+    )
+
+    # JCDE rule (Table 4 R11): Subfigure labels in captions enclosed in parentheses using uppercase (A), (B)
+    caption_subfig_replacements = [
+        (r"\textbf{(e.1--f.2)}", r"\textbf{(E--H)}"),
+        (r"\textbf{(a--c)}", r"\textbf{(A--C)}"),
+        (r"\textbf{(d--e)}", r"\textbf{(D--E)}"),
+        (r"\textbf{(d--f)}", r"\textbf{(D--F)}"),
+        (r"\textbf{(e--f)}", r"\textbf{(E--F)}"),
+        (r"\textbf{(a)}", r"\textbf{(A)}"),
+        (r"\textbf{(b)}", r"\textbf{(B)}"),
+        (r"\textbf{(c)}", r"\textbf{(C)}"),
+        (r"\textbf{(d)}", r"\textbf{(D)}"),
+        (r"\textbf{(e)}", r"\textbf{(E)}"),
+        (r"\textbf{(f)}", r"\textbf{(F)}"),
+        (r"\textbf{(g)}", r"\textbf{(G)}"),
+        (r"\textbf{(h)}", r"\textbf{(H)}"),
+    ]
+    for old_s, new_s in caption_subfig_replacements:
+        tex = tex.replace(old_s, new_s)
+
+    # JCDE rule (Table 5 R27): Figure filenames fig_1.pdf .. fig_10.pdf
+    tex = re.sub(r"figures/fig(\d+)_[^}]+\.pdf", r"figures/fig_\1.pdf", tex)
 
     # Clean internal development version tags into standard academic terminology
     version_cleanups = [
@@ -162,18 +273,9 @@ def apply_jcde_house_style(tex: str) -> str:
     for pat, rep in version_cleanups:
         tex = re.sub(pat, rep, tex)
 
-    # Protect \texttt{...} blocks before applying UK spelling
-    protected: list[str] = []
-
-    def _stash(m: re.Match) -> str:
-        protected.append(m.group(0))
-        return f"@@PROTECTED_{len(protected)-1}@@"
-
-    tex = re.sub(r"\\(texttt|label|ref|eqref|citep|citet|input|includegraphics)\{[^}]*\}|\\[a-zA-Z]+", _stash, tex)
-    for pat, rep in UK_SPELLING_MAP:
-        tex = re.sub(pat, rep, tex)
-    for idx, val in enumerate(protected):
-        tex = tex.replace(f"@@PROTECTED_{idx}@@", val)
+    # Apply Sentence-case section/subsection headings (Table 3 R14)
+    for old_h, new_h in SENTENCE_CASE_HEADINGS:
+        tex = tex.replace(old_h, new_h)
 
     # Allow line breaks after underscores inside \texttt{...} so long filenames never overflow margins
     tex = re.sub(
@@ -182,7 +284,7 @@ def apply_jcde_house_style(tex: str) -> str:
         tex,
     )
 
-    # Fit wide tables cleanly to 12pt \textwidth while preserving compact column headers (~96% of \footnotesize)
+    # Fit wide tables cleanly to 12pt \textwidth
     tex = re.sub(
         r"(?<!\{)(\\begin\{tabular\}\{[^\n]+\}.*?\\end\{tabular\})",
         r"\\resizebox{\\textwidth}{!}{\1}",
@@ -194,7 +296,7 @@ def apply_jcde_house_style(tex: str) -> str:
 
 
 def build_jcde_references_tex() -> str:
-    """Build alphabetically sorted APA 7th Author-Year bibliography with natbib labels and DOIs."""
+    """Build alphabetically sorted APA 7th Author-Year bibliography with natbib labels, DOIs, and recent JCDE citations (Table 2 R3)."""
     entries = [
         (
             "allgower2003introduction",
@@ -205,11 +307,6 @@ def build_jcde_references_tex() -> str:
             "amos2017optnet",
             "Amos \\& Kolter(2017)",
             "Amos, B., \\& Kolter, J. Z. (2017). OptNet: Differentiable optimization as a layer in neural networks. In \\emph{Proceedings of the International Conference on Machine Learning (ICML)} (Vol.~70, pp.~136--145). PMLR.",
-        ),
-        (
-            "anh2026neurotopo",
-            "Nguyen Anh \\& Phan Thi Le(2026)",
-            "Nguyen Anh, T., \\& Phan Thi Le, T. (2026). NeuroTopo: A benchmark for neuro-symbolic topological reasoning on geometric diagrams. In \\emph{2026 IEEE International Conference on Advanced Technologies in Information and Green Business (ATiGB)} (pp.~421--431). IEEE. \\url{https://doi.org/10.1109/ATiGB70203.2026.11628217}",
         ),
         (
             "belhumeur1999bas",
@@ -337,6 +434,11 @@ def build_jcde_references_tex() -> str:
             "Leclerc, Y. G., \\& Fischler, M. A. (1992). An optimization-based approach to the interpretation of single line drawings as 3D wire frames. \\emph{International Journal of Computer Vision}, 9(2), 113--136. \\url{https://doi.org/10.1007/BF00129683}",
         ),
         (
+            "lee2023brepgat",
+            "Lee et~al.(2023)",
+            "Lee, J., Yeo, C., Cheon, S.-U., Park, J. H., \\& Mun, D. (2023). BRepGAT: Graph neural network to segment machining feature faces in a B-rep model. \\emph{Journal of Computational Design and Engineering}, 10(6), 2384--2400. \\url{https://doi.org/10.1093/jcde/qwad106}",
+        ),
+        (
             "levenberg1944method",
             "Levenberg(1944)",
             "Levenberg, K. (1944). A method for the solution of certain non-linear problems in least squares. \\emph{Quarterly of Applied Mathematics}, 2(2), 164--168. \\url{https://doi.org/10.1090/qam/10666}",
@@ -355,6 +457,11 @@ def build_jcde_references_tex() -> str:
             "li2022free2cad",
             "Li et~al.(2022)",
             "Li, C., Pan, H., Bousseau, A., \\& Mitra, N. J. (2022). Free2CAD: Parsing freehand drawings into CAD commands. \\emph{ACM Transactions on Graphics}, 41(4), 93:1--93:16. \\url{https://doi.org/10.1145/3528223.3530133}",
+        ),
+        (
+            "liang2025cadcl",
+            "Liang et~al.(2025)",
+            "Liang, J., He, F., Fan, R., Chu, Y., \\& Yan, X. (2025). CADCL: Reconstruct parametric CAD models from B-rep via contrastive learning. \\emph{Journal of Computational Design and Engineering}, 12(10), 176--184. \\url{https://doi.org/10.1093/jcde/qwaf102}",
         ),
         (
             "lipson1996optimization",
@@ -390,6 +497,11 @@ def build_jcde_references_tex() -> str:
             "necker1832observations",
             "Necker(1832)",
             "Necker, L. A. (1832). Observations on some remarkable optical phaenomena seen in Switzerland; and on an optical phaenomenon which occurs on viewing a figure of a crystal or geometrical solid. \\emph{London and Edinburgh Philosophical Magazine and Journal of Science}, 1(5), 329--337.",
+        ),
+        (
+            "anh2026neurotopo",
+            "Nguyen Anh \\& Phan Thi Le(2026)",
+            "Nguyen Anh, T., \\& Phan Thi Le, T. (2026). NeuroTopo: A benchmark for neuro-symbolic topological reasoning on geometric diagrams. In \\emph{2026 IEEE International Conference on Advanced Technologies in Information and Green Business (ATiGB)} (pp.~421--431). IEEE. \\url{https://doi.org/10.1109/ATiGB70203.2026.11628217}",
         ),
         (
             "nocedal2006numerical",
@@ -517,6 +629,11 @@ def build_jcde_references_tex() -> str:
             "Ying, C., Cai, T., Luo, S., Zheng, S., Ke, G., He, D., Shen, Y., \\& Liu, T.-Y. (2021). Do transformers really perform badly for graph representation? In \\emph{Advances in Neural Information Processing Systems (NeurIPS)} (Vol.~34, pp.~28877--28888).",
         ),
         (
+            "zhang2024brep2seq",
+            "Zhang et~al.(2024)",
+            "Zhang, S., Guan, Z., Jiang, H., Ning, T., Wang, X., \\& Tan, P. (2024). Brep2Seq: A dataset and hierarchical deep learning network for reconstruction and generation of computer-aided design models. \\emph{Journal of Computational Design and Engineering}, 11(1), 110--134. \\url{https://doi.org/10.1093/jcde/qwae005}",
+        ),
+        (
             "zhao2019semantic",
             "Zhao et~al.(2019)",
             "Zhao, L., Peng, X., Tian, Y., Kapadia, M., \\& Metaxas, D. N. (2019). Semantic graph convolutional networks for 3D human pose regression. In \\emph{IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)} (pp.~3425--3435). \\url{https://doi.org/10.1109/CVPR.2019.00354}",
@@ -547,7 +664,7 @@ def build_jcde_references_tex() -> str:
 
 
 def convert_algorithms_to_jcde_env(sec4_tex: str) -> str:
-    """Convert boxed tabular Algorithms 1 & 2 into official JCDE algorithm + algorithmic environments."""
+    """Convert boxed tabular Algorithms 1 & 2 into official JCDE algorithm + algorithmic environments (Oxford -ize spelling)."""
     alg1_new = r"""\begin{algorithm}[t!]
 \caption{Spectral Normal-Flow Row-Space \& Multi-Branch Continuation Projector (\texttt{NF-RSLM})}
 \label{alg:v9_projector}\label{alg:nf_rslm}
@@ -560,7 +677,7 @@ def convert_algorithms_to_jcde_env(sec4_tex: str) -> str:
 \State Extract transverse 2D solid-over-dashed crossings $\mathcal{X}_{\times}(U^{\mathrm{px}}, A, S)$ via Equation~\ref{eq:crossing_score}.
 \State Construct zero-sum viewing-ray basis $Q_{\mathrm{ray}} \in \mathbb{R}^{N \times (N-1)}$ ($Q_{\mathrm{ray}}^\top \mathbf{1}_N = \mathbf{0}, Q_{\mathrm{ray}}^\top Q_{\mathrm{ray}} = I_{N-1}$) and mean depth $\bar{z}_0 = \frac{1}{N}\mathbf{1}_N^\top \hat{z}_0$.
 \Procedure{NormalFlowBranchSolve}{$P_{\mathrm{seed}}$}
-    \State Initialise $(x^{(0)}, y^{(0)}) \leftarrow P_{\mathrm{seed}, xy}$, $\zeta^{(0)} \leftarrow Q_{\mathrm{ray}}^\top (P_{\mathrm{seed}, z} - \bar{z}_0 \mathbf{1}_N)$, damping scale $\nu_0 \leftarrow 10^{-2}$.
+    \State Initialize $(x^{(0)}, y^{(0)}) \leftarrow P_{\mathrm{seed}, xy}$, $\zeta^{(0)} \leftarrow Q_{\mathrm{ray}}^\top (P_{\mathrm{seed}, z} - \bar{z}_0 \mathbf{1}_N)$, damping scale $\nu_0 \leftarrow 10^{-2}$.
     \For{$k = 0, 1, \dots, K_{\max}-1$}
         \State Evaluate $r^{(k)} = r_{\mathcal{C}}(P^{(k)})$; \textbf{if} $\max_{c} \|r_c(P^{(k)})\|_{\mathrm{rms}} \le \epsilon_{\mathrm{sem}}$ \textbf{then break}.
         \State Compute coupled Jacobian $[J_{xy}^{(k)}, \tilde{J}_z^{(k)}] = \bigl[\frac{\partial r_{\mathcal{C}}}{\partial (x,y)}, \frac{\partial r_{\mathcal{C}}}{\partial z} Q_{\mathrm{ray}}\bigr]$ at $P^{(k)}$.
@@ -568,7 +685,7 @@ def convert_algorithms_to_jcde_env(sec4_tex: str) -> str:
         \State Form reduced normal Jacobian $J_{\mathrm{red}}^{(k)} = \bigl[w_{xy}^{-1/2} J_{xy}^{(k)}, \; \tilde{J}_z^{(k)} V_{\mathrm{row}}^{(k)}\bigr]$ and its thin SVD $U_w \Sigma_w V_w^\top$.
         \State Compute adaptive quadratic LM damping $\mu_k = \operatorname{clip}\bigl(\nu_k \|r^{(k)}\|_2^2, \mu_{\min}, \mu_{\max}\bigr)$.
         \State Solve damped normal step $\delta u = -V_w \operatorname{diag}\!\bigl(\frac{\sigma_{w,i}}{\sigma_{w,i}^2 + \mu_k}\bigr) U_w^\top r^{(k)}$; unpack $\delta u_{xy} = w_{xy}^{-1/2}\delta u_{1:2N}$, $\delta\zeta = V_{\mathrm{row}}^{(k)} \delta u_{2N+1:\mathrm{end}}$.
-        \State Enforce double-orthogonalised kernel annihilation: $\delta\zeta \leftarrow \delta\zeta - V_{\ker}^{(k)}(V_{\ker}^{(k)\top} \delta\zeta)$ \quad ($P_{\ker}^{(k)}\delta\zeta = \mathbf{0}$ to $10^{-16}$).
+        \State Enforce double-orthogonalized kernel annihilation: $\delta\zeta \leftarrow \delta\zeta - V_{\ker}^{(k)}(V_{\ker}^{(k)\top} \delta\zeta)$ \quad ($P_{\ker}^{(k)}\delta\zeta = \mathbf{0}$ to $10^{-16}$).
         \State Backtracking line search $\alpha \in \{1, \tfrac{1}{2}, \tfrac{1}{4}, \tfrac{1}{8}, \tfrac{1}{16}\}$ with pixel-budget projection $P_{\mathrm{cand}} = \mathcal{P}_{\mathcal{B}_{\mathrm{px}}}\bigl(P^{(k)} + \alpha (\delta u_{xy}, Q_{\mathrm{ray}}\delta\zeta)\bigr)$; update $\nu_{k+1}$.
     \EndFor
     \State \textbf{return} $P^{(k)}$
@@ -589,7 +706,7 @@ def convert_algorithms_to_jcde_env(sec4_tex: str) -> str:
 \Require Certified 3D vertices $P^\star \in \mathbb{R}^{N \times 3}$, face cycles $\mathcal{F} = \{F_1, \dots, F_{N_F}\}$, physical scale $L_{\mathrm{mm}}$, sewing tolerance $\tau_{\mathrm{sew}}$.
 \Ensure ISO~10303-21 \texttt{.STEP} file, Wavefront \texttt{.OBJ} file, B-Rep quality audit, and optional Nullspace CAD Family $\{P(\alpha_m)\}_{m=1}^{M_{\mathrm{fam}}}$.
 \State \textbf{Half-Edge BFS Consistent Winding:} Build undirected edge-to-face map $\{u,v\} \mapsto \mathcal{F}_{\mathrm{inc}}(u,v)$. Traverse face adjacency via BFS; whenever shared edge $(a,b)$ is traversed in the same direction in $F_{\mathrm{cur}}$ and $F_{\mathrm{nb}}$, reverse $F_{\mathrm{nb}}$ so adjacent half-edges cancel: $(a \to b) \in F_{\mathrm{cur}} \iff (b \to a) \in F_{\mathrm{nb}}$.
-\State \textbf{Exact Newell Signed-Volume Outward Test:} Centre $\tilde{P}^\star = P^\star - \bar{p}^\star$; evaluate exact polyhedral volume (valid for both convex and non-convex polygons): $6 V_{\mathrm{signed}} = \sum_{f=1}^{N_F} \tilde{p}_{F_f[0]}^{\star\top} \mathbf{n}_{\mathrm{Newell}}(F_f)$, where $\mathbf{n}_{\mathrm{Newell}}(F_f) = \sum_{k=0}^{|F_f|-1} (\tilde{p}_{a_k}^\star - \tilde{p}_{b_k}^\star) \times (\tilde{p}_{a_k}^\star + \tilde{p}_{b_k}^\star)$. \textbf{If} $V_{\mathrm{signed}} < 0$ \textbf{then} reverse all cycles $F_f \leftarrow \operatorname{reverse}(F_f)$ so every face normal points strictly outward.
+\State \textbf{Exact Newell Signed-Volume Outward Test:} Center $\tilde{P}^\star = P^\star - \bar{p}^\star$; evaluate exact polyhedral volume (valid for both convex and non-convex polygons): $6 V_{\mathrm{signed}} = \sum_{f=1}^{N_F} \tilde{p}_{F_f[0]}^{\star\top} \mathbf{n}_{\mathrm{Newell}}(F_f)$, where $\mathbf{n}_{\mathrm{Newell}}(F_f) = \sum_{k=0}^{|F_f|-1} (\tilde{p}_{a_k}^\star - \tilde{p}_{b_k}^\star) \times (\tilde{p}_{a_k}^\star + \tilde{p}_{b_k}^\star)$. \textbf{If} $V_{\mathrm{signed}} < 0$ \textbf{then} reverse all cycles $F_f \leftarrow \operatorname{reverse}(F_f)$ so every face normal points strictly outward.
 \State \textbf{SVD Plane Fitting \& Sewing Audit:} For each face $F_f$, fit least-squares plane $(\bar{c}_f, \hat{\mathbf{n}}_f, \hat{\mathbf{r}}_f)$ via SVD of $\{L_{\mathrm{mm}} p_i^\star\}_{i \in F_f}$ aligned with $\mathbf{n}_{\mathrm{Newell}}(F_f)$, and record max vertex-to-plane deviation $\epsilon_{\mathrm{plan}}(F_f) = \max_{i \in F_f} |\hat{\mathbf{n}}_f^\top (L_{\mathrm{mm}} p_i^\star - \bar{c}_f)|$. Verify 2-manifold edge balance ($\forall e: |\mathcal{F}_{\mathrm{inc}}(e)| = 2$ with opposite half-edges) and $\max_f \epsilon_{\mathrm{plan}}(F_f) \le \tau_{\mathrm{sew}}$ ($0.10\text{ mm}$ at $100\text{ mm}$ part scale).
 \State \textbf{ISO~10303-21 \texttt{MANIFOLD\_SOLID\_BREP} Assembly:} Emit \texttt{CARTESIAN\_POINT} $\to$ \texttt{VERTEX\_POINT} for $i=1..N$; canonical \texttt{LINE} + \texttt{EDGE\_CURVE} per undirected edge; signed \texttt{ORIENTED\_EDGE} (\texttt{.T.}/\texttt{.F.}) $\to$ \texttt{EDGE\_LOOP} $\to$ \texttt{FACE\_OUTER\_BOUND} + analytic \texttt{PLANE}(\texttt{AXIS2\_PLACEMENT\_3D}$(\bar{c}_f, \hat{\mathbf{n}}_f, \hat{\mathbf{r}}_f)$) $\to$ \texttt{ADVANCED\_FACE} for $f=1..N_F$; wrap into \texttt{CLOSED\_SHELL} $\to$ \texttt{MANIFOLD\_SOLID\_BREP} inside \texttt{ADVANCED\_BREP\_SHAPE\_REPRESENTATION}.
 \State \textbf{Parametric Nullspace CAD Family Explorer (when $d_{\mathrm{null}}^{\mathrm{ray}}(P^\star) \ge 1$):} Extract right-singular kernel vector $v_{\ker,1} \in \ker(\tilde{J}_z(P^\star))$; for $\alpha \in [-\alpha_{\max}, +\alpha_{\max}]$, seed $z_{\mathrm{seed}}(\alpha) = z^\star + \alpha Q_{\mathrm{ray}} v_{\ker,1}$, polish purely along $\operatorname{row}(\tilde{J}_z)$ with $(x^\star, y^\star)$ locked, and export each member $P^\star(\alpha)$ as an exact watertight \texttt{.STEP} solid at $0.000\text{ px}$ reprojection drift.
@@ -612,22 +729,19 @@ def convert_algorithms_to_jcde_env(sec4_tex: str) -> str:
 
 
 def build_jcde_endmatter_tex() -> str:
-    """Build JCDE mandatory unnumbered end-matter sections placed immediately before References."""
+    """Build the exact 5 JCDE unnumbered end-matter sections allowed by Table 3 R15 immediately before References."""
     raw = r"""
-\section*{Replication of results}
-To ensure full computational reproducibility in accordance with the \emph{Journal of Computational Design and Engineering} replication standards, the complete Python/PyTorch implementation of NeuroTopo-3D---including the \texttt{PairGT-Asym}, \texttt{EGNN}, \texttt{GATv2-Edge}, and \texttt{GraphGPS} neural lifters, the \texttt{NormalFlowMultiBranchProjector} solver, the classical non-neural \texttt{Marill-MSDA} and \texttt{Lipson--Shpitalni} solvers, the ISO~10303-21 (\texttt{MANIFOLD\_SOLID\_BREP}) \texttt{.STEP} B-Rep exporter and validator (\texttt{step\_exporter\_v9.py}), the automated \texttt{SymPy}/\texttt{float64} theorem verification script (\texttt{verify\_q1\_theorems\_v9.py}), the five-gate claim verification script (\texttt{verify\_q1\_journal\_claims\_v9.py}), all JSON benchmark logs, and all exported \texttt{.STEP} and \texttt{.OBJ} solid models---is provided in the accompanying Supplementary Reproducibility Archive (\texttt{9\_Supplementary\_Code\_and\_STEP\_Under2MB.zip}) and publicly hosted at \url{https://github.com/GosuEltin/NeuroTopo-3D}. Executing \texttt{pytest} and \texttt{python scripts/verify\_q1\_journal\_claims\_v9.py} reproduces all theorem certificates, statistical tests, and CAD sewing metrics reported in this paper.
-
 \section*{Conflicts of interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. The authors declare no conflict of interest.
 
 \section*{Author contributions}
-\textbf{Tin Nguyen Anh:} Conceptualisation, Methodology, Software, Formal analysis, Investigation, Data curation, Visualisation, Validation, Writing---original draft, Writing---review \& editing. \textbf{Thuyen Phan Thi Le:} Conceptualisation, System architecture review, Dataset curation review, Validation, Supervision, Writing---review \& editing. Both authors read and approved the final manuscript.
+\textbf{Tin Nguyen Anh:} Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Visualization, Validation, Writing---original draft, Writing---review \& editing. \textbf{Thuyen Phan Thi Le:} Conceptualization, System architecture review, Dataset curation review, Validation, Supervision, Writing---review \& editing. Both authors read and approved the final manuscript.
 
 \section*{Funding}
 This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
 \section*{Data availability}
-All multi-seed benchmark datasets, anonymous 2D perception graphs, machine-verified symbolic theorem certificates, statistical audit JSON logs, and exported ISO~10303-21 (\texttt{.STEP}) and Wavefront (\texttt{.OBJ}) 3D CAD models generated and analysed during this study are included in the Supplementary Reproducibility Archive and publicly available at \url{https://github.com/GosuEltin/NeuroTopo-3D}.
+To ensure full computational reproducibility in accordance with the \emph{Journal of Computational Design and Engineering} replication standards, all multi-seed benchmark datasets, anonymous 2D perception graphs, machine-verified symbolic theorem certificates, statistical audit JSON logs, exported ISO~10303-21 (\texttt{.STEP}) and Wavefront (\texttt{.OBJ}) 3D CAD models, and the complete Python/PyTorch implementation of NeuroTopo-3D---including the \texttt{PairGT-Asym}, \texttt{EGNN}, \texttt{GATv2-Edge}, and \texttt{GraphGPS} neural lifters, the \texttt{NormalFlowMultiBranchProjector} solver, the classical non-neural \texttt{Marill-MSDA} and \texttt{Lipson--Shpitalni} solvers, the ISO~10303-21 \texttt{.STEP} B-Rep exporter (\texttt{step\_exporter\_v9.py}), and the automated theorem/claim verification scripts (\texttt{verify\_q1\_theorems\_v9.py} and \texttt{verify\_q1\_journal\_claims\_v9.py})---are provided in the accompanying Supplementary Reproducibility Archive (\texttt{9\_Supplementary\_Code\_and\_STEP\_Under2MB.zip}) and publicly available at \url{https://github.com/GosuEltin/NeuroTopo-3D}.
 
 \section*{Acknowledgments}
 The authors thank the faculty and computing laboratory staff at FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam, for providing workstation infrastructure and constructive feedback during the development of the NeuroTopo-3D framework.
@@ -637,6 +751,43 @@ The authors thank the faculty and computing laboratory staff at FPT University, 
         lambda m: "\\texttt{" + m.group(1).replace(r"\_", r"\_\allowbreak{}") + "}",
         raw,
     )
+
+
+def build_jcde_appendices_after_refs_tex(sec7_tex: str) -> str:
+    """Format Appendices A and B placed after References per JCDE Template V3.1 and Table 3 R31-R32, Table 4 R5."""
+    sec7_tex = apply_jcde_house_style(sec7_tex)
+    app_a_header = r"""\clearpage
+\section*{Appendix A. Symbolic operator compilation and machine-verified proof audit}
+\label{sec:appendix}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A\arabic{equation}}
+
+\subsection*{A.1 Complete differentiable geometric residual operator specification}
+\label{app:operators}"""
+
+    sec7_tex = re.sub(
+        r"\\appendix\s*\\section\{[^}]+\}\s*\\label\{sec:appendix\}\s*\\subsection\{[^}]+\}\s*\\label\{app:operators\}",
+        lambda _: app_a_header,
+        sec7_tex,
+    )
+    sec7_tex = re.sub(
+        r"\\subsection\{Machine-Verified Symbolic and IEEE-754 \\texttt\{float64\} Audit Summary\}\s*\\label\{app:machine_proofs\}",
+        lambda _: r"\subsection*{A.2 Machine-verified symbolic and IEEE-754 \texttt{float64} audit summary}" "\n" r"\label{app:machine_proofs}",
+        sec7_tex,
+    )
+    app_b_header = r"""\clearpage
+\section*{Appendix B. Dual-gauge rigidity classification across all 12 benchmark families}
+\label{app:dual_gauge_table}
+\setcounter{table}{0}
+\renewcommand{\thetable}{B\arabic{table}}"""
+    sec7_tex = re.sub(
+        r"\\subsection\{Dual-Gauge Rigidity Classification Across All 12 Benchmark Families\}\s*\\label\{app:dual_gauge_table\}",
+        lambda _: app_b_header,
+        sec7_tex,
+    )
+    return sec7_tex
 
 
 def build_jcde_supplementary_tex(sec7_tex: str) -> str:
@@ -659,7 +810,7 @@ def build_jcde_supplementary_tex(sec7_tex: str) -> str:
     sec7_tex = re.sub(r"Section~\\ref\{[^}]+\}", "Section~3", sec7_tex)
     sec7_tex = re.sub(r"Equation~\\ref\{[^}]+\}", "Equation~16", sec7_tex)
 
-    header_replacement = r"""\section*{Section S1. Complete Differentiable Geometric Residual Operator Specification}
+    header_replacement = r"""\section*{Section S1. Complete differentiable geometric residual operator specification}
 \setcounter{table}{0}
 \renewcommand{\thetable}{S\arabic{table}}
 \setcounter{equation}{0}
@@ -672,12 +823,12 @@ def build_jcde_supplementary_tex(sec7_tex: str) -> str:
     )
     sec7_tex = re.sub(
         r"\\subsection\{Machine-Verified Symbolic and IEEE-754 \\texttt\{float64\} Audit Summary\}\s*\\label\{app:machine_proofs\}",
-        lambda _: r"\section*{Section S2. Machine-Verified Symbolic and Spectral Proof Certificates}" "\n" r"\label{app:machine_proofs}",
+        lambda _: r"\section*{Section S2. Machine-verified symbolic and spectral proof certificates}" "\n" r"\label{app:machine_proofs}",
         sec7_tex,
     )
     sec7_tex = re.sub(
         r"\\subsection\{Dual-Gauge Rigidity Classification Across All 12 Benchmark Families\}\s*\\label\{app:dual_gauge_table\}",
-        lambda _: r"\section*{Section S3. Dual-Gauge Rigidity Classification Across All 12 Benchmark Families}" "\n" r"\label{app:dual_gauge_table}",
+        lambda _: r"\section*{Section S3. Dual-gauge rigidity classification across all 12 benchmark families}" "\n" r"\label{app:dual_gauge_table}",
         sec7_tex,
     )
 
@@ -686,7 +837,7 @@ def build_jcde_supplementary_tex(sec7_tex: str) -> str:
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{lmodern}
-\usepackage[margin=1.0in]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
@@ -698,23 +849,21 @@ def build_jcde_supplementary_tex(sec7_tex: str) -> str:
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{microtype}
-\usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=blue!65!black,urlcolor=blue!70!black]{hyperref}
 
 \captionsetup{font=small,labelfont=bf}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\footnotesize\textit{Journal of Computational Design and Engineering} --- Supplementary Material}
-\fancyhead[R]{\footnotesize\textit{Anh \& Le (2026)}}
-\fancyfoot[C]{S-\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\pagestyle{plain}
 
 \begin{document}
 \begin{center}
-    {\Large\textbf{Supplementary Material:\\NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}\\[0.9em]
-    {\normalsize \textbf{Tin Nguyen Anh}$^{1,*}$ \quad and \quad \textbf{Thuyen Phan Thi Le}$^{1}$}\\[0.4em]
-    {\small $^{1}$FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam}\\[0.2em]
-    {\footnotesize $^{*}$Corresponding author: \texttt{ti93ck2@gmail.com} \quad|\quad Code \& STEP Solids: \url{https://github.com/GosuEltin/NeuroTopo-3D}}
+    {\LARGE\textbf{Supplementary Material:\\NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}\\[0.9em]
+    \large Tin Nguyen Anh \small(Corresponding Author) \\
+    \small FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam \\
+    \small \texttt{ti93ck2@gmail.com} \\
+    \small \url{https://orcid.org/0009-0009-4454-9541} \\[0.5em]
+    \large Thuyen Phan Thi Le \\
+    \small FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam \\
+    \small \texttt{thuyenptl@fe.edu.vn}
 \end{center}
 \vspace{0.4em}\hrule\vspace{0.8em}
 """ + sec7_tex + "\n\\end{document}\n"
@@ -722,16 +871,18 @@ def build_jcde_supplementary_tex(sec7_tex: str) -> str:
 
 
 def build_jcde_main_tex() -> str:
-    """Create main.tex matching the official JCDE Overleaf template (12pt, A4, 1.5x spacing, line numbers, APA 7th, Nomenclature)."""
-    return r"""\documentclass[12pt,a4paper]{article}
+    """Create main.tex matching Official JCDE LaTeX Template V3.1 (JCDE_LaTex_Template_V2.11)."""
+    return r"""\documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{lmodern}
-\usepackage[margin=1.0in]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{setspace}
 \onehalfspacing
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
 \usepackage[mathlines]{lineno}
 \usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
 \usepackage{booktabs}
@@ -746,8 +897,7 @@ def build_jcde_main_tex() -> str:
 \usepackage{algpseudocode}
 \usepackage[authoryear,round]{natbib}
 \usepackage{microtype}
-\usepackage{fancyhdr}
-\usepackage[colorlinks=true,linkcolor=blue!65!black,citecolor=teal!70!black,urlcolor=blue!70!black]{hyperref}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
 
 \captionsetup{font=small,labelfont=bf}
 \setlength{\parskip}{0.32em}
@@ -756,13 +906,8 @@ def build_jcde_main_tex() -> str:
 \lefthyphenmin=2
 \righthyphenmin=3
 
-% JCDE Header & Centered Bottom Page Numbers
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\footnotesize\textit{Journal of Computational Design and Engineering} --- Manuscript Submission}
-\fancyhead[R]{\footnotesize\textit{Anh \& Le (2026)}}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+% Official JCDE plain bottom-centered page numbering
+\pagestyle{plain}
 
 % Theorem Environments
 \theoremstyle{plain}
@@ -774,36 +919,35 @@ def build_jcde_main_tex() -> str:
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
+\title{\textbf{NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}
+
+\author{
+\large Tin Nguyen Anh \small(Corresponding Author) \\
+\small FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam \\
+\small \texttt{ti93ck2@gmail.com} \\
+\small \url{https://orcid.org/0009-0009-4454-9541} \\
+\and
+\large Thuyen Phan Thi Le \\
+\small FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam \\
+\small \texttt{thuyenptl@fe.edu.vn}
+}
+\date{}
+
 \begin{document}
 
+\maketitle
 \linenumbers
 
-\begin{center}
-    {\Large\textbf{NeuroTopo-3D: Spectral Normal-Flow Manifold Projection for Single-View Polyhedral and CAD B-Rep Reconstruction}}\\[1.1em]
-    {\normalsize \textbf{Tin Nguyen Anh}$^{1,*}$ \quad and \quad \textbf{Thuyen Phan Thi Le}$^{1}$}\\[0.55em]
-    {\small $^{1}$FPT University, Quy Nhon AI Campus, Gia Lai, Vietnam}\\[0.25em]
-    {\footnotesize $^{*}$Corresponding author. E-mail: \texttt{ti93ck2@gmail.com} (T.~N.~Anh); ORCID: \url{https://orcid.org/0009-0009-4454-9541}\\
-    Co-author E-mail: \texttt{thuyenptl@fe.edu.vn} (T.~P.~T.~Le)}
-\end{center}
+\begin{abstract}
+\noindent Reconstructing watertight three-dimensional polyhedral wireframes and manufacturable Boundary-Representation solids from a single two-dimensional engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric constraints is a foundational inverse problem in computer-aided design and geometric vision. Classical regularity optimizers distort asymmetric or non-convex parts without learned depth priors, pure neural lifters exhibit 7 to 47 millimeters of out-of-plane face warp that breaks solid-kernel sewing, and standard post-hoc solvers either stall off-manifold under soft penalty regularization or shear proportions along viewing-ray nullspaces. We introduce NeuroTopo-3D, a unified spectral rigidity theory and perception-to-CAD framework resolving this dilemma. First, we prove planar viewing-plane saddle collapse for reflection-symmetric neural lifters and establish a visibility-diameter message-passing depth lower bound. Second, we prove a dual-gauge Schur rank identity classifying regular local neighborhoods of single-view constrained polyhedra into viewing-ray rigid, coupled tilt-shear, and bas-relief regimes, alongside a local uniqueness radius. Third, we formulate Iterative Normal-Flow Row-Space Levenberg--Marquardt continuation with discrete multi-branch reflection search and target-free solid-over-dashed crossing verification, achieving zero stepwise nullspace velocity and quadratic curvature drift coupled to an ISO~10303-21 STEP solid exporter. Across 6,144 multi-seed mirror-pair views, 792 multi-constraint views, out-of-distribution suites, scanned textbook diagrams, photographed sketches, and 120 mechanical CAD parts, NeuroTopo-3D achieves 96.35\% tolerance-certified coverage, 0.1107 Procrustes error, 89.17\% simultaneous metric-feasible and sewable CAD B-Rep validity, and zero unabstained invalid updates.\\
 
-\vspace{0.4em}
-\hrule
-\vspace{0.6em}
-
-\noindent\textbf{Abstract}\\
-Reconstructing watertight three-dimensional polyhedral wireframes and manufacturable Boundary-Representation solids from a single two-dimensional engineering blueprint, textbook diagram, or freehand sketch with symbolic geometric constraints is a foundational inverse problem in computer-aided design and geometric vision. Classical regularity optimisers distort asymmetric or non-convex parts without learned depth priors, pure neural lifters exhibit 7 to 47 millimetres of out-of-plane face warp that breaks solid-kernel sewing, and standard post-hoc solvers either stall off-manifold under soft penalty regularisation or shear proportions along viewing-ray nullspaces. We introduce NeuroTopo-3D, a unified spectral rigidity theory and perception-to-CAD framework resolving this dilemma. First, we prove planar viewing-plane saddle collapse for reflection-symmetric neural lifters and establish a visibility-diameter message-passing depth lower bound. Second, we prove a dual-gauge Schur rank identity classifying regular local neighbourhoods of single-view constrained polyhedra into viewing-ray rigid, coupled tilt-shear, and bas-relief regimes, alongside a local uniqueness radius. Third, we formulate Iterative Normal-Flow Row-Space Levenberg--Marquardt continuation with discrete multi-branch reflection search and target-free solid-over-dashed crossing verification, achieving zero stepwise nullspace velocity and quadratic curvature drift coupled to an ISO~10303-21 STEP solid exporter. Across 6,144 multi-seed mirror-pair views, 792 multi-constraint views, out-of-distribution suites, scanned textbook diagrams, photographed sketches, and 120 mechanical CAD parts, NeuroTopo-3D achieves 96.35\% tolerance-certified coverage, 0.1107 Procrustes error, 89.17\% simultaneous metric-feasible and sewable CAD B-Rep validity, and zero unabstained invalid updates.
-
-\vspace{0.55em}
-\noindent\textbf{Keywords:} single-view 3D reconstruction, polyhedral rigidity, bas-relief nullspace, normal-flow manifold optimisation, CAD reverse engineering, STEP B-Rep synthesis.
-
-\vspace{0.55em}
-\hrule
-\vspace{0.65em}
+\noindent\textbf{Keywords:} single-view 3D reconstruction, polyhedral rigidity, bas-relief nullspace, normal-flow manifold optimization, CAD reverse engineering, STEP B-Rep synthesis
+\end{abstract}
 
 \subsection*{Nomenclature}
 \begin{footnotesize}
 \renewcommand{\arraystretch}{1.10}
-\begin{tabular}{@{}p{0.22\textwidth}p{0.73\textwidth}@{}}
+\begin{tabular}{@{}p{0.24\textwidth}p{0.71\textwidth}@{}}
 $\mathcal{G}_{2\mathrm{D}} = (\hat{U}, A, S_{\mathrm{vis}})$ & Anonymous 2D wireframe graph with detected pixel junctions $\hat{U} \in \mathbb{R}^{N \times 2}$, adjacency $A$, and solid/dashed visibility matrix $S_{\mathrm{vis}}$ \\
 $P = [x, y, z] \in \mathbb{R}^{N \times 3}$ & 3D vertex coordinates in the canonical orthographic camera gauge ($+z$ toward viewer) \\
 $\hat{P}_0 = [\hat{x}_0, \hat{y}_0, \hat{z}_0]$ & Continuous 3D coordinate anchor predicted by Module~2 (\texttt{PairGT-Asym}) \\
@@ -829,6 +973,7 @@ $\epsilon_{\mathrm{plan}}(F_f), \; \tau_{\mathrm{sew}}$ & Maximum vertex-to-plan
 \input{sections/sec6_discussion}
 \input{sections/sec_endmatter}
 \input{sections/references}
+\input{sections/sec7_appendix}
 
 \end{document}
 """
@@ -838,9 +983,12 @@ def main() -> None:
     JCDE_SEC_DIR.mkdir(parents=True, exist_ok=True)
     JCDE_FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-    # 1. Copy all 10 vector PDF figures into manuscript_jcde/figures/
-    for fig_pdf in sorted((MASTER_DIR / "figures").glob("*.pdf")):
-        shutil.copy2(fig_pdf, JCDE_FIG_DIR / fig_pdf.name)
+    # 1. Copy all 10 vector PDF + PNG figures into manuscript_jcde/figures/ under both descriptive and fig_1..fig_10 names
+    for fig_file in sorted((MASTER_DIR / "figures").glob("*.*")):
+        shutil.copy2(fig_file, JCDE_FIG_DIR / fig_file.name)
+        m = re.match(r"fig(\d+)_.*(\.(?:pdf|png))$", fig_file.name)
+        if m:
+            shutil.copy2(fig_file, JCDE_FIG_DIR / f"fig_{m.group(1)}{m.group(2)}")
 
     # 2. Transform Sections 1-6 into JCDE house style
     for sec_name in ["sec1_intro.tex", "sec2_related.tex", "sec3_theory.tex", "sec4_methodology.tex", "sec5_experiments.tex", "sec6_discussion.tex"]:
@@ -848,7 +996,7 @@ def main() -> None:
         if sec_name == "sec4_methodology.tex":
             raw_tex = convert_algorithms_to_jcde_env(raw_tex)
         if sec_name == "sec6_discussion.tex":
-            # Promote Conclusion to a top-level numbered section (7. Conclusions) per JCDE template
+            # Promote Conclusion to a top-level numbered section (7. Conclusions) per JCDE template V3.1
             raw_tex = raw_tex.replace(
                 r"\section{Discussion, Computational Scaling, Failure Taxonomy, and Conclusion}",
                 r"\section{Discussion, Computational Scaling, and Failure Taxonomy}",
@@ -860,11 +1008,13 @@ def main() -> None:
         styled_tex = apply_jcde_house_style(raw_tex)
         (JCDE_SEC_DIR / sec_name).write_text(styled_tex, encoding="utf-8")
 
-    # 3. Write JCDE End-Matter, APA 7th References, main.tex, and standalone supplementary.tex
+    # 3. Write JCDE End-Matter, APA 7th References, Appendices A & B, main.tex, and standalone supplementary.tex
     (JCDE_SEC_DIR / "sec_endmatter.tex").write_text(build_jcde_endmatter_tex(), encoding="utf-8")
     (JCDE_SEC_DIR / "references.tex").write_text(build_jcde_references_tex(), encoding="utf-8")
 
     sec7_raw = (MASTER_DIR / "sections" / "sec7_appendix.tex").read_text(encoding="utf-8")
+    (JCDE_SEC_DIR / "sec7_appendix.tex").write_text(build_jcde_appendices_after_refs_tex(sec7_raw), encoding="utf-8")
+
     supp_tex_str = build_jcde_supplementary_tex(sec7_raw)
     (JCDE_TEX_DIR / "supplementary.tex").write_text(supp_tex_str, encoding="utf-8")
 
@@ -933,18 +1083,22 @@ def main() -> None:
         zf.write(JCDE_TEX_DIR / "main.tex", "main.tex")
         zf.write(JCDE_TEX_DIR / "supplementary.tex", "supplementary.tex")
         for f in sorted(JCDE_SEC_DIR.glob("*.tex")):
-            if f.name != "sec7_appendix.tex":
-                zf.write(f, f"sections/{f.name}")
-        for f in sorted(JCDE_FIG_DIR.glob("*.pdf")):
-            zf.write(f, f"figures/{f.name}")
+            zf.write(f, f"sections/{f.name}")
+        for idx in range(1, 11):
+            fig_p = JCDE_FIG_DIR / f"fig_{idx}.pdf"
+            if fig_p.exists():
+                zf.write(fig_p, f"figures/fig_{idx}.pdf")
     shutil.copy2(zip_src_5, zip_src)
 
-    # 6. Package 7_Figures_JCDE.zip
+    # 6. Package 7_Figures_JCDE.zip (containing fig_1..fig_10.pdf/png + Graphical_abstract)
     zip_figs = PKG_DIR / "7_Figures_JCDE.zip"
     with zipfile.ZipFile(zip_figs, "w", zipfile.ZIP_DEFLATED) as zf:
-        for f in sorted((MASTER_DIR / "figures").glob("*.*")):
-            zf.write(f, f.name)
-        for ga_file in ["2_Graphical_Abstract_A4_Portrait.pdf", "2_Graphical_Abstract_HighRes_300dpi.jpg", "2_Graphical_Abstract_Preview.png"]:
+        for idx in range(1, 11):
+            for ext in (".pdf", ".png"):
+                fp = JCDE_FIG_DIR / f"fig_{idx}{ext}"
+                if fp.exists():
+                    zf.write(fp, fp.name)
+        for ga_file in ["Graphical_abstract.pdf", "Graphical_abstract.jpg", "Graphical_abstract.docx", "2_Graphical_Abstract_A4_Portrait.pdf", "2_Graphical_Abstract_HighRes_300dpi.jpg"]:
             ga_path = PKG_DIR / ga_file
             if ga_path.exists():
                 zf.write(ga_path, ga_file)
